@@ -1,5 +1,64 @@
 #include "arbre.h"
 
+bool is_feuille(Arbre arbre)
+{
+    if(arbre->fils[]!=NULL)
+    {
+        return false;
+    }
+    else true;
+}
+bool is_noeud(Arbre arbre)
+{
+    if(arbre->fils[]!=NULL)
+    {
+        return true;
+    }
+    else false;
+}
+couleur contenu_elem(Abre arbre)
+{
+    Arbre temp=arbre;
+    while(temp->fils[]!=NULL)
+    {
+        return temp->couleur;
+        temp=temp->fils[];
+    }
+    return temp->couleur;
+}
+Arbre sous_arbre_NO(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.NO;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+Arbre sous_arbre_NE(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.NE;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+Arbre sous_arbre_SO(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.SO;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+Arbre sous_arbre_SE(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.SE;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+
 Direction getDirection(Arbre arbre)
 {
     assert(arbre != NULL);
@@ -37,6 +96,7 @@ bool isUni(Arbre arbre)
     assert(arbre != NULL);
     return getCouleur(arbre) != NON_UNI;
 }
+
 void print(Arbre arbre)
 {
     if( arbre == NULL)
