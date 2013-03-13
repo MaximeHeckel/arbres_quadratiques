@@ -20,7 +20,7 @@ struct arbre
 {
     Direction direction;
     Couleur couleur;
-    struct arbre* fils[NB_FILS];
+    struct arbre ** fils;
 };
 typedef struct arbre * Arbre;
 

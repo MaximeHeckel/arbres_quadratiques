@@ -76,11 +76,13 @@ void print(Arbre arbre)
 }
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, int numero)
 {
-    Arbre nouveau = malloc(sizeof(nouveau));
+    Arbre nouveau = NULL;
+    nouveau = (Arbre) malloc(sizeof(Arbre));
     assert(nouveau != NULL);
 
     nouveau->direction = direction;
     nouveau->couleur = couleur;
+    nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
     int i;
     for(i=1; i<=NB_FILS; i++)
     { nouveau->fils[i] = NULL; }
@@ -88,7 +90,7 @@ Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, int numero)
     if(arbre == NULL)
     { return nouveau; }
 
-    arbre->fils[i] = nouveau;
+    arbre->fils[numero] = nouveau;
 
     return arbre;
 }
