@@ -65,7 +65,7 @@ void print(Arbre arbre)
     if( arbre == NULL)
     { return; }
 
-    printf("\n");
+   // printf("\n");
 
     if(getCouleur(arbre) == NOIR)
     { printf("NOIR"); }
@@ -86,12 +86,12 @@ void print(Arbre arbre)
     { printf("SE"); }
 
     int i;
-    for(i=1; i<=NB_FILS; i++)
+    for(i=0; i<NB_FILS; i++)
     {
-        if(getFils(arbre,i) != NULL)
+        if(arbre->fils[i] != NULL)
         {
              printf("\n\t |_ ");
-             print(getFils(arbre,i));
+             print(arbre->fils[i]);
         }
 
     }
@@ -99,16 +99,10 @@ void print(Arbre arbre)
 }
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, int numero)
 {
-    Arbre nouveau = NULL;
-    nouveau = (Arbre) malloc(sizeof(Arbre));
-    assert(nouveau != NULL);
+    Arbre nouveau = creer();
 
     nouveau->direction = direction;
     nouveau->couleur = couleur;
-    nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
-    int i;
-    for(i=1; i<=NB_FILS; i++)
-    { nouveau->fils[i] = NULL; }
 
     if(arbre == NULL)
     { return nouveau; }
@@ -118,4 +112,54 @@ Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, int numero)
     return arbre;
 }
 
+void free_arbre(Arbre arbre)
+{
+    printf("***Free***");
+    if(arbre == NULL)
+    { return; }
 
+    int i;
+    for(i=0; i<NB_FILS; i++)
+    {
+        printf("\n\t |_ ");
+        free_arbre(arbre->fils[i]);
+    }
+    printf("\t*Free fils*");
+    free(arbre->fils);
+    free(arbre);
+
+}
+
+Arbre copie(Arbre arbre)
+{
+    assert(arbre != NULL);
+
+    Arbre res = creer();
+
+    res->couleur = arbre->couleur;
+    res->direction = arbre->direction;
+
+    int i;
+    for(i=0; i<NB_FILS; i++)
+    {
+        if(arbre->fils[i] != NULL)
+        res->fils[i] = copie(arbre->fils[i]);
+    }
+    return res;
+}
+
+Arbre creer()
+{
+    Arbre nouveau = NULL;
+    nouveau = (Arbre) malloc(sizeof(Arbre));
+    assert(nouveau != NULL);
+
+    nouveau->direction = 0;
+    nouveau->couleur = 0;
+    nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
+    int i;
+    for(i=1; i<=NB_FILS; i++)
+    { nouveau->fils[i] = NULL; }
+
+    return nouveau;
+}

@@ -37,5 +37,8 @@ void print(Arbre arbre);
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur,int numero);
 bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);
+void free_arbre(Arbre arbre);
+Arbre copie(Arbre arbre);
+Arbre creer();
 
 #endif // ARBRE_H_INCLUDED
