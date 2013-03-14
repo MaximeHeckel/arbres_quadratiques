@@ -34,3 +34,15 @@ typedef struct donnee_arbre arbre_binaire_strict;
 - Faire une image noir et blanc sur paint!
 
 - Fonction niveau de gris
+
+###### Update : 14-03-13 :
+
+- Nouvelle structure : fait
+
+- Correction sur les fonctions déjà implémentées : fait
+
+- Fonction is_Equilibré : fait
+
+- Ajout de getFilsNO getFilsSO getFils NE et getFils NE : fait
+
+- Reflexion sur la fonction profondeur( ou niveau ) : en cours 
