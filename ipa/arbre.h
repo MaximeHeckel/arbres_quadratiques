@@ -13,7 +13,7 @@ enum dir {NO,NE,SO,SE};
 enum bool {false, true};
 
 typedef enum coul Couleur;
-typedef enum dir Direction;
+/*typedef enum dir Direction;
 typedef enum bool bool;
 
 struct arbre
@@ -22,8 +22,22 @@ struct arbre
     Couleur couleur;
     struct arbre ** fils;
 };
-typedef struct arbre * Arbre;
+typedef struct arbre * Arbre;*/
 
+/* NOUVELLE STRUCTURE */
+enum cas_arbre{Feuille,Noeud};
+
+union union_arbre {
+	int couleur;
+	arbre_quadratique *filsNO, *filsNE, *filsSO, *filsSE;
+};
+
+typedef struct donnee_arbre arbre_quadratique;
+
+struct donnee_arbre{
+	enum cas_arbre genre;
+	union union_arbre valeur;
+};
 
 Direction getDirection(Arbre arbre);
 Couleur getCouleur(Arbre arbre);
