@@ -1,0 +1,43 @@
+Arbre sous_arbre_NO(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.NO;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+Arbre sous_arbre_NE(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.NE;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+Arbre sous_arbre_SO(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.SO;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+Arbre sous_arbre_SE(Arbre arbre){
+    Arbre res=malloc(sizeof(Arbre));
+    if(is_noeud(arbre)){
+        res=arbre.SE;
+        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
+    }
+    return res;
+}
+
+Couleur contenu_elem(Arbre arbre)
+{
+    Arbre temp=arbre;
+    while(temp->fils[]!=NULL)
+    {
+        return temp->couleur;
+        temp=temp->fils[];
+    }
+    return temp->couleur;
+}

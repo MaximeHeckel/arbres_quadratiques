@@ -35,7 +35,7 @@ Couleur getCouleur(Arbre arbre)
 Arbre getFils(Arbre arbre, int numero)
 {
     assert(arbre != NULL);
-    return arbre->fils[numero-1];
+    return arbre->fils[numero];
 }
 void setDirection(Arbre arbre, Direction direction)
 {
@@ -50,7 +50,7 @@ void setCouleur(Arbre arbre, Couleur couleur)
 void setFils(Arbre pere,Arbre fils, int numero)
 {
     assert(pere != NULL);
-    pere->fils[numero-1] = fils;
+    pere->fils[numero] = fils;
 }
 
 bool isEquilibre(Arbre arbre);
