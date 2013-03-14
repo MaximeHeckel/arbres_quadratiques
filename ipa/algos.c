@@ -38,13 +38,23 @@ int nb_feuille(Arbre arbre){
 }
 
 bool is_equilibre(Arbre arbre){
-	int res;
+	int res=false;
+	int i;
 	if(is_feuille(arbre))
 	{
 		res=true;
 	}
-	else
+	else 
 	{
-		if()
+		if((abs((hauteur(getFils(arbre, 1)-hauteur(getFils(arbre,2)))<=1)
+			&&(abs((hauteur(getFils(arbre,3))-hauteur(getFils(arbre,4)))<=1)))))
+		{
+			if((abs((hauteur(getFils(arbre, 1)-hauteur(getFils(arbre,3)))<=1)
+			{
+				res = true;
+			}
+		}
+			
 	}
+	return res;
 }
