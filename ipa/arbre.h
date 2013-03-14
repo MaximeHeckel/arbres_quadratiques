@@ -35,6 +35,7 @@ bool isEquilibre(Arbre arbre);
 bool isUni(Arbre arbre);
 void print(Arbre arbre);
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur,int numero);
-
+bool is_feuille(Arbre arbre);
+bool is_noeud(Arbre arbre);
 
 #endif // ARBRE_H_INCLUDED

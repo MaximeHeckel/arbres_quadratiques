@@ -2,61 +2,24 @@
 
 bool is_feuille(Arbre arbre)
 {
-    if(arbre->fils[]!=NULL)
+    int i;
+    for(i=0; i<NB_FILS; i++)
     {
-        return false;
+        if(arbre->fils[i] != NULL)
+        { return false; }
     }
-    else true;
+    return true;
 }
 bool is_noeud(Arbre arbre)
 {
-    if(arbre->fils[]!=NULL)
+    int i;
+    int nb_fils;
+    for(i=0; i<NB_FILS; i++)
     {
-        return true;
+        if(arbre->fils[i] == NULL)
+        { nb_fils++; }
     }
-    else false;
-}
-couleur contenu_elem(Abre arbre)
-{
-    Arbre temp=arbre;
-    while(temp->fils[]!=NULL)
-    {
-        return temp->couleur;
-        temp=temp->fils[];
-    }
-    return temp->couleur;
-}
-Arbre sous_arbre_NO(Arbre arbre){
-    Arbre res=malloc(sizeof(Arbre));
-    if(is_noeud(arbre)){
-        res=arbre.NO;
-        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
-    }
-    return res;
-}
-Arbre sous_arbre_NE(Arbre arbre){
-    Arbre res=malloc(sizeof(Arbre));
-    if(is_noeud(arbre)){
-        res=arbre.NE;
-        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
-    }
-    return res;
-}
-Arbre sous_arbre_SO(Arbre arbre){
-    Arbre res=malloc(sizeof(Arbre));
-    if(is_noeud(arbre)){
-        res=arbre.SO;
-        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
-    }
-    return res;
-}
-Arbre sous_arbre_SE(Arbre arbre){
-    Arbre res=malloc(sizeof(Arbre));
-    if(is_noeud(arbre)){
-        res=arbre.SE;
-        res=res->fils[];  /* Pas sur s'il faut utilisé la structure comme ca ou pas */
-    }
-    return res;
+    return (nb_fils == 4) ? false : true;
 }
 
 Direction getDirection(Arbre arbre)
@@ -154,3 +117,5 @@ Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, int numero)
 
     return arbre;
 }
+
+
