@@ -14,7 +14,7 @@ enum bool {false, true};
 
 typedef enum coul Couleur;
 typedef enum dir Direction;
-typedef enum bool bool;
+typedef enum bool bool; 
 
 struct arbre
 {
@@ -35,7 +35,13 @@ bool isEquilibre(Arbre arbre);
 bool isUni(Arbre arbre);
 void print(Arbre arbre);
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur,int numero);
+<<<<<<< HEAD
 bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);
 
 #endif // ARBRE_H_INCLUDED
+=======
+
+
+#endif // ARBRE_H_INCLUDED
+>>>>>>> commit
