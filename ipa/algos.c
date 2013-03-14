@@ -19,7 +19,7 @@ int hauteur (Arbre arbre){
 	}
 	else
 	{
-		res=1+max(hauteur(getFilsSO(arbre)),hauteur(getFilsSE(arbre)),hauteur(getFilsNO(arbre)),hauteur(getFilsNE(arbre)));
+		res=1+max(max(hauteur(getFilsSO(arbre)),hauteur(getFilsSE(arbre))),(max(hauteur(getFilsNO(arbre)),hauteur(getFilsNE(arbre)))));
 	}
 	return res;
 }
@@ -47,11 +47,11 @@ bool is_equilibre(Arbre arbre){
 	else 
 	{
 		if((abs(hauteur(getFilsNO(arbre))-hauteur(getFilsNE(arbre)))<=1) 
-			&& (abs(hauteur(getFilsSO))-hauteur(getFilsSE(arbre)))<=1)
+			&& (abs(hauteur(getFilsSO(arbre)))-hauteur(getFilsSE(arbre)))<=1)
 		{
 			if((abs(hauteur(getFilsNO(arbre))-(hauteur(getFilsSO(arbre)))))<=1);
 			{
-				res=true
+				res=true;
 			}
 		}	
 	}

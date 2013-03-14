@@ -13,10 +13,10 @@ enum dir {NO,NE,SO,SE};
 enum bool {false, true};
 
 typedef enum coul Couleur;
-/*typedef enum dir Direction;
+typedef enum dir Direction;
 typedef enum bool bool;
 
-struct arbre
+/*struct arbre
 {
     Direction direction;
     Couleur couleur;
@@ -29,7 +29,7 @@ enum cas_arbre{Feuille,Noeud};
 
 union union_arbre {
 	int couleur;
-	arbre_quadratique *filsNO, *filsNE, *filsSO, *filsSE;
+	struct Arbre *filsNO, *filsNE, *filsSO, *filsSE;
 };
 
 typedef struct donnee_arbre Arbre;
@@ -41,7 +41,10 @@ struct donnee_arbre{
 
 Direction getDirection(Arbre arbre);
 Couleur getCouleur(Arbre arbre);
-Arbre getFils(Arbre arbre, int numero);
+Arbre getFilsNO(Arbre arbre);
+Arbre getFilsNE(Arbre arbre);
+Arbre getFilsSO(Arbre arbre);
+Arbre getFilsSE(Arbre arbre);
 void setDirection(Arbre arbre, Direction direction);
 void setCouleur(Arbre arbre, Couleur couleur);
 void setFils(Arbre pere,Arbre fils, int numero);
@@ -52,6 +55,9 @@ Arbre inserer(Arbre arbre, Direction direction, Couleur couleur,int numero);
 
 bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);
+int hauteur(Arbre arbre);
+int nb_feuille(Arbre arbre);
+bool is_equilibre(Arbre arbre);
 void free_arbre(Arbre arbre);
 Arbre copie(Arbre arbre);
 Arbre creer();
