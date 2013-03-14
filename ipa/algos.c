@@ -19,7 +19,7 @@ int hauteur (Arbre arbre){
 	}
 	else
 	{
-		res=1+max(hauteur(sous_arbre_NO(arbre)),hauteur(sous_arbre_NE(arbre)),hauteur(sous_arbre_SO(arbre)),hauteur(sous_arbre_SE(arbre)));
+		res=1+max(hauteur(getFilsSO(arbre)),hauteur(getFilsSE(arbre)),hauteur(getFilsNO(arbre)),hauteur(getFilsNE(arbre)));
 	}
 	return res;
 }
@@ -32,7 +32,7 @@ int nb_feuille(Arbre arbre){
 	}
 	else
 	{
-		res=nb_feuille(sous_arbre_NO(arbre))+nb_feuille(sous_arbre_NE(arbre))+nb_feuille(sous_arbre_SO(arbre))+nb_feuille(sous_arbre_SE(arbre));
+		res=nb_feuille(getFilsSO(arbre))+nb_feuille(getFilsSE(arbre))+nb_feuille(getFilsNO(arbre))+nb_feuille(getFilsNE(arbre));
 	}
 	return res;
 }
@@ -46,15 +46,14 @@ bool is_equilibre(Arbre arbre){
 	}
 	else 
 	{
-		if((abs((hauteur(getFils(arbre, 1)-hauteur(getFils(arbre,2)))<=1)
-			&&(abs((hauteur(getFils(arbre,3))-hauteur(getFils(arbre,4)))<=1)))))
+		if((abs(hauteur(getFilsNO(arbre))-hauteur(getFilsNE(arbre)))<=1) 
+			&& (abs(hauteur(getFilsSO))-hauteur(getFilsSE(arbre)))<=1)
 		{
-			if((abs((hauteur(getFils(arbre, 1)-hauteur(getFils(arbre,3)))<=1)
+			if((abs(hauteur(getFilsNO(arbre))-(hauteur(getFilsSO(arbre)))))<=1);
 			{
-				res = true;
+				res=true
 			}
-		}
-			
+		}	
 	}
 	return res;
 }

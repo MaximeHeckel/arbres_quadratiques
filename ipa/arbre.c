@@ -2,24 +2,21 @@
 
 bool is_feuille(Arbre arbre)
 {
-    int i;
-    for(i=0; i<NB_FILS; i++)
+    bool res=false;
+    if(arbre.genre==Feuille)
     {
-        if(arbre->fils[i] != NULL)
-        { return false; }
+        res=true;
     }
-    return true;
+    return res;
 }
 bool is_noeud(Arbre arbre)
 {
-    int i;
-    int nb_fils;
-    for(i=0; i<NB_FILS; i++)
+    bool res=false;
+    if(arbre.genre==Noeud)
     {
-        if(arbre->fils[i] == NULL)
-        { nb_fils++; }
+        res=true;
     }
-    return (nb_fils == 4) ? false : true;
+    return res;
 }
 
 Direction getDirection(Arbre arbre)
@@ -32,10 +29,25 @@ Couleur getCouleur(Arbre arbre)
     assert(arbre != NULL);
     return arbre->couleur;
 }
-Arbre getFils(Arbre arbre, int numero)
+Arbre getFilsNO(Arbre arbre)
 {
     assert(arbre != NULL);
-    return arbre->fils[numero];
+    return arbre->filsNO;
+}
+Arbre getFilsNE(Arbre arbre)
+{
+    assert(arbre != NULL);
+    return arbre->filsNE;
+}
+Arbre getFilsSO(Arbre arbre)
+{
+    assert(arbre != NULL);
+    return arbre->filsSO;
+}
+Arbre getFilsSE(Arbre arbre)
+{
+    assert(arbre != NULL);
+    return arbre->filsSE;
 }
 void setDirection(Arbre arbre, Direction direction)
 {
@@ -53,7 +65,6 @@ void setFils(Arbre pere,Arbre fils, int numero)
     pere->fils[numero] = fils;
 }
 
-bool isEquilibre(Arbre arbre);
 bool isUni(Arbre arbre)
 {
     assert(arbre != NULL);

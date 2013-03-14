@@ -32,7 +32,7 @@ union union_arbre {
 	arbre_quadratique *filsNO, *filsNE, *filsSO, *filsSE;
 };
 
-typedef struct donnee_arbre arbre_quadratique;
+typedef struct donnee_arbre Arbre;
 
 struct donnee_arbre{
 	enum cas_arbre genre;
