@@ -1,7 +1,8 @@
 #include "arbre.h"
 
-static int max(int a, int b){
-    if (a>b)
+static int max(int a, int b)
+{
+    if(a>b)
     {
         return a;
     }
@@ -9,6 +10,42 @@ static int max(int a, int b){
     {
         return b;
     }
+}
+
+
+int countLevelBranch(Arbre arbre,Direction dir)
+{
+    assert(arbre.genre!=Null);
+    int i;
+    while(getFils(arbre,dir).genre !=Feuille)
+    {
+        i=i++;
+        arbre=getFils(arbre,dir);
+    }
+    return i;
+}
+
+Couleur getCouleurBranches(Arbre arbre, Direction dir)
+{
+	assert(arbre.genre!=Null);
+	int i;
+	for(i=0;i<countLevelBranch(arbre,dir);i++)
+	{
+		arbre=getFils(arbre,dir);
+	}
+	return getCouleur(arbre);
+
+}
+
+Arbre goToLevel(Arbre arbre, Direction dir,int level)
+{
+	assert(arbre.genre!=Null);
+	int i;
+	for(i=0; i<level; i++)
+	{
+		arbre=getFils(arbre,dir);
+	}
+	return arbre;
 }
 
 int hauteur (Arbre arbre){
@@ -19,7 +56,7 @@ int hauteur (Arbre arbre){
 	}
 	else
 	{
-		res=1+max(max(hauteur(getFilsSO(arbre)),hauteur(getFilsSE(arbre))),(max(hauteur(getFilsNO(arbre)),hauteur(getFilsNE(arbre)))));
+		res=1+max(max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,SE))),(max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,NE)))));
 	}
 	return res;
 }
@@ -32,7 +69,7 @@ int nb_feuille(Arbre arbre){
 	}
 	else
 	{
-		res=nb_feuille(getFilsSO(arbre))+nb_feuille(getFilsSE(arbre))+nb_feuille(getFilsNO(arbre))+nb_feuille(getFilsNE(arbre));
+		res=nb_feuille(getFils(arbre,SO))+nb_feuille(getFils(arbre,SE))+nb_feuille(getFils(arbre,NO))+nb_feuille(getFils(arbre,NE));
 	}
 	return res;
 }
@@ -46,10 +83,10 @@ bool is_equilibre(Arbre arbre){
 	}
 	else 
 	{
-		if((abs(hauteur(getFilsNO(arbre))-hauteur(getFilsNE(arbre)))<=1) 
-			&& (abs(hauteur(getFilsSO(arbre)))-hauteur(getFilsSE(arbre)))<=1)
+		if((abs(hauteur(getFils(arbre,NO))-hauteur(getFils(arbre,NE)))<=1) 
+			&& (abs(hauteur(getFils(arbre,SO)))-hauteur(getFils(arbre,SE)))<=1)
 		{
-			if((abs(hauteur(getFilsNO(arbre))-(hauteur(getFilsSO(arbre)))))<=1);
+			if((abs(hauteur(getFils(arbre,NO))-(hauteur(getFils(arbre,SO)))))<=1);
 			{
 				res=true;
 			}

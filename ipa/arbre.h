@@ -25,26 +25,25 @@ typedef enum bool bool;
 typedef struct arbre * Arbre;*/
 
 /* NOUVELLE STRUCTURE */
-enum cas_arbre{Feuille,Noeud};
+enum cas_arbre { Feuille, Noeud, Null};
 
 union union_arbre {
-	int couleur;
-	struct Arbre *filsNO, *filsNE, *filsSO, *filsSE;
+
+   int couleur;
+   struct Arbre **fils;
 };
 
 typedef struct donnee_arbre Arbre;
 
-struct donnee_arbre{
-	enum cas_arbre genre;
-	union union_arbre valeur;
+struct donnee_arbre
+{
+   enum cas_arbre genre;
+   union union_arbre valeur;
 };
 
 Direction getDirection(Arbre arbre);
 Couleur getCouleur(Arbre arbre);
-Arbre getFilsNO(Arbre arbre);
-Arbre getFilsNE(Arbre arbre);
-Arbre getFilsSO(Arbre arbre);
-Arbre getFilsSE(Arbre arbre);
+Arbre getFils(Arbre arbre,Direction dir);
 void setDirection(Arbre arbre, Direction direction);
 void setCouleur(Arbre arbre, Couleur couleur);
 void setFils(Arbre pere,Arbre fils, int numero);
@@ -57,6 +56,9 @@ bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);
 int hauteur(Arbre arbre);
 int nb_feuille(Arbre arbre);
+int countLevelBranch(Arbre arbre,Direction dir);
+Couleur getCouleurBranches(Arbre arbre, Direction dir);
+Arbre goToLevel(Arbre arbre, Direction dir,int level);
 bool is_equilibre(Arbre arbre);
 void free_arbre(Arbre arbre);
 Arbre copie(Arbre arbre);

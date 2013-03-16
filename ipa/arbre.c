@@ -19,6 +19,24 @@ bool is_noeud(Arbre arbre)
     return res;
 }
 
+
+/*Couleur getFeuille(Arbre arbre)
+{
+    assert(arbre!=NULL);
+    Arbre NO = arbre->fils[NO];
+    Arbre SO = arbre->fils[SO];
+    Arbre NE = arbre->fils[NE];
+    Arbre SE = arbre->fils[SE];
+    
+    while(arbre != Feuille)
+    {
+        getFeuille(NO);
+        getFeuille(SO);
+        getFeuille(NE);
+        getFeuille(SE);
+    }
+
+}*/
 Direction getDirection(Arbre arbre)
 {
     assert(arbre != NULL);
@@ -29,26 +47,12 @@ Couleur getCouleur(Arbre arbre)
     assert(arbre != NULL);
     return arbre->couleur;
 }
-Arbre getFilsNO(Arbre arbre)
+Arbre getFils(Arbre arbre, Direction dir)
 {
     assert(arbre != NULL);
-    return arbre->filsNO;
+    return arbre->fils[];
 }
-Arbre getFilsNE(Arbre arbre)
-{
-    assert(arbre != NULL);
-    return arbre->filsNE;
-}
-Arbre getFilsSO(Arbre arbre)
-{
-    assert(arbre != NULL);
-    return arbre->filsSO;
-}
-Arbre getFilsSE(Arbre arbre)
-{
-    assert(arbre != NULL);
-    return arbre->filsSE;
-}
+
 void setDirection(Arbre arbre, Direction direction)
 {
     assert(arbre != NULL);
@@ -59,7 +63,7 @@ void setCouleur(Arbre arbre, Couleur couleur)
     assert(arbre != NULL);
     arbre->couleur = couleur;
 }
-void setFils(Arbre pere,Arbre fils, int numero)
+void setFils(Arbre pere,Arbre fils, int numero)  // <=== int numero -> dir Direction
 {
     assert(pere != NULL);
     pere->fils[numero] = fils;
