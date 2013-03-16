@@ -45,4 +45,12 @@ typedef struct donnee_arbre arbre_binaire_strict;
 
 - Ajout de getFilsNO getFilsSO getFils NE et getFils NE : fait
 
-- Reflexion sur la fonction profondeur( ou niveau ) : en cours 
+- Reflexion sur la fonction profondeur( ou niveau ) : en cours
+
+###### Update : 16-03-13 : (Maxime)
+
+- Ajout nouvelle structure 
+
+- Correction de certains algos ( La majorité des tiens, Phillipe ne fonctionnent plus il faut les modifier)
+
+-Ajout getToLevel getColorBranches getDepthBranches 
