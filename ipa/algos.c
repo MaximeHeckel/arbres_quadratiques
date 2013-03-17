@@ -39,13 +39,36 @@ Couleur getCouleurBranches(Arbre arbre, Direction dir)
 
 Arbre goToLevel(Arbre arbre, Direction dir,int level)
 {
-	assert(arbre.genre!=Null);
+	assert(arbre.genre!=Null); // Null est juste un genre que j'ai mis pour que ca compile 
 	int i;
 	for(i=0; i<level; i++)
 	{
 		arbre=getFils(arbre,dir);
 	}
 	return arbre;
+}
+
+bool isUni(Arbre arbre)
+{
+	bool res=false;
+	assert(arbre.genre!=Null);
+	if(getFils(arbre,NO).valeur.couleur==getFils(arbre,NE).valeur.couleur)
+	{
+		if(getFils(arbre,SO).valeur.couleur==getFils(arbre,SE).valeur.couleur)
+		{
+			res=true;
+		}
+	}
+	return res;
+}
+
+Arbre unification(Arbre arbre)
+{
+	assert(arbre.genre!=Null);
+	if(isUni(arbre))
+	{
+
+	}
 }
 
 int hauteur (Arbre arbre){
