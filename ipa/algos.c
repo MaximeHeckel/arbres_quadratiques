@@ -64,11 +64,18 @@ bool isUni(Arbre arbre)
 
 Arbre unification(Arbre arbre)
 {
+
 	assert(arbre.genre!=Null);
 	if(isUni(arbre))
 	{
+		arbre.valeur.couleur=getFils(arbre,NO).valeur.couleur;
+		free_arbre(getFils(arbre,NO));
+		free_arbre(getFils(arbre,NE));
+		free_arbre(getFils(arbre,SO));
+		free_arbre(getFils(arbre,SE));
 
 	}
+	return arbre;
 }
 
 int hauteur (Arbre arbre){

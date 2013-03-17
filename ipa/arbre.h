@@ -59,6 +59,8 @@ int nb_feuille(Arbre arbre);
 int countLevelBranch(Arbre arbre,Direction dir);
 Couleur getCouleurBranches(Arbre arbre, Direction dir);
 Arbre goToLevel(Arbre arbre, Direction dir,int level);
+bool isUni(Arbre arbre);
+Arbre unification(Arbre arbre);
 bool is_equilibre(Arbre arbre);
 void free_arbre(Arbre arbre);
 Arbre copie(Arbre arbre);
