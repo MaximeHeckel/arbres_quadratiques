@@ -47,10 +47,35 @@ typedef struct donnee_arbre arbre_binaire_strict;
 
 - Reflexion sur la fonction profondeur( ou niveau ) : en cours
 
-###### Update : 16-03-13 : (Maxime)
+###### Update : 16-03-13 : 
 
 - Ajout nouvelle structure 
 
 - Correction de certains algos ( La majorité des tiens, Phillipe ne fonctionnent plus il faut les modifier)
 
--Ajout getToLevel getColorBranches getDepthBranches 
+- Ajout getToLevel getColorBranches getDepthBranches
+ 
+###### Update : 18-03-13 : 
+
+- Ajout des fonctions isUni et Unification 
+
+- Code trouvé sur StackOverFlow pour la conversion d'une image en quadtree : 
+
+				void divideAndConquer(Mat im, QuadTree &tree, int parent){
+  				if(parent<0) 
+    				return;
+  				double min,max;
+  				minMaxLoc(im,&min,&max);
+  				if(max-min<0.01)
+    				tree.addNode(parent,closed);
+  				else{
+    				tree.addNode(parent,open);
+    				Mat im0=Mat(im,Range(0,image.rows/				2-1),Range(0,image.cols/2-1));
+    				Mat im1=Mat(im,Range(image.rows/				2,image.rows),Range(0,image.cols/2-1));
+    				Mat im2=Mat(im,Range(0,image.rows/				2-1),Range(image.cols/2,image.cols));
+    				Mat im3=Mat(im,Range(image.rows/				2,image.rows),Range(image.cols/2-1,image.cols));
+    				divideAndConquer(im0, tree, parent/4);
+    				divideAndConquer(im1, tree, parent/4+1);
+    				divideAndConquer(im2, tree, parent/4+2);
+    				divideAndConquer(im3, tree, parent/4+3);
+  				}
