@@ -3,22 +3,14 @@
 bool is_feuille(Arbre arbre)
 {
     assert(arbre != NULL);
-    bool res=false;
-    if(arbre->genre==Feuille)
-    {
-        res=true;
-    }
-    return res;
+
+    return (arbre->genre == Feuille);
 }
 bool is_noeud(Arbre arbre)
 {
     assert(arbre != NULL);
-    bool res=false;
-    if(arbre->genre==Noeud)
-    {
-        res=true;
-    }
-    return res;
+
+    return (arbre->genre == Noeud);
 }
 
 
@@ -144,19 +136,18 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 
 void free_arbre(Arbre arbre)
 {
-    printf("\n***Free***");
+   // printf("\n***Free***");
     if(arbre == NULL)
     { return; }
 
     int i;
     for(i=0; i<NB_FILS; i++)
     {
-        printf("\n\t |_ ");
+       // printf("\n\t |_ ");
         free_arbre(arbre->fils[i]);
     }
    // printf("\t*Free fils*");
-    /*if(arbre->fils != NULL)
-    {free(arbre->fils);}*/
+
     free(arbre);
 
 }
@@ -169,6 +160,7 @@ Arbre copie(Arbre arbre)
 
     res->couleur = arbre->couleur;
     res->direction = arbre->direction;
+    res->genre = arbre->genre;
 
     int i;
     for(i=0; i<NB_FILS; i++)
@@ -187,8 +179,8 @@ Arbre creer()
 
     nouveau->direction = 0;
     nouveau->couleur = 0;
-    nouveau->genre=0;
-    //nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
+    nouveau->genre=Feuille;
+
     int i;
     for(i=0; i<NB_FILS; i++)
     { nouveau->fils[i] = NULL; }

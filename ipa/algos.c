@@ -92,13 +92,13 @@ int hauteur (Arbre arbre){
 
 int nb_feuille(Arbre arbre){
 	int res;
-	if(is_feuille(arbre))
+	if(arbre == NULL || is_feuille(arbre))
 	{
 		res=1;
 	}
 	else
 	{
-		res=nb_feuille(getFils(arbre,SO))+nb_feuille(getFils(arbre,SE))+nb_feuille(getFils(arbre,NO))+nb_feuille(getFils(arbre,NE));
+		res += nb_feuille(getFils(arbre,SO)) + nb_feuille(getFils(arbre,SE)) + nb_feuille(getFils(arbre,NO)) + nb_feuille(getFils(arbre,NE));
 	}
 	return res;
 }
