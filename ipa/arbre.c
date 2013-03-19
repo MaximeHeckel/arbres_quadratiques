@@ -2,6 +2,7 @@
 
 bool is_feuille(Arbre arbre)
 {
+    assert(arbre != NULL);
     bool res=false;
     if(arbre->genre==Feuille)
     {
@@ -11,6 +12,7 @@ bool is_feuille(Arbre arbre)
 }
 bool is_noeud(Arbre arbre)
 {
+    assert(arbre != NULL);
     bool res=false;
     if(arbre->genre==Noeud)
     {
@@ -73,11 +75,11 @@ void setFils(Arbre pere,Arbre fils, Direction dir)  // <=== int numero -> dir Di
     pere->fils[dir] = fils;
 }
 
-bool isUni(Arbre arbre)
+/*bool isUni(Arbre arbre)
 {
     assert(arbre != NULL);
     return (getCouleur(arbre) != NON_UNI);
-}
+}*/
 
 void print(Arbre arbre)
 {
@@ -123,18 +125,19 @@ void print(Arbre arbre)
     }
 
 }
-Arbre inserer(Arbre pere, Direction direction, Couleur couleur,Genre genre)
+Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 {
     Arbre nouveau = creer();
 
     nouveau->direction = direction;
     nouveau->couleur = couleur;
-    nouveau->genre = genre;
+    nouveau->genre = Feuille;
 
     if(pere == NULL)
     { return nouveau; }
 
     pere->fils[direction] = nouveau;
+    pere->genre = Noeud;
 
     return pere;
 }
