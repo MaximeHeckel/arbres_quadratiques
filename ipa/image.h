@@ -1,3 +1,4 @@
+#include "arbre.h"
 struct coord
 {
 	float x;  //Ou int ?????
@@ -15,8 +16,8 @@ struct rect
 typedef struct rect Quadrant;
 
 struct image
-{
-	Coordonnee pixels;
+{	
+	int nb_pixels;
 	Quadrant contour;
 };
 
