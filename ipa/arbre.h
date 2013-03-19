@@ -37,7 +37,7 @@ void setFils(Arbre pere,Arbre fils, Direction dir);
 bool isEquilibre(Arbre arbre);
 bool isUni(Arbre arbre);
 void print(Arbre arbre);
-Arbre inserer(Arbre arbre, Direction direction, Couleur couleur);
+Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, Genre genre);
 
 bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);

@@ -104,6 +104,13 @@ void print(Arbre arbre)
     else
     { printf("SE"); }
 
+    printf(" - ");
+
+    if(is_feuille(arbre))
+    { printf("Feuille");}
+    else
+    { printf("Noeud");}
+
     int i;
     for(i=0; i<NB_FILS; i++)
     {
@@ -116,12 +123,13 @@ void print(Arbre arbre)
     }
 
 }
-Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
+Arbre inserer(Arbre pere, Direction direction, Couleur couleur,Genre genre)
 {
     Arbre nouveau = creer();
 
     nouveau->direction = direction;
     nouveau->couleur = couleur;
+    nouveau->genre = genre;
 
     if(pere == NULL)
     { return nouveau; }
@@ -133,7 +141,7 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 
 void free_arbre(Arbre arbre)
 {
-    printf("***Free***");
+    printf("\n***Free***");
     if(arbre == NULL)
     { return; }
 
@@ -143,7 +151,7 @@ void free_arbre(Arbre arbre)
         printf("\n\t |_ ");
         free_arbre(arbre->fils[i]);
     }
-    printf("\t*Free fils*");
+   // printf("\t*Free fils*");
     /*if(arbre->fils != NULL)
     {free(arbre->fils);}*/
     free(arbre);
@@ -171,11 +179,12 @@ Arbre copie(Arbre arbre)
 Arbre creer()
 {
     Arbre nouveau = NULL;
-    nouveau = (Arbre) malloc(sizeof(Arbre));
+    nouveau = malloc(sizeof(struct arbre));
     assert(nouveau != NULL);
 
     nouveau->direction = 0;
     nouveau->couleur = 0;
+    nouveau->genre=0;
     //nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
     int i;
     for(i=0; i<NB_FILS; i++)
