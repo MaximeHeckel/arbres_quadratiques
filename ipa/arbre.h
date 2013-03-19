@@ -10,47 +10,34 @@
 
 enum coul {NOIR,BLANC,NON_UNI};
 enum dir {NO,NE,SO,SE};
+enum genre { Feuille, Noeud };
 enum bool {false, true};
 
 typedef enum coul Couleur;
 typedef enum dir Direction;
+typedef enum genre Genre;
 typedef enum bool bool;
 
-/*struct arbre
+struct arbre
 {
     Direction direction;
     Couleur couleur;
-    struct arbre ** fils;
+    Genre genre;
+    struct arbre * fils[NB_FILS];
 };
-typedef struct arbre * Arbre;*/
+typedef struct arbre * Arbre;
 
-/* NOUVELLE STRUCTURE */
-enum cas_arbre { Feuille, Noeud, Null};
-
-union union_arbre {
-
-   int couleur;
-   struct Arbre **fils;
-};
-
-typedef struct donnee_arbre Arbre;
-
-struct donnee_arbre
-{
-   enum cas_arbre genre;
-   union union_arbre valeur;
-};
 
 Direction getDirection(Arbre arbre);
 Couleur getCouleur(Arbre arbre);
 Arbre getFils(Arbre arbre,Direction dir);
 void setDirection(Arbre arbre, Direction direction);
 void setCouleur(Arbre arbre, Couleur couleur);
-void setFils(Arbre pere,Arbre fils, int numero);
+void setFils(Arbre pere,Arbre fils, Direction dir);
 bool isEquilibre(Arbre arbre);
 bool isUni(Arbre arbre);
 void print(Arbre arbre);
-Arbre inserer(Arbre arbre, Direction direction, Couleur couleur,int numero);
+Arbre inserer(Arbre arbre, Direction direction, Couleur couleur);
 
 bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);

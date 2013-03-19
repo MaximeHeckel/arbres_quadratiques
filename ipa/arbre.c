@@ -3,7 +3,7 @@
 bool is_feuille(Arbre arbre)
 {
     bool res=false;
-    if(arbre.genre==Feuille)
+    if(arbre->genre==Feuille)
     {
         res=true;
     }
@@ -12,7 +12,7 @@ bool is_feuille(Arbre arbre)
 bool is_noeud(Arbre arbre)
 {
     bool res=false;
-    if(arbre.genre==Noeud)
+    if(arbre->genre==Noeud)
     {
         res=true;
     }
@@ -27,7 +27,7 @@ bool is_noeud(Arbre arbre)
     Arbre SO = arbre->fils[SO];
     Arbre NE = arbre->fils[NE];
     Arbre SE = arbre->fils[SE];
-    
+
     while(arbre != Feuille)
     {
         getFeuille(NO);
@@ -45,12 +45,15 @@ Direction getDirection(Arbre arbre)
 Couleur getCouleur(Arbre arbre)
 {
     assert(arbre != NULL);
+
     return arbre->couleur;
 }
 Arbre getFils(Arbre arbre, Direction dir)
 {
     assert(arbre != NULL);
-    return arbre->fils[];
+
+    return arbre->fils[dir];
+
 }
 
 void setDirection(Arbre arbre, Direction direction)
@@ -61,18 +64,19 @@ void setDirection(Arbre arbre, Direction direction)
 void setCouleur(Arbre arbre, Couleur couleur)
 {
     assert(arbre != NULL);
+
     arbre->couleur = couleur;
 }
-void setFils(Arbre pere,Arbre fils, int numero)  // <=== int numero -> dir Direction
+void setFils(Arbre pere,Arbre fils, Direction dir)  // <=== int numero -> dir Direction
 {
     assert(pere != NULL);
-    pere->fils[numero] = fils;
+    pere->fils[dir] = fils;
 }
 
 bool isUni(Arbre arbre)
 {
     assert(arbre != NULL);
-    return getCouleur(arbre) != NON_UNI;
+    return (getCouleur(arbre) != NON_UNI);
 }
 
 void print(Arbre arbre)
@@ -112,19 +116,19 @@ void print(Arbre arbre)
     }
 
 }
-Arbre inserer(Arbre arbre, Direction direction, Couleur couleur, int numero)
+Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 {
     Arbre nouveau = creer();
 
     nouveau->direction = direction;
     nouveau->couleur = couleur;
 
-    if(arbre == NULL)
+    if(pere == NULL)
     { return nouveau; }
 
-    arbre->fils[numero] = nouveau;
+    pere->fils[direction] = nouveau;
 
-    return arbre;
+    return pere;
 }
 
 void free_arbre(Arbre arbre)
@@ -140,7 +144,8 @@ void free_arbre(Arbre arbre)
         free_arbre(arbre->fils[i]);
     }
     printf("\t*Free fils*");
-    free(arbre->fils);
+    /*if(arbre->fils != NULL)
+    {free(arbre->fils);}*/
     free(arbre);
 
 }
@@ -171,9 +176,9 @@ Arbre creer()
 
     nouveau->direction = 0;
     nouveau->couleur = 0;
-    nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
+    //nouveau->fils = (Arbre) malloc(NB_FILS * sizeof(Arbre));
     int i;
-    for(i=1; i<=NB_FILS; i++)
+    for(i=0; i<NB_FILS; i++)
     { nouveau->fils[i] = NULL; }
 
     return nouveau;
