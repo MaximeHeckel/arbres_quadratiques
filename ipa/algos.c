@@ -1,4 +1,5 @@
 #include "arbre.h"
+#include "algos.h"
 
 int max(int a, int b)
 {
@@ -64,11 +65,12 @@ Arbre unification(Arbre arbre)
 	assert(arbre != NULL);
 	if(isUni(arbre))
 	{
-		arbre->couleur=getCouleur(getFils(arbre,NO));
+		Couleur temp = getCouleur(getFils(arbre,NO));
 		free_arbre(getFils(arbre,NO));
 		free_arbre(getFils(arbre,NE));
 		free_arbre(getFils(arbre,SO));
 		free_arbre(getFils(arbre,SE));
+		arbre->couleur= temp;
 
 	}
 	return arbre;
