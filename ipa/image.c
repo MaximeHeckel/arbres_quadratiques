@@ -34,3 +34,4 @@ Image colorier(Image picture, Couleur couleur,int i,int j)
 	}
 	return picture;
 }
+
