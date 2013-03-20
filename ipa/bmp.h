@@ -28,4 +28,4 @@ struct INFOHEADER
         unsigned int colours;
         unsigned int impcolours;  //importantcolours
     };
-typedef struct INFOHEADER header;
+typedef struct INFOHEADER infoheader;
