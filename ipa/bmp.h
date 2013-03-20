@@ -29,3 +29,7 @@ struct INFOHEADER
         unsigned int impcolours;  //importantcolours
     };
 typedef struct INFOHEADER infoheader;
+
+void isBMP(FILE* fichier, HEADER header, infoheader my_infoheader);
+RGB** creeMatrice(infoheader my_infoheader);
+infoheader readInfo(FILE* arq);
