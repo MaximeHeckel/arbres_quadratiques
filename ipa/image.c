@@ -1,10 +1,22 @@
 #include "image.h"
 
-Image tracerImage(float hauteur, float largeur)
+Image tracerImage(int hauteur, int largeur)
 {
-	Image picture;
-	picture.contour.largeur=largeur;
-	picture.contour.hauteur=largeur;
-	picture.nb_pixels = 0; // Histoire de mettre quelque chose
+	Image picture=malloc(sizeof(struct image));
+	picture->largeur=largeur;
+	picture->hauteur=hauteur;
+	picture->pixel_tab=malloc(sizeof(struct pixel)*largeur);
+	int i,j = 0;
+	for(j=0; j<largeur; j++)
+	{
+		picture->pixel_tab[j]=malloc(sizeof(struct pixel)*hauteur);
+	}
+	for(j=0;j<largeur; j++ )
+	{
+		for(i=0;i<hauteur;i++)
+		{
+			picture->pixel_tab[i][j].col=BLANC;
+		}
+	}
 	return picture;
 }
