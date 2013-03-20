@@ -20,3 +20,17 @@ Image tracerImage(int hauteur, int largeur)
 	}
 	return picture;
 }
+
+Image colorier(Image picture, Couleur couleur,int i,int j)
+{
+	assert(picture !=NULL);
+	if(i <= picture->hauteur && j <= picture->largeur)
+	{
+		picture->pixel_tab[i][j].col=couleur;
+	}
+	else
+	{
+		perror("Le pixel choisi est en dehors de l'image");
+	}
+	return picture;
+}
