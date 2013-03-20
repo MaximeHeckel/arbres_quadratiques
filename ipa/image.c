@@ -24,7 +24,7 @@ Image tracerImage(int hauteur, int largeur)
 Image colorier(Image picture, Couleur couleur,int i,int j)
 {
 	assert(picture !=NULL);
-	if(i <= picture->hauteur && j <= picture->largeur)
+	if(i < picture->hauteur && j < picture->largeur)
 	{
 		picture->pixel_tab[i][j].col=couleur;
 	}
