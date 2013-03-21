@@ -23,22 +23,22 @@
 
 int main(int argc, char * argv[])
 {
-    /*
+
     //Arbre mon_fils = creerArbre(Feuille);
     Arbre pere = inserer(NULL,SO,NOIR);
-  //  print(pere);
+    print(pere);
     Arbre fils = inserer(pere,SE,BLANC);
     print(pere);
     //free(pere);
     printf("\n%d",nb_feuille(pere));
 
-    freeArbre(pere);*/
+    freeArbre(pere);
 
-    Image image = creerImage(4,4);
+    /*Image image = creerImage(4,4);
     colorier(image,0,2,2);
     print_image(image);
 
-    freeImage(image);
+    freeImage(image);*/
 
 
 
