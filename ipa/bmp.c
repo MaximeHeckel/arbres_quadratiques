@@ -211,7 +211,7 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	}
 	else
 	{
-		perror("Zone indisponible");
+		perror("Zone indisponible" );
 	}
 	return resMatrice;
 }
