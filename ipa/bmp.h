@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-enum bool {false, true};
 
-typedef enum bool bool;
-
+enum boolen {FAUX, VRAI};
+typedef enum boolen boolen;
 typedef struct
 	{
 		char		type[2]; 	// file type
@@ -33,7 +32,7 @@ struct INFOHEADER
     };
 typedef struct INFOHEADER infoheader;
 
-bool isBMP(FILE* fichier, HEADER header, infoheader my_infoheader);
+boolen isBMP(FILE* fichier, HEADER header, infoheader my_infoheader);
 RGB** creeMatrice(infoheader my_infoheader);
 infoheader readInfo(FILE* arq);
 RGB** readFile(FILE* fichier , RGB** Matrice);

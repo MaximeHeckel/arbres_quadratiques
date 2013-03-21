@@ -1,9 +1,11 @@
 #include "bmp.h"
+#include "arbre.h"
+
 int height, width;
 
-bool isBMP(FILE* fichier, HEADER header, infoheader my_infoheader)
+boolen isBMP(FILE* fichier, HEADER header, infoheader my_infoheader)
 {
-	bool res = true;
+	bool res = VRAI;
 	char type[3];
 	int bpp;
 	fseek(fichier,0,0);
@@ -13,7 +15,7 @@ bool isBMP(FILE* fichier, HEADER header, infoheader my_infoheader)
 	fread(&bpp,1,2,fichier);
 	if(strcmp(type,"BM")||(bpp !=24))
 	{
-		res=false;
+		res=FAUX;
 	}
 	return res;
 }

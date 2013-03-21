@@ -1,5 +1,4 @@
 #include "arbre.h"
-#include "bmp.h"
 
 bool is_feuille(Arbre arbre)
 {
@@ -15,23 +14,6 @@ bool is_noeud(Arbre arbre)
 }
 
 
-/*Couleur getFeuille(Arbre arbre)
-{
-    assert(arbre!=NULL);
-    Arbre NO = arbre->fils[NO];
-    Arbre SO = arbre->fils[SO];
-    Arbre NE = arbre->fils[NE];
-    Arbre SE = arbre->fils[SE];
-
-    while(arbre != Feuille)
-    {
-        getFeuille(NO);
-        getFeuille(SO);
-        getFeuille(NE);
-        getFeuille(SE);
-    }
-
-}*/
 Direction getDirection(Arbre arbre)
 {
     assert(arbre != NULL);
@@ -189,18 +171,26 @@ Arbre creer()
     return nouveau;
 }
 
-/*Arbre AbreFromMatrice(RGB** Matrice,infoheader info)
+Arbre MatriceToArbre(RGB** Matrice, int precision)
 {
-    New = creer();
-    int a = info.xresolution/2;
-    int b = info.yresolution/2;
-    int c = info.xresolution;
-    int d = info.yresolution;
-    RGB ** subMatrice1;
-    RGB ** subMatrice2;
-    RGB ** subMatrice3;
-    RGB ** subMatrice4;
-    subMatrice1.info.xresolution = ;
-    subMatrice1.info.width =  b;
-    
-}*/
+     Arbre newArbre = creer();
+     int k=1;
+     while(k!=precision)
+     {
+        RGB** subMatrice1 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 1);
+        RGB** subMatrice2 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 2);
+        RGB** subMatrice3 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 3);
+        RGB** subMatrice4 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 4);
+        newArbre->fils[NO] = (Arbre)subMatrice1; //Affectation des fils 
+        newArbre->fils[NE] = (Arbre)subMatrice2;
+        newArbre->fils[SO] = (Arbre)subMatrice3;
+        newArbre->fils[SE] = (Arbre)subMatrice4;
+        MatriceToArbre(MatriceToCell(subMatrice1 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 1),precision);
+        MatriceToArbre(MatriceToCell(subMatrice2 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 2),precision);
+        MatriceToArbre(MatriceToCell(subMatrice3 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 3),precision);
+        MatriceToArbre(MatriceToCell(subMatrice4 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 4),precision);
+        k++;
+     }
+
+
+}

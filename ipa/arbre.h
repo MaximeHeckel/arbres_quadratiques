@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "bmp.h"
 
 #define NB_FILS 4
 
@@ -52,6 +53,7 @@ bool is_equilibre(Arbre arbre);
 void free_arbre(Arbre arbre);
 Arbre copie(Arbre arbre);
 Arbre creer();
+Arbre MatriceToArbre(RGB** Matrice, int precision);
 
 #endif // ARBRE_H_INCLUDED
 
