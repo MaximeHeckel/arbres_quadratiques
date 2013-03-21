@@ -12,5 +12,5 @@ int nb_feuille(Arbre arbre);
 bool is_equilibre(Arbre arbre);
 
 float moyenne(int a,int b, int c);
-
+int rgb_to_nb(int r, int g, int b);
 #endif // ALGOS_H_INCLUDED
