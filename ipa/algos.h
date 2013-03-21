@@ -11,4 +11,6 @@ int hauteur (Arbre arbre);
 int nb_feuille(Arbre arbre);
 bool is_equilibre(Arbre arbre);
 
+float moyenne(int a,int b, int c);
+
 #endif // ALGOS_H_INCLUDED
