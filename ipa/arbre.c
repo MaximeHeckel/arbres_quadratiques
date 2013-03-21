@@ -135,24 +135,6 @@ void free_arbre(Arbre arbre)
 
 }
 
-Arbre copie(Arbre arbre)
-{
-    assert(arbre != NULL);
-
-    Arbre res = creer();
-
-    res->couleur = arbre->couleur;
-    res->direction = arbre->direction;
-    res->genre = arbre->genre;
-
-    int i;
-    for(i=0; i<NB_FILS; i++)
-    {
-        if(arbre->fils[i] != NULL)
-        res->fils[i] = copie(arbre->fils[i]);
-    }
-    return res;
-}
 
 Arbre creer()
 {
@@ -180,7 +162,7 @@ Arbre MatriceToArbre(RGB** Matrice, int precision,Arbre newArbre)
         RGB** subMatrice2 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 2);
         RGB** subMatrice3 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 3);
         RGB** subMatrice4 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 4);
-        newArbre->fils[NO] = (Arbre)subMatrice1; //Affectation des fils 
+        newArbre->fils[NO] = (Arbre)subMatrice1; //Affectation des fils
         newArbre->fils[NE] = (Arbre)subMatrice2;
         newArbre->fils[SO] = (Arbre)subMatrice3;
         newArbre->fils[SE] = (Arbre)subMatrice4;
