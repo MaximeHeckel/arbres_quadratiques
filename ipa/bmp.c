@@ -103,7 +103,7 @@ RGB** readFile(FILE* fichier , RGB** Matrice)
 	return Matrice;
 }
 
-void writeFile(RGB** Matrix, FILE* fichier)
+void writeFile(RGB** Matrice, FILE* fichier)
 {
 	FILE* out;
 	int i,j;
@@ -121,7 +121,7 @@ void writeFile(RGB** Matrix, FILE* fichier)
 		{
 			position = position +3;
 			fseek(out,position,0);
-			temp = Matrix[i][j];
+			temp = Matrice[i][j];
 			fwrite(&temp,(sizeof(RGB)),1,out);
 		}
 	}
