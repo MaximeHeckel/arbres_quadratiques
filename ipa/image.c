@@ -15,7 +15,9 @@ Image tracerImage(int hauteur, int largeur)
 	{
 		for(i=0;i<hauteur;i++)
 		{
-			picture->pixel_tab[i][j].col=BLANC;
+		    Coordonnnee c = {i,j};
+		    Pixel p = {c,BLANC};
+			picture->pixel_tab[i][j]=p;
 		}
 	}
 	return picture;
@@ -37,9 +39,17 @@ Image colorier(Image picture, Couleur couleur,int i,int j)
 
 void print_pixel(Pixel p)
 {
-    printf("(x,y) : ( %d , %d ) . Couleur : %d",p.coord.x, p.coord.y, p.col);
+    printf(" (%d,%d, %d) ",p.coord.x, p.coord.y, p.col);
 }
-void print_image(Image i)
+void print_image(Image img)
 {
-
+    int i,j;
+    for(i=0; i<img->hauteur; i++)
+    {
+        for(j=0; j<img->largeur; j++)
+        {
+            print_pixel(img->pixel_tab[i][j]);
+        }
+        printf("\n");
+    }
 }
