@@ -43,7 +43,6 @@ RGB** creeMatrice(infoheader my_infoheader)
 
 // Source : les internettes => ( à analyser (propriétés bien particulières des BMP))
 
-// ********** Read BMP info from file **********
 infoheader readInfo(FILE* arq)
 {
     infoheader info;
@@ -104,7 +103,44 @@ RGB** readFile(FILE* fichier , RGB** Matrice)
 	return Matrice;
 }
 
+void writeFile(RGB** Matrix, FILE* fichier)
+{
+	FILE* out;
+	int i,j;
+	int position = 51;
+	RGB temp;
+	char header[54];
+	fseek(fichier,0,0);
+	out = fopen("out.bmp","w");
+	fseek(out,0,0);
+	fwrite(header,54,1,out);
 
+	for(i=0; i<height;i++)
+	{
+		for(j=0; j<width;j++)
+		{
+			position = position +3;
+			fseek(out,position,0);
+			temp = Matrix[i][j];
+			fwrite(&temp,(sizeof(RGB)),1,out);
+		}
+	}
+	fflush(out);
+	fclose(out);
+
+}
+
+void freeMatrice(RGB** Matrice,infoheader info )
+{
+	int i,j;
+	for(i=0; i<info.height;i++)
+	{
+		
+			free(Matrice[i]);
+		
+	}
+	free(Matrice);
+}
 
 /* DANS LE MAIN 
 

@@ -36,4 +36,6 @@ typedef struct INFOHEADER infoheader;
 bool isBMP(FILE* fichier, HEADER header, infoheader my_infoheader);
 RGB** creeMatrice(infoheader my_infoheader);
 infoheader readInfo(FILE* arq);
-void writeBMP(RGB **OutMatrix, infoheader my_infohead, FILE* arq);
+RGB** readFile(FILE* fichier , RGB** Matrice);
+void writeFile(RGB **Matrix, FILE* fichier);
+void freeMatrice(RGB** Matrice,infoheader info );
