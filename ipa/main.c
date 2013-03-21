@@ -38,6 +38,8 @@ int main(int argc, char * argv[])
     colorier(image,0,2,2);
     print_image(image);
 
+    freeImage(image);
+
 
 
 	return 0;

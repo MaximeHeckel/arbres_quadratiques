@@ -56,5 +56,16 @@ void print_image(Image img)
 
 void freeImage(Image img)
 {
+    if(img == NULL)
+    return ;
 
+
+    int j;
+    for(j=0; j<img->largeur; j++)
+	{
+		free(img->pixel_tab[j]);
+	}
+	free(img->pixel_tab);
+
+	free(img);
 }
