@@ -1,8 +1,9 @@
 #include "bmp.h"
 int height, width;
 
-void isBMP(FILE* fichier, HEADER header, infoheader my_infoheader)
+bool isBMP(FILE* fichier, HEADER header, infoheader my_infoheader)
 {
+	bool res = true;
 	char type[3];
 	int bpp;
 	fseek(fichier,0,0);
@@ -12,9 +13,9 @@ void isBMP(FILE* fichier, HEADER header, infoheader my_infoheader)
 	fread(&bpp,1,2,fichier);
 	if(strcmp(type,"BM")||(bpp !=24))
 	{
-		perror("Ce fichier n'est pas un BMP");
-		exit(0);
+		res=false;
 	}
+	return res;
 }
 
 RGB** creeMatrice(infoheader my_infoheader)
@@ -102,6 +103,8 @@ RGB** readFile(FILE* fichier , RGB** Matrice)
 	}
 	return Matrice;
 }
+
+
 
 /* DANS LE MAIN 
 
