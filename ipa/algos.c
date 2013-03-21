@@ -69,10 +69,10 @@ Arbre unification(Arbre arbre)
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
-		free_arbre(getFils(arbre,NO));
-		free_arbre(getFils(arbre,NE));
-		free_arbre(getFils(arbre,SO));
-		free_arbre(getFils(arbre,SE));
+		freeArbre(getFils(arbre,NO));
+		freeArbre(getFils(arbre,NE));
+		freeArbre(getFils(arbre,SO));
+		freeArbre(getFils(arbre,SE));
 		arbre->couleur= temp;
 
 	}

@@ -26,7 +26,8 @@ struct image
 
 typedef struct image *Image;
 
-void print_image(Image i);
+void print_image(Image img);
 void print_pixel(Pixel p);
 void colorier(Image picture, Couleur couleur,int i,int j);
 Image creerImage(int hauteur, int largeur);
+void freeImage(Image img);

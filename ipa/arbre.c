@@ -102,7 +102,7 @@ void print(Arbre arbre)
 }
 Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 {
-    Arbre nouveau = creer();
+    Arbre nouveau = creerArbre();
 
     nouveau->direction = direction;
     nouveau->couleur = couleur;
@@ -117,7 +117,7 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
     return pere;
 }
 
-void free_arbre(Arbre arbre)
+void freeArbre(Arbre arbre)
 {
    // printf("\n***Free***");
     if(arbre == NULL)
@@ -127,7 +127,7 @@ void free_arbre(Arbre arbre)
     for(i=0; i<NB_FILS; i++)
     {
        // printf("\n\t |_ ");
-        free_arbre(arbre->fils[i]);
+        freeArbre(arbre->fils[i]);
     }
    // printf("\t*Free fils*");
 
@@ -136,7 +136,7 @@ void free_arbre(Arbre arbre)
 }
 
 
-Arbre creer()
+Arbre creerArbre()
 {
     Arbre nouveau = NULL;
     nouveau = malloc(sizeof(struct arbre));

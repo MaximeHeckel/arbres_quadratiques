@@ -40,11 +40,11 @@ void print(Arbre arbre);
 
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur);
 Arbre unification(Arbre arbre);
-Arbre creer();
+Arbre creerArbre();
 
 Arbre goToLevel(Arbre arbre, Direction dir,int level);
 
-void free_arbre(Arbre arbre);
+void freeArbre(Arbre arbre);
 
 Arbre MatriceToArbre(RGB** Matrice, int precision,Arbre newArbre);
 

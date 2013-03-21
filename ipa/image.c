@@ -53,3 +53,8 @@ void print_image(Image img)
         printf("\n");
     }
 }
+
+void freeImage(Image img)
+{
+
+}
