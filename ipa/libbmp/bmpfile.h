@@ -1,3 +1,7 @@
+
+
+
+
 /**
  * @file bmpfile.h
  * @brief The BMP library header
