@@ -53,7 +53,7 @@ bool is_equilibre(Arbre arbre);
 void free_arbre(Arbre arbre);
 Arbre copie(Arbre arbre);
 Arbre creer();
-Arbre MatriceToArbre(RGB** Matrice, int precision);
+Arbre MatriceToArbre(RGB** Matrice, int precision,Arbre newArbre);
 
 #endif // ARBRE_H_INCLUDED
 

@@ -171,9 +171,8 @@ Arbre creer()
     return nouveau;
 }
 
-Arbre MatriceToArbre(RGB** Matrice, int precision)
+Arbre MatriceToArbre(RGB** Matrice, int precision,Arbre newArbre)
 {
-     Arbre newArbre = creer();
      int k=1;
      while(k!=precision)
      {
@@ -185,12 +184,13 @@ Arbre MatriceToArbre(RGB** Matrice, int precision)
         newArbre->fils[NE] = (Arbre)subMatrice2;
         newArbre->fils[SO] = (Arbre)subMatrice3;
         newArbre->fils[SE] = (Arbre)subMatrice4;
-        MatriceToArbre(MatriceToCell(subMatrice1 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 1),precision);
-        MatriceToArbre(MatriceToCell(subMatrice2 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 2),precision);
-        MatriceToArbre(MatriceToCell(subMatrice3 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 3),precision);
-        MatriceToArbre(MatriceToCell(subMatrice4 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 4),precision);
+        MatriceToArbre(MatriceToCell(subMatrice1 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 1),precision,(Arbre)subMatrice1);
+        MatriceToArbre(MatriceToCell(subMatrice2 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 2),precision,(Arbre)subMatrice2);
+        MatriceToArbre(MatriceToCell(subMatrice3 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 3),precision,(Arbre)subMatrice3);
+        MatriceToArbre(MatriceToCell(subMatrice4 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 4),precision,(Arbre)subMatrice4);
         k++;
      }
+
 
 
 }
