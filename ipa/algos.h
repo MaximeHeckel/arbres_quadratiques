@@ -1,6 +1,8 @@
 #ifndef ALGOS_H_INCLUDED
 #define ALGOS_H_INCLUDED
 
+#include "const.h"
+
 int max(int a, int b);
 int countLevelBranch(Arbre arbre,Direction dir);
 Couleur getCouleurBranches(Arbre arbre, Direction dir);

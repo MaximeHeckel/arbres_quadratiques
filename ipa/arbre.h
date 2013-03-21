@@ -2,22 +2,9 @@
 #define ARBRE_H_INCLUDED
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
 #include "bmp.h"
+#include "const.h"
 
-#define NB_FILS 4
-
-enum coul {NOIR,BLANC,NON_UNI};
-enum dir {NO,NE,SO,SE};
-enum genre { Feuille, Noeud };
-enum bool {false, true};
-
-typedef enum coul Couleur;
-typedef enum dir Direction;
-typedef enum genre Genre;
-typedef enum bool bool;
 
 struct arbre
 {
@@ -52,7 +39,6 @@ int countLevelBranch(Arbre arbre,Direction dir);
 void print(Arbre arbre);
 
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur);
-Arbre insererTab(Arbre arbre, Direction * tab_dir, int taille_tab_dir,Couleur* couleur,int taille_tab_col);
 Arbre unification(Arbre arbre);
 Arbre creer();
 

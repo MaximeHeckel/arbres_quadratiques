@@ -1,10 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h>
+#ifndef BMP_H_INCLUDED
+#define BMP_H_INCLUDED
 
-enum boolen {FAUX, VRAI};
-typedef enum boolen boolen;
+#include "const.h"
+
 typedef struct
 	{
 		char		type[2]; 	// file type
@@ -17,7 +15,7 @@ typedef struct
     {
         unsigned char RGB[3];
     }RGB;
- 
+
 struct INFOHEADER
     {
         unsigned int size;
@@ -32,10 +30,11 @@ struct INFOHEADER
     };
 typedef struct INFOHEADER infoheader;
 
-boolen isBMP(FILE* fichier, HEADER header, infoheader my_infoheader);
+bool isBMP(FILE* fichier, HEADER header, infoheader my_infoheader);
 RGB** creeMatrice(infoheader my_infoheader);
 infoheader readInfo(FILE* arq);
 RGB** readFile(FILE* fichier , RGB** Matrice);
 void writeFile(RGB **Matrix, FILE* fichier);
 void freeMatrice(RGB** Matrice,infoheader info );
 RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone);
+#endif // BMP_H_INCLUDED

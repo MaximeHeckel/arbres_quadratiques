@@ -13,7 +13,7 @@ int countLevelBranch(Arbre arbre,Direction dir)
     int i;
     while(getFils(arbre,dir)->genre !=Feuille)
     {
-        i=i++;
+        i++;
         arbre=getFils(arbre,dir);
     }
     return i;
@@ -23,11 +23,13 @@ Couleur getCouleurBranches(Arbre arbre, Direction dir)
 {
 	assert(arbre != NULL);
 	int i;
-	for(i=0;i<countLevelBranch(arbre,dir);i++)
+	int count = countLevelBranch(arbre,dir);
+	Arbre temp = arbre;
+	for(i=0;i<count;i++)
 	{
-		arbre=getFils(arbre,dir);
+		temp=getFils(temp,dir);
 	}
-	return getCouleur(arbre);
+	return getCouleur(temp);
 
 }
 
@@ -35,11 +37,12 @@ Arbre goToLevel(Arbre arbre, Direction dir,int level)
 {
 	assert(arbre != NULL);
 	int i;
+	Arbre temp = arbre;
 	for(i=0; i<level; i++)
 	{
-		arbre=getFils(arbre,dir);
+		temp=getFils(temp,dir);
 	}
-	return arbre;
+	return temp;
 }
 
 bool isUni(Arbre arbre)
