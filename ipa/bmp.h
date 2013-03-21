@@ -39,3 +39,4 @@ infoheader readInfo(FILE* arq);
 RGB** readFile(FILE* fichier , RGB** Matrice);
 void writeFile(RGB **Matrix, FILE* fichier);
 void freeMatrice(RGB** Matrice,infoheader info );
+RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone);

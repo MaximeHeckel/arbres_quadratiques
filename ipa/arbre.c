@@ -1,4 +1,5 @@
 #include "arbre.h"
+#include "bmp.h"
 
 bool is_feuille(Arbre arbre)
 {
@@ -187,3 +188,19 @@ Arbre creer()
 
     return nouveau;
 }
+
+/*Arbre AbreFromMatrice(RGB** Matrice,infoheader info)
+{
+    New = creer();
+    int a = info.xresolution/2;
+    int b = info.yresolution/2;
+    int c = info.xresolution;
+    int d = info.yresolution;
+    RGB ** subMatrice1;
+    RGB ** subMatrice2;
+    RGB ** subMatrice3;
+    RGB ** subMatrice4;
+    subMatrice1.info.xresolution = ;
+    subMatrice1.info.width =  b;
+    
+}*/

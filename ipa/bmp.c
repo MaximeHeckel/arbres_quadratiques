@@ -142,6 +142,78 @@ void freeMatrice(RGB** Matrice,infoheader info )
 	free(Matrice);
 }
 
+RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
+{
+
+	/*
+
+	|	1	|	2	|
+	|_______|_______|
+	|		|		|
+	|	3	|	4	|
+
+	*/
+	RGB** resMatrice;
+	RGB** SubMatrice1;
+	RGB** SubMatrice2;
+	RGB** SubMatrice3;
+	RGB** SubMatrice4;
+	int h2= sizeh/2;
+	int w2=sizew/2;
+	int i;
+	int j;
+	if(zone==3)
+	{
+		for(i=0; i<h2;i++)
+		{
+			for(j=0;j<w2; j++)
+			{
+				SubMatrice3[i][j]=Matrice[i][j];
+				resMatrice = SubMatrice3;
+			}
+		}
+	}
+	else if(zone==1)
+	{
+		for(i=h2; i<sizeh;i++)
+		{
+			for(j=0;j<w2; j++)
+			{
+				SubMatrice1[i][j]=Matrice[i][j];
+				resMatrice = SubMatrice1;
+			}
+		}
+	}
+	else if(zone==2)
+	{
+		for(i=h2; i<sizeh;i++)
+		{
+			for(j=w2;j<sizew; j++)
+			{
+				SubMatrice2[i][j]=Matrice[i][j];
+				resMatrice = SubMatrice2;
+			}
+		}
+	}
+	else if(zone==2)
+	{
+		for(i=0; i<h2;i++)
+		{
+			for(j=w2;j<sizew; j++)
+			{
+				SubMatrice4[i][j]=Matrice[i][j];
+				resMatrice = SubMatrice4;
+
+			}
+		}
+	}
+	else
+	{
+		perror("Zone indisponible");
+	}
+	return resMatrice;
+}
+
 /* DANS LE MAIN 
 
 FILE* arq; /* the bitmap file 24 bits 
