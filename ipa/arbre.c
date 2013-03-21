@@ -191,6 +191,6 @@ Arbre MatriceToArbre(RGB** Matrice, int precision,Arbre newArbre)
         k++;
      }
 
-
-
+    //!!!! Prendre en compte les feuilles et leur couleur !!!!
+     return newArbre;
 }
