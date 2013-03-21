@@ -1,19 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+#include "const.h"
 
-enum coul {NOIR,BLANC,NON_UNI};
-enum dir {NO,NE,SO,SE};
-enum genre { Feuille, Noeud };
-enum bool {false, true};
 
-typedef enum coul Couleur;
-typedef enum dir Direction;
-typedef enum genre Genre;
-typedef enum bool bool;
 struct coord
 {
-	int x;  
+	int x;
 	int y;
 };
 
@@ -27,7 +17,7 @@ struct pixel
 typedef struct pixel Pixel;
 
 struct image
-{	
+{
 	Pixel **pixel_tab;
 	int hauteur;
 	int largeur;
@@ -35,3 +25,8 @@ struct image
 };
 
 typedef struct image *Image;
+
+void print_image(Image i);
+void print_pixel(Pixel p);
+Image colorier(Image picture, Couleur couleur,int i,int j);
+Image tracerImage(int hauteur, int largeur);

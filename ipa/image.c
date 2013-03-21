@@ -35,3 +35,11 @@ Image colorier(Image picture, Couleur couleur,int i,int j)
 	return picture;
 }
 
+void print_pixel(Pixel p)
+{
+    printf("(x,y) : ( %d , %d ) . Couleur : %d",p.coord.x, p.coord.y, p.col);
+}
+void print_image(Image i)
+{
+
+}
