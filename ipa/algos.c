@@ -1,4 +1,3 @@
-#include "arbre.h"
 #include "algos.h"
 
 int max(int a, int b)

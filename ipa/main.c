@@ -36,38 +36,39 @@ int main()
 
     freeArbre(pere);*/
 
-    /*FILE *arq; // the bitmap file 24 bits
+    FILE *arq; // the bitmap file 24 bits
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
-    char name[15]="test.bmp";*/
+    char name[15]="test.bmp";
 
-    /*printf("Veuillez entrer le nom du fichier à traiter : ");
-    scanf("%s",name);*/
+    printf("Veuillez entrer le nom du fichier à traiter : ");
+    scanf("%s",name);
 
 
-    /*arq = exist(name);
+    arq = exist(name);
     isBMP(arq);
     info = readInfo(arq);
     height = info.height;
-    width = info.width;*/
-
-   // Matrix = createMatrix(info.height,info.width);
-    //printf(" %d %d",info.height,info.width);
-   // printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
-  //  loadImage(arq,Matrix);
-  //  printMatrix(Matrix,info.height,info.width);
+    width = info.width;
+    Matrix = createMatrix(info.height,info.width);
+    printf(" %d %d",info.height,info.width);
+    printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
+    loadImage(arq,Matrix);
+    Arbre newArbre = creerArbre();
+    MatriceToArbre(Matrix,newArbre, info.height, info.width);
+  //printMatrix(Matrix,info.height,info.width);
     //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
    /* Arbre pere = creerArbre();
     MatriceToArbre(Matrix,pere,info.height,info.width);
     print(pere);*/
 
-    RGB** Matrix = createMatrix(4,4);
+    /*RGB** Matrix = createMatrix(4,4);
     printMatrix(Matrix,4,4);
 
     Arbre pere = creerArbre();
     pere = MatriceToArbre(Matrix,pere,4,4);
-    print(pere);
+    print(pere);*/
 
    // writeBMP(Matrix,head,arq);
     //freeMatrix(Matrix,info);
