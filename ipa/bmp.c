@@ -15,7 +15,7 @@ FILE* exist(char *name)
 }
 
 // ********** Verify if the file is BMP *********
-void isBMP(FILE* arq, HEADER head, INFOHEADER info){
+void isBMP(FILE* arq){
         char type[3];
         unsigned short int bpp;
         fseek(arq,0,0);
@@ -89,7 +89,7 @@ void loadImage(FILE* arq, RGB** Matrix){
 }
 
 // ********** Create Matrix **********
-RGB** createMatrix(h,w)
+RGB** createMatrix(int h,int w)
 {
 
         int i;
@@ -109,7 +109,7 @@ RGB** createMatrix(h,w)
 }
 
 // ********** Image Output **********
-void writeBMP(RGB **Matrix, HEADER head, FILE* arq){
+void writeBMP(RGB **Matrix, FILE* arq){
 	FILE* out;
 	int i,j;
 	RGB tmp;
@@ -166,7 +166,7 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	RGB** resMatrice = createMatrix(h2,w2);
 
 	//Si on a atteint le "fond" de l'image, ie un pixel (qui est indivisible), on return NULL (signal d'arrret)
-	if(h2 == 0 || w2 && 0)
+	if( (h2 == 0) || (w2 && 0) )
 	{
 	    return NULL;
 	}
@@ -229,22 +229,9 @@ void printMatrix(RGB** Matrix, int h, int w)
     for(i=0; i<h; i++)
     {
         for(j=0; j<w; j++)
-            printf("%d.d.%d ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
+            printf("%d.%d.%d ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
         printf("\n");
     }
 }
 
 
-/* DANS LE MAIN
-
-FILE* arq; /* the bitmap file 24 bits
-RGB** Matrix_aux, Matrix;
-INFOHEADER info;
-info = readInfo(FILE* arq);
-height = info.height;
-width = info.width;
-
-Matrix_aux = createMatrix();
-Matrix = loadImage(arq,Matrix_aux);
-
-*/

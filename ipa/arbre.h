@@ -3,6 +3,7 @@
 
 
 #include "bmp.h"
+#include "algos.h"
 #include "const.h"
 
 

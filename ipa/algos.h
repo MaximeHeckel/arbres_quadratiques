@@ -2,6 +2,7 @@
 #define ALGOS_H_INCLUDED
 
 #include "const.h"
+typedef struct arbre * Arbre;
 
 int max(int a, int b);
 int countLevelBranch(Arbre arbre,Direction dir);

@@ -40,13 +40,14 @@ int main(int argc, char * argv[])
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
-    char name[15];
+    char name[15]="test.bmp";
 
-    printf("Veuillez entrer le nom du fichier à traiter : ");
-    scanf("%s",name);
+    /*printf("Veuillez entrer le nom du fichier à traiter : ");
+    scanf("%s",name);*/
+
 
     arq = exist(name);
-    isBMP(arq,head,info);
+    isBMP(arq);
     info = readInfo(arq);
     height = info.height;
     width = info.width;
