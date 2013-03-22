@@ -56,7 +56,8 @@ int main(int argc, char * argv[])
     loadImage(arq,Matrix);
     printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
     writeBMP(Matrix,head,arq);
-
+    freeMatrix(Matrix,info);
+    fclose(arq);
     /*Image image = creerImage(4,4);
     colorier(image,0,2,2);
     colorier(image,0,3,3);
