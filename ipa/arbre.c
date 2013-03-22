@@ -143,7 +143,7 @@ Arbre creerArbre()
     assert(nouveau != NULL);
 
     nouveau->direction = 0;
-    nouveau->couleur = 0;
+    nouveau->couleur = NON_UNI;
     nouveau->genre=Feuille;
 
     int i;
@@ -158,12 +158,14 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 //Cas d'erreur
         if(Matrice == NULL)
         {
-            return pere;
+            printf("\nCas d'erreur");
+            return NULL;
         }
 //CAS D'ARRET: Si on est arrivé au niveau du pixel on affecte la couleur
         //Matrice est en fait un tableau 2D de hauteur 1 et largeur 1 -> 1 case
         if(h == 1 || w == 1)
         {
+            printf("\nCas d'arreth: %d w: %d",h,w);
             Arbre feuille = creerArbre();
             feuille->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
             feuille->genre = Feuille;
@@ -171,16 +173,37 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
             return feuille;
         }
 //CAS GENERAL: récursivité
+        printf("\nCas recursif . h: %d w: %d",h,w);
         RGB** subMatrice1 =MatriceToCell(Matrice ,h/2,w/2, 1);
         RGB** subMatrice2 =MatriceToCell(Matrice ,h/2,w/2, 2);
         RGB** subMatrice3 =MatriceToCell(Matrice ,h/2,w/2,3);
         RGB** subMatrice4 =MatriceToCell(Matrice ,h/2,w/2,4);
 
         //Affectation des fils (recursif)
-        pere->fils[NO] = MatriceToArbre(subMatrice1,pere->fils[NO],h/2,w/2);
-        pere->fils[NE] = MatriceToArbre(subMatrice2,pere->fils[NE],h/2,w/2);
-        pere->fils[SO] = MatriceToArbre(subMatrice3,pere->fils[SO],h/2,w/2);
-        pere->fils[SE] = MatriceToArbre(subMatrice4,pere->fils[SE],h/2,w/2);
+        if(subMatrice1 != NULL)
+        {
+            pere->fils[NO] = creerArbre();
+            pere->fils[NO]->genre = Noeud;
+            pere->fils[NO] = MatriceToArbre(subMatrice1,pere->fils[NO],h/2,w/2);
+        }
+        if(subMatrice2 != NULL)
+        {
+            pere->fils[NE] = creerArbre();
+            pere->fils[NE]->genre = Noeud;
+            pere->fils[NE] = MatriceToArbre(subMatrice2,pere->fils[NE],h/2,w/2);
+        }
+        if(subMatrice3 != NULL)
+        {
+            pere->fils[SO] = creerArbre();
+            pere->fils[SO]->genre = Noeud;
+            pere->fils[SO] = MatriceToArbre(subMatrice3,pere->fils[SO],h/2,w/2);
+        }
+        if(subMatrice4 != NULL)
+        {
+            pere->fils[SE] = creerArbre();
+            pere->fils[SE]->genre = Noeud;
+            pere->fils[SE] = MatriceToArbre(subMatrice4,pere->fils[SE],h/2,w/2);
+        }
 
 
         return pere;
