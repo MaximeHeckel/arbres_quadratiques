@@ -173,52 +173,52 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 
 	int i;
 	int j;
-	if(zone==3)
+	switch(zone)
 	{
-		for(i=0; i<h2;i++)
-		{
-			for(j=0;j<w2; j++)
-			{
-				resMatrice[i][j] = Matrice[i][j];
-
+	    case 1:
+            for(i=h2; i<sizeh;i++)
+            {
+                for(j=0;j<w2; j++)
+                {
+                    resMatrice[i-h2][j] =Matrice[i][j];
+                }
             }
-		}
-	}
-	else if(zone==1)
-	{
-		for(i=h2; i<sizeh;i++)
-		{
-			for(j=0;j<w2; j++)
-			{
-				resMatrice[i-h2][j] =Matrice[i][j];
-			}
-		}
-	}
-	else if(zone==2)
-	{
-		for(i=h2; i<sizeh;i++)
-		{
-			for(j=w2;j<sizew; j++)
-			{
-				resMatrice[i-h2][j-w2] =Matrice[i][j];
-			}
-		}
-	}
-	else if(zone==4)
-	{
-		for(i=0; i<h2;i++)
-		{
-			for(j=w2;j<sizew; j++)
-			{
-				resMatrice[i][j-w2] =Matrice[i][j];
+            break;
 
-			}
-		}
+	    case 2:
+            for(i=h2; i<sizeh;i++)
+            {
+                for(j=w2;j<sizew; j++)
+                {
+                    resMatrice[i-h2][j-w2] =Matrice[i][j];
+                }
+            }
+            break;
+
+        case 3:
+            for(i=0; i<h2;i++)
+            {
+                for(j=0;j<w2; j++)
+                {
+                    resMatrice[i][j] = Matrice[i][j];
+                }
+            }
+            break;
+
+        case 4:
+            for(i=0; i<h2;i++)
+            {
+                for(j=w2;j<sizew; j++)
+                {
+                    resMatrice[i][j-w2] =Matrice[i][j];
+                }
+            }
+            break;
+
+        default:
+            perror("Zone indisponible" );
 	}
-	else
-	{
-		perror("Zone indisponible" );
-	}
+
 	return resMatrice;
 }
 

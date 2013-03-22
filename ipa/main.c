@@ -23,7 +23,7 @@
 #include "image.h"
 #include "bmp.h"
 
-int main(int argc, char * argv[])
+int main()
 {
 /*
     //Arbre mon_fils = creerArbre(Feuille);
