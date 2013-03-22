@@ -30,8 +30,8 @@ void setFils(Arbre pere,Arbre fils, Direction dir);
 bool is_feuille(Arbre arbre);
 bool is_noeud(Arbre arbre);
 
-
 void print(Arbre arbre);
+void printArbre(Arbre arbre,int i);
 
 Arbre inserer(Arbre arbre, Direction direction, Couleur couleur);
 

@@ -55,13 +55,21 @@ void setFils(Arbre pere,Arbre fils, Direction dir)  // <=== int numero -> dir Di
     assert(arbre != NULL);
     return (getCouleur(arbre) != NON_UNI);
 }*/
-
 void print(Arbre arbre)
+{
+    printf("\n\n");
+    printArbre(arbre,0);
+}
+
+void printArbre(Arbre arbre,int nb)
 {
     if( arbre == NULL)
     { return; }
 
-   // printf("\n");
+    int j;
+    for(j=0; j<nb; j++)
+               {printf("\t");}
+     printf("|_");
 
     if(getCouleur(arbre) == NOIR)
     { printf("NOIR"); }
@@ -88,13 +96,13 @@ void print(Arbre arbre)
     else
     { printf("Noeud");}
 
-    int i;
-    for(i=0; i<NB_FILS; i++)
+
+    for(j=0; j<NB_FILS; j++)
     {
-        if(arbre->fils[i] != NULL)
+        if(arbre->fils[j] != NULL)
         {
-             printf("\n\t |_ ");
-             print(arbre->fils[i]);
+            printf("\n");
+            printArbre(arbre->fils[j],nb+1);
         }
 
     }
@@ -174,10 +182,10 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
         }
 //CAS GENERAL: récursivité
         printf("\nCas recursif . h: %d w: %d",h,w);
-        RGB** subMatrice1 =MatriceToCell(Matrice ,h/2,w/2, 1);
-        RGB** subMatrice2 =MatriceToCell(Matrice ,h/2,w/2, 2);
-        RGB** subMatrice3 =MatriceToCell(Matrice ,h/2,w/2,3);
-        RGB** subMatrice4 =MatriceToCell(Matrice ,h/2,w/2,4);
+        RGB** subMatrice1 =MatriceToCell(Matrice ,h,w, 1);
+        RGB** subMatrice2 =MatriceToCell(Matrice ,h,w, 2);
+        RGB** subMatrice3 =MatriceToCell(Matrice ,h,w,3);
+        RGB** subMatrice4 =MatriceToCell(Matrice ,h,w,4);
 
         //Affectation des fils (recursif)
         if(subMatrice1 != NULL)
