@@ -153,26 +153,35 @@ Arbre creerArbre()
     return nouveau;
 }
 
-Arbre MatriceToArbre(RGB** Matrice, int precision,Arbre newArbre)
+Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 {
-     int k=1;
-     while(k!=precision)
-     {
-        RGB** subMatrice1 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 1);
-        RGB** subMatrice2 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 2);
-        RGB** subMatrice3 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 3);
-        RGB** subMatrice4 =MatriceToCell(Matrice ,sizeof(RGB*),sizeof(RGB*), 4);
-        newArbre->fils[NO] = (Arbre)subMatrice1; //Affectation des fils
-        newArbre->fils[NE] = (Arbre)subMatrice2;
-        newArbre->fils[SO] = (Arbre)subMatrice3;
-        newArbre->fils[SE] = (Arbre)subMatrice4;
-        MatriceToArbre(MatriceToCell(subMatrice1 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 1),precision,(Arbre)subMatrice1);
-        MatriceToArbre(MatriceToCell(subMatrice2 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 2),precision,(Arbre)subMatrice2);
-        MatriceToArbre(MatriceToCell(subMatrice3 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 3),precision,(Arbre)subMatrice3);
-        MatriceToArbre(MatriceToCell(subMatrice4 ,sizeof(RGB*)/2,sizeof(RGB*)/2, 4),precision,(Arbre)subMatrice4);
-        k++;
-     }
+//Cas d'erreur
+        if(Matrice == NULL)
+        {
+            return pere;
+        }
+//CAS D'ARRET: Si on est arrivé au niveau du pixel on affecte la couleur
+        //Matrice est en fait un tableau 2D de hauteur 1 et largeur 1 -> 1 case
+        if(h == 1 || w == 1)
+        {
+            Arbre feuille = creerArbre();
+            feuille->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
+            feuille->genre = Feuille;
 
-    //!!!! Prendre en compte les feuilles et leur couleur !!!!
-     return newArbre;
+            return feuille;
+        }
+//CAS GENERAL: récursivité
+        RGB** subMatrice1 =MatriceToCell(Matrice ,h/2,w/2, 1);
+        RGB** subMatrice2 =MatriceToCell(Matrice ,h/2,w/2, 2);
+        RGB** subMatrice3 =MatriceToCell(Matrice ,h/2,w/2,3);
+        RGB** subMatrice4 =MatriceToCell(Matrice ,h/2,w/2,4);
+
+        //Affectation des fils (recursif)
+        pere->fils[NO] = MatriceToArbre(subMatrice1,pere->fils[NO],h/2,w/2);
+        pere->fils[NE] = MatriceToArbre(subMatrice2,pere->fils[NE],h/2,w/2);
+        pere->fils[SO] = MatriceToArbre(subMatrice3,pere->fils[SO],h/2,w/2);
+        pere->fils[SE] = MatriceToArbre(subMatrice4,pere->fils[SE],h/2,w/2);
+
+
+        return pere;
 }

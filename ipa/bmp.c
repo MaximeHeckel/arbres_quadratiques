@@ -89,18 +89,19 @@ void loadImage(FILE* arq, RGB** Matrix){
 }
 
 // ********** Create Matrix **********
-RGB** createMatrix(){
-        RGB** Matrix;
+RGB** createMatrix(h,w)
+{
+
         int i;
-        Matrix = (RGB **) malloc (sizeof (RGB*) * height);
+        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * h);
         if (Matrix == NULL){
-                perror("***** No memory available *****");
+                perror("***** No memory available 1*****");
                 exit(0);
         }
-        for (i=0;i<height;i++){
-                Matrix[i] = (RGB *) malloc (sizeof(RGB) * width);
+        for (i=0;i<h;i++){
+                Matrix[i] = (RGB *) malloc (sizeof(RGB) * w);
                 if (Matrix[i] == NULL){
-                perror("***** No memory available *****");
+                perror("***** No memory available 2*****");
                         exit(0);
                 }
         }
@@ -159,13 +160,17 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	|	3	|	4	|
 
 	*/
-	RGB** resMatrice;
-	RGB** SubMatrice1;
-	RGB** SubMatrice2;
-	RGB** SubMatrice3;
-	RGB** SubMatrice4;
+
 	int h2= sizeh/2;
 	int w2=sizew/2;
+	RGB** resMatrice = createMatrix(h2,w2);
+
+	//Si on a atteint le "fond" de l'image, ie un pixel (qui est indivisible), on return NULL (signal d'arrret)
+	if(h2 == 0 || w2 && 0)
+	{
+	    return NULL;
+	}
+
 	int i;
 	int j;
 	if(zone==3)
@@ -174,9 +179,9 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 		{
 			for(j=0;j<w2; j++)
 			{
-				SubMatrice3[i][j]=Matrice[i][j];
-				resMatrice = SubMatrice3;
-			}
+				resMatrice[i][j] = Matrice[i][j];
+
+            }
 		}
 	}
 	else if(zone==1)
@@ -185,8 +190,7 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 		{
 			for(j=0;j<w2; j++)
 			{
-				SubMatrice1[i][j]=Matrice[i][j];
-				resMatrice = SubMatrice1;
+				resMatrice[i-h2][j] =Matrice[i][j];
 			}
 		}
 	}
@@ -196,19 +200,17 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 		{
 			for(j=w2;j<sizew; j++)
 			{
-				SubMatrice2[i][j]=Matrice[i][j];
-				resMatrice = SubMatrice2;
+				resMatrice[i-h2][j-w2] =Matrice[i][j];
 			}
 		}
 	}
-	else if(zone==2)
+	else if(zone==4)
 	{
 		for(i=0; i<h2;i++)
 		{
 			for(j=w2;j<sizew; j++)
 			{
-				SubMatrice4[i][j]=Matrice[i][j];
-				resMatrice = SubMatrice4;
+				resMatrice[i][j-w2] =Matrice[i][j];
 
 			}
 		}
@@ -219,6 +221,19 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	}
 	return resMatrice;
 }
+
+void printMatrix(RGB** Matrix, int h, int w)
+{
+    assert(Matrix != NULL);
+    int i,j;
+    for(i=0; i<h; i++)
+    {
+        for(j=0; j<w; j++)
+            printf("%d.d.%d ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
+        printf("\n");
+    }
+}
+
 
 /* DANS LE MAIN
 

@@ -51,13 +51,20 @@ int main(int argc, char * argv[])
     height = info.height;
     width = info.width;
 
-    Matrix = createMatrix(info);
-    printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
+    Matrix = createMatrix(info.height,info.width);
+    //printf(" %d %d",info.height,info.width);
+   // printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
     loadImage(arq,Matrix);
-    printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
-    writeBMP(Matrix,head,arq);
-    freeMatrix(Matrix,info);
-    fclose(arq);
+    printMatrix(Matrix,info.height,info.width);
+    //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
+   /* Arbre pere = creerArbre();
+    MatriceToArbre(Matrix,pere,info.height,info.width);
+    print(pere);*/
+
+
+   // writeBMP(Matrix,head,arq);
+    //freeMatrix(Matrix,info);
+    //fclose(arq);
     /*Image image = creerImage(4,4);
     colorier(image,0,2,2);
     colorier(image,0,3,3);

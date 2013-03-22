@@ -96,7 +96,7 @@ int hauteur (Arbre arbre){
 }
 
 int nb_feuille(Arbre arbre){
-	int res;
+	int res=0;
 	if(arbre == NULL || is_feuille(arbre))
 	{
 		res=1;
@@ -110,21 +110,24 @@ int nb_feuille(Arbre arbre){
 
 bool is_equilibre(Arbre arbre){
 	int res=false;
-	int i;
+
 	if(is_feuille(arbre))
 	{
 		res=true;
 	}
 	else
 	{
-		if((abs(hauteur(getFils(arbre,NO))-hauteur(getFils(arbre,NE)))<=1)
-			&& (abs(hauteur(getFils(arbre,SO)))-hauteur(getFils(arbre,SE)))<=1)
+	    int hNO = hauteur(getFils(arbre,NO));
+	    int hNE = hauteur(getFils(arbre,NE));
+	    int hSO = hauteur(getFils(arbre,SO));
+	    int hSE = hauteur(getFils(arbre,SE));
+
+		if(abs(hNO - hNE) <=1
+        && abs(hSO - hSE) <=1
+        && abs(hNO - hNE)<=1)
 		{
-			if((abs(hauteur(getFils(arbre,NO))-(hauteur(getFils(arbre,SO)))))<=1);
-			{
 				res=true;
-			}
-		}
+        }
 	}
 	return res;
 }
