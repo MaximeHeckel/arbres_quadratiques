@@ -175,8 +175,8 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	int j;
 	switch(zone)
 	{
-	    // NO
-	    case 1:
+	    // SE
+	    case 4:
             for(i=h2; i<sizeh;i++)
             {
                 for(j=0;j<w2; j++)
@@ -185,8 +185,8 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-        // NE
-	    case 2:
+        // SO
+	    case 3:
             for(i=h2; i<sizeh;i++)
             {
                 for(j=w2;j<sizew; j++)
@@ -195,8 +195,8 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-        // SO
-        case 3:
+        // NO
+        case 1:
             for(i=0; i<h2;i++)
             {
                 for(j=0;j<w2; j++)
@@ -205,8 +205,8 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-        // SE
-        case 4:
+        // NE
+        case 2:
             for(i=0; i<h2;i++)
             {
                 for(j=w2;j<sizew; j++)

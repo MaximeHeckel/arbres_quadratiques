@@ -83,17 +83,17 @@ int main()
     RGB ** sousMatriceNE = MatriceToCell(Matrice,4,4,2);
     RGB ** sousMatriceSO = MatriceToCell(Matrice,4,4,4);
     RGB ** sousMatriceSE = MatriceToCell(Matrice,4,4,3);
-    printf("\n\n\n");
+    printf("\n\n");
     printMatrix(sousMatriceNO,2,2);
-    printf("\n\n\n");
+    printf("\n\n");
     printMatrix(sousMatriceNE,2,2);
-    printf("\n\n\n");
+    printf("\n\n");
     printMatrix(sousMatriceSO,2,2);
-    printf("\n\n\n");
+    printf("\n\n");
     printMatrix(sousMatriceSE,2,2);
 
     RGB ** Matrice2 = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,4,4);
-    printf("\n\n\n");
+  //  printf("\n\n");
     //printMatrix(Matrice2, 4, 4);
 
 
