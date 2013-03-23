@@ -7,13 +7,11 @@ bool is_feuille(Arbre arbre)
     while(arbre->fils[i] != NULL)
         i++;
 
-    return (i == 3) ? true:false;
+    return (i == 4) ? true:false;
 }
 bool is_noeud(Arbre arbre)
 {
-    assert(arbre != NULL);
-
-    return (arbre->genre == Noeud);
+    return ( ! is_feuille(arbre));
 }
 
 
@@ -363,16 +361,29 @@ int rgb_to_nb(int r, int g, int b)
 }
 RGB** ArbreToMatrice(Arbre arbre)
 {
-//Cas d'arret
-        if(arbre == NULL)
-        {
-            return NULL;
-        }
+//Cas d'erreur
+        assert(arbre != NULL);
 
         int hsize = calcDimensionMatrice(arbre);
-
-
         RGB ** Matrice = createMatrix(hsize,hsize);
+        assert(Matrice != NULL);
+
+//Cas d'arret
+        if(is_feuille(arbre))
+        {
+            int i,j;
+            for(i=0; i<hsize; i++)
+            {
+                for(j=0; j<hsize; j++)
+                {
+                    Matrice[i][j].RGB[0] = arbre->couleur;
+                    Matrice[i][j].RGB[1] = arbre->couleur;
+                    Matrice[i][j].RGB[2] = arbre->couleur;
+                }
+            }
+            return Matrice;
+        }
+//Cas recursif
         RGB ** sousMatriceNO;
         RGB ** sousMatriceNE;
         RGB ** sousMatriceSO;
@@ -400,8 +411,8 @@ int calcDimensionMatrice(Arbre arbre)
         int h = hauteur(arbre);
         int hsize=1;
         int i;
-        //Pow : hauteur matrice = 2^(hauteur arbre + 1);
-        for(i=1; i<=h+1; i++)
+        //Pow : hauteur matrice = 2^(hauteur arbre - 1);
+        for(i=1; i<h; i++)
         {
             hsize *= 2;
         }
