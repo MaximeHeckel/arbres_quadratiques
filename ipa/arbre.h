@@ -54,7 +54,7 @@ bool is_equilibre(Arbre arbre);
 float moyenne(int a,int b, int c);
 int rgb_to_nb(int r, int g, int b);
 
-RGB** ArbreToMatrice(RGB** Matrice,Arbre arbre, int h, int w);
+RGB** ArbreToMatrice(Arbre arbre);
 
 #endif // ARBRE_H_INCLUDED
 

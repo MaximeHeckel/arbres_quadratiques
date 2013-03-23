@@ -38,8 +38,8 @@ int main()
     FILE *arq; // the bitmap file 24 bits
     RGB  **Matrix;
     INFOHEADER info;
-    HEADER head;
-    char name[]="test.bmp";
+    //HEADER head;
+    char name[]="orca.bmp";
 
    /* printf("Veuillez entrer le nom du fichier à traiter : ");
     scanf("%s",name);*/
@@ -56,7 +56,8 @@ int main()
     loadImage(arq,Matrix);
     Arbre newArbre = creerArbre();
     MatriceToArbre(Matrix,newArbre, info.height, info.width);
-    print(newArbre);
+    printf("\n %d", hauteur(newArbre));
+   // print(newArbre);
   //printMatrix(Matrix,info.height,info.width);
     //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
    /* Arbre pere = creerArbre();

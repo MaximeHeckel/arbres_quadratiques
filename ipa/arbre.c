@@ -3,8 +3,11 @@
 bool is_feuille(Arbre arbre)
 {
     assert(arbre != NULL);
+    int i=0;
+    while(arbre->fils[i] != NULL)
+        i++;
 
-    return (arbre->genre == Feuille);
+    return (i == 3) ? true:false;
 }
 bool is_noeud(Arbre arbre)
 {
@@ -298,7 +301,7 @@ Arbre unification(Arbre arbre)
 
 int hauteur (Arbre arbre){
 
-	int res;
+	int res=0;
 	if(arbre == NULL || is_feuille(arbre) )
 	{
 		res=0;
@@ -306,7 +309,7 @@ int hauteur (Arbre arbre){
 	else
 	{
         int hauteur1 = max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,SE)));
-        int hauteur2 = (max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,NE))));
+        int hauteur2 = max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,NE)));
 		res=1+max(hauteur1,hauteur2);
 	}
 	return res;
@@ -358,7 +361,7 @@ int rgb_to_nb(int r, int g, int b)
 // Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie blanc (0) sinon noir (1)
   return (moyenne(r,g,b) < 127) ? 0 : 1;
 }
-RGB** ArbreToMatrice(RGB** Matrice,Arbre arbre, int h, int w)
+RGB** ArbreToMatrice(Arbre arbre)
 {
 //Cas d'erreur
         if(arbre == NULL)
@@ -366,6 +369,18 @@ RGB** ArbreToMatrice(RGB** Matrice,Arbre arbre, int h, int w)
           //  printf("\nCas d'erreur");
             return NULL;
         }
+        int h = hauteur(arbre);
+        int hsize=1;
+        int i;
+        //Pow : hauteur matrice = 2^(hauteur arbre + 1);
+        for(i=1; i<=h+1; i++)
+        {
+            hsize *= 2;
+        }
+
+        RGB ** Matrice = createMatrix(h,h);
+
+
 
         return Matrice;
 }
