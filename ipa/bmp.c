@@ -175,8 +175,9 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	int j;
 	switch(zone)
 	{
+	    // NO
 	    case 1:
-            for(i=h2; i<sizeh-1;i++)
+            for(i=h2; i<sizeh;i++)
             {
                 for(j=0;j<w2; j++)
                 {
@@ -184,17 +185,17 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-
+        // NE
 	    case 2:
-            for(i=h2; i<sizeh-1;i++)
+            for(i=h2; i<sizeh;i++)
             {
-                for(j=w2;j<sizew-1; j++)
+                for(j=w2;j<sizew; j++)
                 {
                     resMatrice[i-h2][j-w2] =Matrice[i][j];
                 }
             }
             break;
-
+        // SO
         case 3:
             for(i=0; i<h2;i++)
             {
@@ -204,11 +205,11 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-
+        // SE
         case 4:
             for(i=0; i<h2;i++)
             {
-                for(j=w2;j<sizew-1; j++)
+                for(j=w2;j<sizew; j++)
                 {
                     resMatrice[i][j-w2] =Matrice[i][j];
                 }
@@ -247,20 +248,20 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
         int i,j;
         int h2 = h/2;
         int w2 = w/2;
-        //Traitement NE
+//Traitement NO
             for(i=h2; i<h-1;i++)
             {
                 for(j=0;j<w2; j++)
                 {
-                    Matrice[i][j] = sousMatriceNE[i-h2][j];
+                    Matrice[i][j] = sousMatriceNO[i-h2][j];
                 }
             }
-//Traitement SE
+//Traitement NE
             for(i=h2; i<h-1;i++)
             {
                 for(j=w2;j<w-1; j++)
                 {
-                    Matrice[i][j] = sousMatriceSE[i-h2][j-w2];
+                    Matrice[i][j] = sousMatriceNE[i-h2][j-w2];
                 }
             }
 //Traitement SO
@@ -271,12 +272,12 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
                     Matrice[i][j] = sousMatriceSO[i][j];
                 }
             }
-//Traitement NO
+//Traitement SE
             for(i=0; i<h2;i++)
             {
                 for(j=w2;j<w-1; j++)
                 {
-                    Matrice[i][j] = sousMatriceNO[i][j-w2];
+                    Matrice[i][j] = sousMatriceSE[i][j-w2];
                 }
             }
             return Matrice;
