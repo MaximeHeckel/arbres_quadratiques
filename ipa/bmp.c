@@ -248,36 +248,36 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
         int i,j;
         int h2 = h/2;
         int w2 = w/2;
-//Traitement NO
-            for(i=h2; i<h-1;i++)
-            {
-                for(j=0;j<w2; j++)
-                {
-                    Matrice[i][j] = sousMatriceNO[i-h2][j];
-                }
-            }
-//Traitement NE
-            for(i=h2; i<h-1;i++)
-            {
-                for(j=w2;j<w-1; j++)
-                {
-                    Matrice[i][j] = sousMatriceNE[i-h2][j-w2];
-                }
-            }
 //Traitement SO
-            for(i=0; i<h2;i++)
+            for(i=h2; i<h;i++)
             {
                 for(j=0;j<w2; j++)
                 {
-                    Matrice[i][j] = sousMatriceSO[i][j];
+                    Matrice[i][j] = sousMatriceSO[i-h2][j];
                 }
             }
 //Traitement SE
+            for(i=h2; i<h-1;i++)
+            {
+                for(j=w2;j<w; j++)
+                {
+                    Matrice[i][j] = sousMatriceSE[i-h2][j-w2];
+                }
+            }
+//Traitement NO
             for(i=0; i<h2;i++)
             {
-                for(j=w2;j<w-1; j++)
+                for(j=0;j<w2; j++)
                 {
-                    Matrice[i][j] = sousMatriceSE[i][j-w2];
+                    Matrice[i][j] = sousMatriceNO[i][j];
+                }
+            }
+//Traitement NE
+            for(i=0; i<h2;i++)
+            {
+                for(j=w2;j<w; j++)
+                {
+                    Matrice[i][j] = sousMatriceNE[i][j-w2];
                 }
             }
             return Matrice;
