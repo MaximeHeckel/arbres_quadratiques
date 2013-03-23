@@ -366,7 +366,6 @@ RGB** ArbreToMatrice(Arbre arbre)
 //Cas d'arret
         if(arbre == NULL)
         {
-          //  printf("\nCas d'erreur");
             return NULL;
         }
 
@@ -374,11 +373,22 @@ RGB** ArbreToMatrice(Arbre arbre)
 
 
         RGB ** Matrice = createMatrix(hsize,hsize);
+        RGB ** sousMatriceNO;
+        RGB ** sousMatriceNE;
+        RGB ** sousMatriceSO;
+        RGB ** sousMatriceSE;
 
-        RGB ** sousMatriceNO = ArbreToMatrice(arbre->fils[NO]);
-        RGB ** sousMatriceNE = ArbreToMatrice(arbre->fils[NE]);
-        RGB ** sousMatriceSO = ArbreToMatrice(arbre->fils[SO]);
-        RGB ** sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
+        if(arbre->fils[NO] != NULL)
+            sousMatriceNO = ArbreToMatrice(arbre->fils[NO]);
+
+        if(arbre->fils[NE] != NULL)
+            sousMatriceNE = ArbreToMatrice(arbre->fils[NE]);
+
+        if(arbre->fils[SO] != NULL)
+            sousMatriceSO = ArbreToMatrice(arbre->fils[SO]);
+
+        if(arbre->fils[SE] != NULL)
+            sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
 
         Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 

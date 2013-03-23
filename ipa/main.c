@@ -36,16 +36,16 @@ int main()
     freeArbre(pere);*/
 
     FILE *arq; // the bitmap file 24 bits
-   // RGB  **Matrix;
+    RGB  **Matrix;
     INFOHEADER info;
-    //HEADER head;
+    HEADER head;
     char name[]="orca.bmp";
 
    /* printf("Veuillez entrer le nom du fichier à traiter : ");
     scanf("%s",name);*/
 
 
-    /*arq = exist(name);
+    arq = exist(name);
     isBMP(arq);
     info = readInfo(arq);
     height = info.height;
@@ -59,7 +59,7 @@ int main()
    // printf("\n %d", hauteur(newArbre));
     RGB ** res = ArbreToMatrice(newArbre);
     int h = calcDimensionMatrice(newArbre);
-    printMatrix(res,h,h);*/
+    printMatrix(res,h,h);
    // print(newArbre);
   //printMatrix(Matrix,info.height,info.width);
     //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
