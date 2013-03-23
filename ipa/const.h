@@ -6,6 +6,8 @@
 #include <assert.h>
 #include <string.h>
 
+
+
 #define NB_FILS 4
 
 enum coul {NOIR,BLANC,NON_UNI};

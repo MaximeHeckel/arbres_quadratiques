@@ -175,8 +175,9 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	int j;
 	switch(zone)
 	{
-	    case 1:
-            for(i=h2; i<sizeh-1;i++)
+	    // SE
+	    case 4:
+            for(i=h2; i<sizeh;i++)
             {
                 for(j=0;j<w2; j++)
                 {
@@ -184,18 +185,18 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-
-	    case 2:
-            for(i=h2; i<sizeh-1;i++)
+        // SO
+	    case 3:
+            for(i=h2; i<sizeh;i++)
             {
-                for(j=w2;j<sizew-1; j++)
+                for(j=w2;j<sizew; j++)
                 {
                     resMatrice[i-h2][j-w2] =Matrice[i][j];
                 }
             }
             break;
-
-        case 3:
+        // NO
+        case 1:
             for(i=0; i<h2;i++)
             {
                 for(j=0;j<w2; j++)
@@ -204,11 +205,11 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
                 }
             }
             break;
-
-        case 4:
+        // NE
+        case 2:
             for(i=0; i<h2;i++)
             {
-                for(j=w2;j<sizew-1; j++)
+                for(j=w2;j<sizew; j++)
                 {
                     resMatrice[i][j-w2] =Matrice[i][j];
                 }
@@ -229,9 +230,55 @@ void printMatrix(RGB** Matrix, int h, int w)
     for(i=0; i<h; i++)
     {
         for(j=0; j<w; j++)
-            printf("%d.%d.%d ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
+            printf("%d.%d.%d   ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
         printf("\n");
     }
 }
 
 
+RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w)
+{
+        assert(sousMatriceNO != NULL);
+        assert(sousMatriceNE != NULL);
+        assert(sousMatriceSO != NULL);
+        assert(sousMatriceSE != NULL);
+
+
+        RGB ** Matrice = createMatrix(h,w);
+        int i,j;
+        int h2 = h/2;
+        int w2 = w/2;
+//Traitement SO
+            for(i=h2; i<h;i++)
+            {
+                for(j=0;j<w2; j++)
+                {
+                    Matrice[i][j] = sousMatriceSO[i-h2][j];
+                }
+            }
+//Traitement SE
+            for(i=h2; i<h-1;i++)
+            {
+                for(j=w2;j<w; j++)
+                {
+                    Matrice[i][j] = sousMatriceSE[i-h2][j-w2];
+                }
+            }
+//Traitement NO
+            for(i=0; i<h2;i++)
+            {
+                for(j=0;j<w2; j++)
+                {
+                    Matrice[i][j] = sousMatriceNO[i][j];
+                }
+            }
+//Traitement NE
+            for(i=0; i<h2;i++)
+            {
+                for(j=w2;j<w; j++)
+                {
+                    Matrice[i][j] = sousMatriceNE[i][j-w2];
+                }
+            }
+            return Matrice;
+}
