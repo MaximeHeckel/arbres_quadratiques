@@ -166,14 +166,14 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 //Cas d'erreur
         if(Matrice == NULL)
         {
-            printf("\nCas d'erreur");
+          //  printf("\nCas d'erreur");
             return NULL;
         }
 //CAS D'ARRET: Si on est arrivé au niveau du pixel on affecte la couleur
         //Matrice est en fait un tableau 2D de hauteur 1 et largeur 1 -> 1 case
         if(h == 1 || w == 1)
         {
-            printf("\nCas d'arret h: %d w: %d",h,w);
+          //  printf("\nCas d'arret h: %d w: %d",h,w);
             Arbre feuille = creerArbre();
             feuille->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
             feuille->genre = Feuille;
@@ -181,7 +181,7 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
             return feuille;
         }
 //CAS GENERAL: récursivité
-        printf("\nCas recursif . h: %d w: %d",h,w);
+       // printf("\nCas recursif . h: %d w: %d",h,w);
         RGB** subMatrice1 =MatriceToCell(Matrice ,h,w, 1);
         RGB** subMatrice2 =MatriceToCell(Matrice ,h,w, 2);
         RGB** subMatrice3 =MatriceToCell(Matrice ,h,w,3);

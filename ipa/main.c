@@ -39,10 +39,10 @@ int main()
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
-    char name[15]="test.bmp";
+    char name[]="test.bmp";
 
-    printf("Veuillez entrer le nom du fichier à traiter : ");
-    scanf("%s",name);
+   /* printf("Veuillez entrer le nom du fichier à traiter : ");
+    scanf("%s",name);*/
 
 
     arq = exist(name);
@@ -52,10 +52,11 @@ int main()
     width = info.width;
     Matrix = createMatrix(info.height,info.width);
     printf(" %d %d",info.height,info.width);
-    printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
+   // printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
     loadImage(arq,Matrix);
     Arbre newArbre = creerArbre();
     MatriceToArbre(Matrix,newArbre, info.height, info.width);
+    print(newArbre);
   //printMatrix(Matrix,info.height,info.width);
     //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
    /* Arbre pere = creerArbre();

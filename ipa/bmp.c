@@ -176,7 +176,7 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	switch(zone)
 	{
 	    case 1:
-            for(i=h2; i<sizeh;i++)
+            for(i=h2; i<sizeh-1;i++)
             {
                 for(j=0;j<w2; j++)
                 {
@@ -186,9 +186,9 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
             break;
 
 	    case 2:
-            for(i=h2; i<sizeh;i++)
+            for(i=h2; i<sizeh-1;i++)
             {
-                for(j=w2;j<sizew; j++)
+                for(j=w2;j<sizew-1; j++)
                 {
                     resMatrice[i-h2][j-w2] =Matrice[i][j];
                 }
@@ -208,7 +208,7 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
         case 4:
             for(i=0; i<h2;i++)
             {
-                for(j=w2;j<sizew; j++)
+                for(j=w2;j<sizew-1; j++)
                 {
                     resMatrice[i][j-w2] =Matrice[i][j];
                 }
