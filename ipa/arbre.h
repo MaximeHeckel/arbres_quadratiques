@@ -3,7 +3,6 @@
 
 
 #include "bmp.h"
-#include "algos.h"
 #include "const.h"
 
 
@@ -41,6 +40,21 @@ Arbre creerArbre();
 void freeArbre(Arbre arbre);
 
 Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w);
+
+int max(int a, int b);
+int countLevelBranch(Arbre arbre,Direction dir);
+Couleur getCouleurBranches(Arbre arbre, Direction dir);
+Arbre goToLevel(Arbre arbre, Direction dir,int level);
+bool isUni(Arbre arbre);
+Arbre unification(Arbre arbre);
+int hauteur (Arbre arbre);
+int nb_feuille(Arbre arbre);
+bool is_equilibre(Arbre arbre);
+
+float moyenne(int a,int b, int c);
+int rgb_to_nb(int r, int g, int b);
+
+
 
 #endif // ARBRE_H_INCLUDED
 

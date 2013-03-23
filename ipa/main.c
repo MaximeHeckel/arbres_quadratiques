@@ -19,7 +19,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "arbre.h"
-#include "algos.h"
 #include "image.h"
 #include "bmp.h"
 
