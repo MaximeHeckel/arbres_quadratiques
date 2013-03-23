@@ -79,3 +79,14 @@ typedef struct donnee_arbre arbre_binaire_strict;
     				divideAndConquer(im2, tree, parent/4+2);
     				divideAndConquer(im3, tree, parent/4+3);
   				}
+
+//Update 23/03
+TODO:
+-ArbreToMatrix : l'inverse de MatrixToArbre.
+
+Je crois que c'est le dernier truc à faire.
+Pour résumer :  on charge le bmp, on le stocke dans une Matrice, on la transforme en arbre, on unifie l'arbre, on transforme l'arbre en Matrice, puis la Matrice en .bmp.
+
+bmp -> Matrice -> Arbre -> Arbre unifié -> Matrice -> bmp
+
+MatrixToArbre fait l'avant derniere operation, c'est celle qui nous manque.

@@ -358,3 +358,14 @@ int rgb_to_nb(int r, int g, int b)
 // Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie blanc (0) sinon noir (1)
   return (moyenne(r,g,b) < 127) ? 0 : 1;
 }
+RGB** ArbreToMatrice(RGB** Matrice,Arbre arbre, int h, int w)
+{
+//Cas d'erreur
+        if(arbre == NULL)
+        {
+          //  printf("\nCas d'erreur");
+            return NULL;
+        }
+
+        return Matrice;
+}
