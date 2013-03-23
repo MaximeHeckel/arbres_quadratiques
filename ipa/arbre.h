@@ -55,6 +55,7 @@ float moyenne(int a,int b, int c);
 int rgb_to_nb(int r, int g, int b);
 
 RGB** ArbreToMatrice(Arbre arbre);
+int calcDimensionMatrice(Arbre arbre);
 
 #endif // ARBRE_H_INCLUDED
 

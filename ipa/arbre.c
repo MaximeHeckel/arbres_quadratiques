@@ -363,12 +363,30 @@ int rgb_to_nb(int r, int g, int b)
 }
 RGB** ArbreToMatrice(Arbre arbre)
 {
-//Cas d'erreur
+//Cas d'arret
         if(arbre == NULL)
         {
           //  printf("\nCas d'erreur");
             return NULL;
         }
+
+        int hsize = calcDimensionMatrice(arbre);
+
+
+        RGB ** Matrice = createMatrix(hsize,hsize);
+
+        RGB ** sousMatriceNO = ArbreToMatrice(arbre->fils[NO]);
+        RGB ** sousMatriceNE = ArbreToMatrice(arbre->fils[NE]);
+        RGB ** sousMatriceSO = ArbreToMatrice(arbre->fils[SO]);
+        RGB ** sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
+
+        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
+
+        return Matrice;
+}
+
+int calcDimensionMatrice(Arbre arbre)
+{
         int h = hauteur(arbre);
         int hsize=1;
         int i;
@@ -377,10 +395,5 @@ RGB** ArbreToMatrice(Arbre arbre)
         {
             hsize *= 2;
         }
-
-        RGB ** Matrice = createMatrix(h,h);
-
-
-
-        return Matrice;
+        return hsize;
 }

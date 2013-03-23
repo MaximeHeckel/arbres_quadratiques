@@ -229,9 +229,55 @@ void printMatrix(RGB** Matrix, int h, int w)
     for(i=0; i<h; i++)
     {
         for(j=0; j<w; j++)
-            printf("%d.%d.%d ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
+            printf("%d.%d.%d   ",Matrix[i][j].RGB[0],Matrix[i][j].RGB[1],Matrix[i][j].RGB[2]);
         printf("\n");
     }
 }
 
 
+RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w)
+{
+        assert(sousMatriceNO != NULL);
+        assert(sousMatriceNE != NULL);
+        assert(sousMatriceSO != NULL);
+        assert(sousMatriceSE != NULL);
+
+
+        RGB ** Matrice = createMatrix(h,w);
+        int i,j;
+        int h2 = h/2;
+        int w2 = w/2;
+        //Traitement NE
+            for(i=h2; i<h-1;i++)
+            {
+                for(j=0;j<w2; j++)
+                {
+                    Matrice[i][j] = sousMatriceNE[i-h2][j];
+                }
+            }
+//Traitement SE
+            for(i=h2; i<h-1;i++)
+            {
+                for(j=w2;j<w-1; j++)
+                {
+                    Matrice[i][j] = sousMatriceSE[i-h2][j-w2];
+                }
+            }
+//Traitement SO
+            for(i=0; i<h2;i++)
+            {
+                for(j=0;j<w2; j++)
+                {
+                    Matrice[i][j] = sousMatriceSO[i][j];
+                }
+            }
+//Traitement NO
+            for(i=0; i<h2;i++)
+            {
+                for(j=w2;j<w-1; j++)
+                {
+                    Matrice[i][j] = sousMatriceNO[i][j-w2];
+                }
+            }
+            return Matrice;
+}

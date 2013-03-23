@@ -45,4 +45,5 @@ void writeBMP(RGB **OutMatrix,FILE* arq);
 void freeMatrix(RGB **Matrix,INFOHEADER info);
 RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone);
 void printMatrix(RGB** Matrix, int h, int w);
+RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w);
 #endif // BMP_H_INCLUDED
