@@ -7,13 +7,11 @@ bool is_feuille(Arbre arbre)
     while(arbre->fils[i] != NULL)
         i++;
 
-    return (i == 3) ? true:false;
+    return (i == 4) ? true:false;
 }
 bool is_noeud(Arbre arbre)
 {
-    assert(arbre != NULL);
-
-    return (arbre->genre == Noeud);
+    return ( ! is_feuille(arbre));
 }
 
 
@@ -67,7 +65,13 @@ void print(Arbre arbre)
 void printArbre(Arbre arbre,int nb)
 {
     if( arbre == NULL)
-    { return; }
+    {
+       /* int j;
+        for(j=0; j<nb; j++)
+               {printf("\t");}
+        printf("|_");printf("NULL");*/
+        return;
+     }
 
     int j;
     for(j=0; j<nb; j++)
@@ -140,19 +144,24 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 
 void freeArbre(Arbre arbre)
 {
-   // printf("\n***Free***");
+    printf("\n***Free***");
     if(arbre == NULL)
     { return; }
 
-    int i;
-    for(i=0; i<NB_FILS; i++)
+    if(is_feuille(arbre))
     {
-       // printf("\n\t |_ ");
-        freeArbre(arbre->fils[i]);
+        free(arbre);
+        arbre = NULL;
+        return ;
     }
-   // printf("\t*Free fils*");
-
-    free(arbre);
+    printf("\t*Free fils*");
+     int i;
+     for(i=0; i<NB_FILS; i++)
+     {
+        printf("\n\t |_ ");
+        freeArbre(arbre->fils[i]);
+        arbre->fils[i] = NULL;
+     }
 
 }
 
@@ -279,6 +288,11 @@ bool isUni(Arbre arbre)
 {
 	assert(arbre != NULL);
 
+    if(is_feuille(arbre))
+    {
+        return false;
+    }
+
 	Couleur couleur_no = getCouleur(getFils(arbre,NO));
 	Couleur couleur_ne = getCouleur(getFils(arbre,NE));
 	Couleur couleur_so = getCouleur(getFils(arbre,SO));
@@ -286,27 +300,41 @@ bool isUni(Arbre arbre)
 
     if(couleur_no == couleur_ne
     && couleur_so == couleur_se
-    && couleur_no == couleur_so)
+    && couleur_no == couleur_so
+    && couleur_no != NON_UNI)
     { return true; }
 	else
 	{ return false; }
 }
 
-Arbre unification(Arbre arbre)
+void unification(Arbre arbre)
 {
 
 	assert(arbre != NULL);
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
-		freeArbre(getFils(arbre,NO));
+        arbre->couleur= temp;
+
+		freeArbre(arbre->fils[NO]);
 		freeArbre(getFils(arbre,NE));
 		freeArbre(getFils(arbre,SO));
 		freeArbre(getFils(arbre,SE));
-		arbre->couleur= temp;
 
+        //arbre->fils[NO]=NULL;
+	//	assert(arbre->fils[NO] == NULL);
 	}
-	return arbre;
+    else if(arbre != NULL)
+    {
+        unification(arbre->fils[NO]);
+        unification(arbre->fils[NE]);
+        unification(arbre->fils[SO]);
+        unification(arbre->fils[SE]);
+    }
+
+    else
+        return ;
+
 }
 
 int hauteur (Arbre arbre){
@@ -371,36 +399,54 @@ int rgb_to_nb(int r, int g, int b)
 // Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie blanc (0) sinon noir (1)
   return (moyenne(r,g,b) < 127) ? 0 : 1;
 }
-RGB** ArbreToMatrice(Arbre arbre,int h,int w)
+RGB** ArbreToMatrice(Arbre arbre)
 {
+//Cas d'erreur
+        assert(arbre != NULL);
+
+        int hsize = calcDimensionMatrice(arbre);
+        RGB ** Matrice = createMatrix(hsize,hsize);
+        assert(Matrice != NULL);
+
 //Cas d'arret
-        if(arbre == NULL)
+        if(is_feuille(arbre))
         {
-            return NULL;
+            int i,j;
+            for(i=0; i<hsize; i++)
+            {
+                for(j=0; j<hsize; j++)
+                {
+                    Matrice[i][j].RGB[0] = arbre->couleur;
+                    Matrice[i][j].RGB[1] = arbre->couleur;
+                    Matrice[i][j].RGB[2] = arbre->couleur;
+                }
+            }
+            return Matrice;
         }
-
-        //int hsize = calcDimensionMatrice(arbre);
-
-
-        RGB ** Matrice = createMatrix();
+//Cas recursif
         RGB ** sousMatriceNO;
         RGB ** sousMatriceNE;
         RGB ** sousMatriceSO;
         RGB ** sousMatriceSE;
 
         if(arbre->fils[NO] != NULL)
-            sousMatriceNO = ArbreToMatrice(arbre->fils[NO],h,w);
+            sousMatriceNO = ArbreToMatrice(arbre->fils[NO]);
 
         if(arbre->fils[NE] != NULL)
-            sousMatriceNE = ArbreToMatrice(arbre->fils[NE],h,w);
+            sousMatriceNE = ArbreToMatrice(arbre->fils[NE]);
 
         if(arbre->fils[SO] != NULL)
-            sousMatriceSO = ArbreToMatrice(arbre->fils[SO],h,w);
+            sousMatriceSO = ArbreToMatrice(arbre->fils[SO]);
 
         if(arbre->fils[SE] != NULL)
-            sousMatriceSE = ArbreToMatrice(arbre->fils[SE],h,w);
+            sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
 
-        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,h,w);
+        assert(sousMatriceNO != NULL);
+        assert(sousMatriceNE != NULL);
+        assert(sousMatriceSO != NULL);
+        assert(sousMatriceSE != NULL);
+
+        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 
         return Matrice;
 }
@@ -410,8 +456,8 @@ int calcDimensionMatrice(Arbre arbre)
         int h = hauteur(arbre);
         int hsize=1;
         int i;
-        //Pow : hauteur matrice = 2^(hauteur arbre + 1);
-        for(i=1; i<=h+1; i++)
+        //Pow : hauteur matrice = 2^(hauteur arbre - 1);
+        for(i=1; i<h; i++)
         {
             hsize *= 2;
         }
