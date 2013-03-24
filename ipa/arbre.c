@@ -132,7 +132,7 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 
 void freeArbre(Arbre arbre)
 {
-   // printf("\n***Free***");
+   printf("\n***Free***");
     if(arbre == NULL)
     { return; }
 
@@ -390,7 +390,7 @@ RGB** ArbreToMatrice(Arbre arbre)
         if(arbre->fils[SE] != NULL)
             sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
 
-        //Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
+        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 
         return Matrice;
 }

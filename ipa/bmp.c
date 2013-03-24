@@ -243,19 +243,21 @@ void printMatrix(RGB** Matrix, int h, int w)
 
 RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w)
 {
-        //assert(sousMatriceNO != NULL);
-        //assert(sousMatriceNE != NULL);
-        //assert(sousMatriceSO != NULL);
-       // assert(sousMatriceSE != NULL);
+    assert(sousMatriceNO != NULL);
+    assert(sousMatriceNE != NULL);
+    assert(sousMatriceSO != NULL);
+    assert(sousMatriceSE != NULL);
 
 
-        RGB ** Matrice = createMatrix(h,w);
-        assert(Matrice != NULL);
-
+        RGB ** Matrice = createMatrix();
+        
         int i,j;
+        int hsize=1;
         int h2 = h/2;
         int w2 = w/2;
 //Traitement SO
+        while(hsize!=h)
+        {
             for(i=h2; i<h;i++)
             {
                 for(j=0;j<w2; j++)
@@ -287,5 +289,7 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
                     Matrice[i][j] = sousMatriceNE[i][j-w2];
                 }
             }
+            h=h*2;
+        }
             return Matrice;
 }

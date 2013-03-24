@@ -41,21 +41,22 @@ int main()
     info = readInfo(arq);
     height = info.height;
     width = info.width;
-
+    Matrix = createMatrix(info);
     //RGB** Matrice = createMatrix(info);
     //Matrice[2][2].RGB[0] = 111;
     //Matrice[0][1].RGB[2] = 222;
     //Matrice[1][3].RGB[1]=44;
     //Matrice[3][1].RGB[1]=33;
     //printMatrix(Matrice,4,4);
-    //Arbre newArbre = creerArbre();
+    Arbre newArbre = creerArbre();
     //writeBMP(Matrice,head,arq);
-    //loadImage(arq,Matrix);
-    //printMatrix(Matrix, height, width);
-    //MatriceToArbre(Matrix,newArbre, info.height, info.width);
+    loadImage(arq,Matrix);
+    printMatrix(Matrix, height, width);
+    MatriceToArbre(Matrix,newArbre, info.height, info.width);
+    //free(newArbre);
     //printf("\n %d", hauteur(newArbre));
     //print(newArbre);
-    //RGB ** res = ArbreToMatrice(newArbre);
+    RGB ** res = ArbreToMatrice(newArbre);
     
     //printf("\n %d", calcDimensionMatrice(newArbre));
 
