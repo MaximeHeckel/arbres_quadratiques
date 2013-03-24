@@ -54,8 +54,9 @@ int main()
     RGB ** Matrice = createMatrix(4,4);
     pere = MatriceToArbre(Matrice,pere,4,4);
     print(pere);
-    printf("\n\n\n");
-    unification(pere);
+    printf("\n\n**************\n");
+    //unification(pere);
+    freeArbre(pere);
     print(pere);
   //  printf("\n\n %d",isUni(pere->fils[NO]));
 //    RGB ** Matrice2 = ArbreToMatrice(pere);
