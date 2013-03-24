@@ -144,7 +144,7 @@ void freeArbre(Arbre * arbre)
      {
        // printf("\n\t |_ ");
         freeArbre(&(*arbre)->fils[i]);
-        (*arbre)->fils[i] = NULL;
+        //(*arbre)->fils[i] = NULL;
      }
     free(*arbre);
     *arbre = NULL;
