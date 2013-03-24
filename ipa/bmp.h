@@ -39,7 +39,7 @@ int height, width;
 FILE* exist(char *name);
 void isBMP(FILE* arq, HEADER head, INFOHEADER info);
 INFOHEADER readInfo(FILE* arq);
-RGB** createMatrix();
+RGB** createMatrix(int h, int w);
 void loadImage(FILE* arq, RGB** Matrix);
 void writeBMP(RGB **Matrix, HEADER head, FILE* arq);
 void freeMatrix(RGB **Matrix,INFOHEADER info);

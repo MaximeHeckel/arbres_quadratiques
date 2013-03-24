@@ -170,10 +170,11 @@ Arbre creerArbre()
 
 Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 {
+        assert(pere != NULL);
 //Cas d'erreur
         if(Matrice == NULL)
         {
-           printf("\nCas d'erreur");
+           fprintf(stderr,"\nCas d'erreur");
             return NULL;
         }
 //CAS D'ARRET: Si on est arrivé au niveau du pixel on affecte la couleur
@@ -292,7 +293,7 @@ void unification(Arbre arbre)
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
-<<<<<<< HEAD
+
         arbre->couleur= temp;
 
 		freeArbre(&arbre->fils[NO]);
@@ -376,7 +377,7 @@ RGB** ArbreToMatrice(Arbre arbre)
         int hsize = calcDimensionMatrice(arbre);
 
 
-        RGB ** Matrice = createMatrix();
+        RGB ** Matrice = createMatrix(hsize,hsize);
         RGB ** sousMatriceNO;
         RGB ** sousMatriceNE;
         RGB ** sousMatriceSO;

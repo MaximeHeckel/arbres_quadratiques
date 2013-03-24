@@ -89,20 +89,22 @@ void loadImage(FILE* arq, RGB** Matrix){
 }
 
 // ********** Create Matrix **********
-RGB** createMatrix()
+RGB** createMatrix(int h, int w)
 {
 
         int i;
-        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * height);
-        if (Matrix == NULL){
+        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * h);
+        if (Matrix == NULL)
+        {
                 perror("***** No memory available 1*****");
                 exit(0);
         }
-        for (i=0;i<height;i++){
-                Matrix[i] = (RGB *) malloc (sizeof(RGB) * width);
-                if (Matrix[i] == NULL){
-                perror("***** No memory available 2*****");
-                        exit(0);
+        for (i=0;i<h;i++){
+                Matrix[i] = (RGB *) malloc (sizeof(RGB) * w);
+                if (Matrix[i] == NULL)
+                {
+                    perror("***** No memory available 2*****");
+                    exit(0);
                 }
         }
         return(Matrix);
