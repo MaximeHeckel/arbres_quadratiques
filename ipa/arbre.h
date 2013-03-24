@@ -37,7 +37,7 @@ Arbre inserer(Arbre arbre, Direction direction, Couleur couleur);
 Arbre creerArbre();
 
 
-void freeArbre(Arbre arbre);
+void freeArbre(Arbre * arbre);
 
 Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w);
 

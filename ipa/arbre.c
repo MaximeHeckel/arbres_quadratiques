@@ -132,26 +132,22 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
     return pere;
 }
 
-void freeArbre(Arbre arbre)
+void freeArbre(Arbre * arbre)
 {
-    printf("\n***Free***");
-    if(arbre == NULL)
+    //printf("\n***Free***");
+    if(*arbre == NULL)
     { return; }
 
-    if(is_feuille(arbre))
-    {
-        free(arbre);
-        arbre = NULL;
-        return ;
-    }
-    printf("\t*Free fils*");
+   // printf("\t*Free fils*");
      int i;
      for(i=0; i<NB_FILS; i++)
      {
-        printf("\n\t |_ ");
-        freeArbre(arbre->fils[i]);
-        arbre->fils[i] = NULL;
+       // printf("\n\t |_ ");
+        freeArbre(&(*arbre)->fils[i]);
+        (*arbre)->fils[i] = NULL;
      }
+    free(*arbre);
+    *arbre = NULL;
 
 }
 
@@ -306,10 +302,10 @@ void unification(Arbre arbre)
 		Couleur temp = getCouleur(getFils(arbre,NO));
         arbre->couleur= temp;
 
-		freeArbre(arbre->fils[NO]);
-		freeArbre(getFils(arbre,NE));
-		freeArbre(getFils(arbre,SO));
-		freeArbre(getFils(arbre,SE));
+		freeArbre(&arbre->fils[NO]);
+		freeArbre(&arbre->fils[NE]);
+		freeArbre(&arbre->fils[SO]);
+		freeArbre(&arbre->fils[SE]);
 
         //arbre->fils[NO]=NULL;
 	//	assert(arbre->fils[NO] == NULL);

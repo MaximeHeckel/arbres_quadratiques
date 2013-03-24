@@ -27,7 +27,7 @@ int main()
 
 
 
-    FILE *arq; // the bitmap file 24 bits
+   /* FILE *arq; // the bitmap file 24 bits
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
@@ -40,7 +40,7 @@ int main()
     isBMP(arq,head,info);
     info = readInfo(arq);
     height = info.height;
-    width = info.width;
+    width = info.width;*/
 
 
 
@@ -53,7 +53,7 @@ int main()
     print(pere);
     printf("\n\n**************\n");
     //unification(pere);
-    freeArbre(pere);
+    freeArbre(&pere);
     print(pere);
   //  printf("\n\n %d",isUni(pere->fils[NO]));
 //    RGB ** Matrice2 = ArbreToMatrice(pere);
