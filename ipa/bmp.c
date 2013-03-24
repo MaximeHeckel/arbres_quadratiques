@@ -15,7 +15,7 @@ FILE* exist(char *name)
 }
 
 // ********** Verify if the file is BMP *********
-void isBMP(FILE* arq){
+void isBMP(FILE* arq, HEADER head, INFOHEADER info){
         char type[3];
         unsigned short int bpp;
         fseek(arq,0,0);
@@ -89,17 +89,17 @@ void loadImage(FILE* arq, RGB** Matrix){
 }
 
 // ********** Create Matrix **********
-RGB** createMatrix(int h,int w)
+RGB** createMatrix()
 {
 
         int i;
-        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * h);
+        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * height);
         if (Matrix == NULL){
                 perror("***** No memory available 1*****");
                 exit(0);
         }
-        for (i=0;i<h;i++){
-                Matrix[i] = (RGB *) malloc (sizeof(RGB) * w);
+        for (i=0;i<height;i++){
+                Matrix[i] = (RGB *) malloc (sizeof(RGB) * width);
                 if (Matrix[i] == NULL){
                 perror("***** No memory available 2*****");
                         exit(0);
@@ -109,7 +109,7 @@ RGB** createMatrix(int h,int w)
 }
 
 // ********** Image Output **********
-void writeBMP(RGB **Matrix, FILE* arq){
+void writeBMP(RGB **Matrix, HEADER head, FILE* arq){
 	FILE* out;
 	int i,j;
 	RGB tmp;
@@ -238,10 +238,10 @@ void printMatrix(RGB** Matrix, int h, int w)
 
 RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w)
 {
-        assert(sousMatriceNO != NULL);
+        /*assert(sousMatriceNO != NULL);
         assert(sousMatriceNE != NULL);
         assert(sousMatriceSO != NULL);
-        assert(sousMatriceSE != NULL);
+        assert(sousMatriceSE != NULL);*/
 
 
         RGB ** Matrice = createMatrix(h,w);
