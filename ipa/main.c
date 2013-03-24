@@ -33,7 +33,7 @@ int main()
     HEADER head;
     char name[15];
 
-    printf("Type the image's name : ");
+    printf("Entrez le nom du fichier à traiter : ");
     scanf("%s",name);
 
     arq = exist(name);
@@ -42,46 +42,23 @@ int main()
     height = info.height;
     width = info.width;
 
-<<<<<<< HEAD
-    Matrix = createMatrix(info);
-    Arbre newArbre = creerArbre();
-    //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
-    loadImage(arq,Matrix);
-    MatriceToArbre(Matrix,newArbre, info.height, info.width);
-    printf("\n %d", hauteur(newArbre));
-    print(newArbre);
-    //RGB ** res = ArbreToMatrice(newArbre,info.height,info.width);
+    //RGB** Matrice = createMatrix(info);
+    //Matrice[2][2].RGB[0] = 111;
+    //Matrice[0][1].RGB[2] = 222;
+    //Matrice[1][3].RGB[1]=44;
+    //Matrice[3][1].RGB[1]=33;
+    //printMatrix(Matrice,4,4);
+    //Arbre newArbre = creerArbre();
+    //writeBMP(Matrice,head,arq);
+    //loadImage(arq,Matrix);
+    //printMatrix(Matrix, height, width);
+    //MatriceToArbre(Matrix,newArbre, info.height, info.width);
+    //printf("\n %d", hauteur(newArbre));
+    //print(newArbre);
+    //RGB ** res = ArbreToMatrice(newArbre);
     
-    printf("\n %d", calcDimensionMatrice(newArbre));
-    //printMatrix(res,h,h);
-=======
->>>>>>> 9543363744a936f58cf59cb86cd793357c2d6f64
+    //printf("\n %d", calcDimensionMatrice(newArbre));
 
-
-  //printMatrix(Matrix,info.height,info.width);
-    //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
-    Arbre pere = creerArbre();
-
-    RGB ** Matrice = createMatrix(4,4);
-    pere = MatriceToArbre(Matrice,pere,4,4);
-    print(pere);
-    printf("\n\n**************\n");
-    //unification(pere);
-    freeArbre(pere);
-    print(pere);
-  //  printf("\n\n %d",isUni(pere->fils[NO]));
-//    RGB ** Matrice2 = ArbreToMatrice(pere);
-
-    //pere = MatriceToArbre(Matrix,pere,info.height,info.width);
-    //print(pere);
-    //unification(pere);
-
-   // Matrix = ArbreToMatrice(pere);
-
-
-   /* writeBMP(Matrix,arq);
-    freeMatrix(Matrix,info);
-    fclose(arq);*/
 
 
 	return 0;

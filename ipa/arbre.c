@@ -7,11 +7,13 @@ bool is_feuille(Arbre arbre)
     while(arbre->fils[i] != NULL)
         i++;
 
-    return (i == 4) ? true:false;
+    return (i == 3) ? true:false;
 }
 bool is_noeud(Arbre arbre)
 {
-    return ( ! is_feuille(arbre));
+    assert(arbre != NULL);
+
+    return (arbre->genre == Noeud);
 }
 
 
@@ -22,7 +24,7 @@ Direction getDirection(Arbre arbre)
 }
 Couleur getCouleur(Arbre arbre)
 {
-    assert(arbre != NULL);
+    if(arbre!=NULL);
 
     return arbre->couleur;
 }
@@ -65,13 +67,9 @@ void print(Arbre arbre)
 void printArbre(Arbre arbre,int nb)
 {
     if( arbre == NULL)
-    {
-       /* int j;
-        for(j=0; j<nb; j++)
-               {printf("\t");}
-        printf("|_");printf("NULL");*/
-        return;
-     }
+    { 
+        return; 
+    }
 
     int j;
     for(j=0; j<nb; j++)
@@ -103,26 +101,16 @@ void printArbre(Arbre arbre,int nb)
     else
     { printf("Noeud");}
 
-        if(arbre->fils[NO] != NULL)
+
+    for(j=0; j<NB_FILS; j++)
+    {
+        if(arbre->fils[j] != NULL)
         {
             printf("\n");
-            printArbre(arbre->fils[NO],nb+1);
+            printArbre(arbre->fils[j],nb+1);
         }
-        if(arbre->fils[NE] != NULL)
-        {
-            printf("\n");
-            printArbre(arbre->fils[NE],nb+1);
-        }
-        if(arbre->fils[SO] != NULL)
-        {
-            printf("\n");
-            printArbre(arbre->fils[SO],nb+1);
-        }
-        if(arbre->fils[SE] != NULL)
-        {
-            printf("\n");
-            printArbre(arbre->fils[SE],nb+1);
-        }
+
+    }
 
 }
 Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
@@ -144,24 +132,19 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 
 void freeArbre(Arbre arbre)
 {
-    printf("\n***Free***");
+   // printf("\n***Free***");
     if(arbre == NULL)
     { return; }
 
-    if(is_feuille(arbre))
+    int i;
+    for(i=0; i<NB_FILS; i++)
     {
-        free(arbre);
-        arbre = NULL;
-        return ;
-    }
-    printf("\t*Free fils*");
-     int i;
-     for(i=0; i<NB_FILS; i++)
-     {
-        printf("\n\t |_ ");
+       // printf("\n\t |_ ");
         freeArbre(arbre->fils[i]);
-        arbre->fils[i] = NULL;
-     }
+    }
+   // printf("\t*Free fils*");
+
+    free(arbre);
 
 }
 
@@ -188,7 +171,7 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 //Cas d'erreur
         if(Matrice == NULL)
         {
-          //  printf("\nCas d'erreur");
+           printf("\nCas d'erreur");
             return NULL;
         }
 //CAS D'ARRET: Si on est arrivé au niveau du pixel on affecte la couleur
@@ -196,11 +179,10 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
         if(h == 1 || w == 1)
         {
           //  printf("\nCas d'arret h: %d w: %d",h,w);
-            Arbre feuille = creerArbre();
-            feuille->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
-            feuille->genre = Feuille;
+            pere->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
+            pere->genre = Feuille;
 
-            return feuille;
+            return pere;
         }
 //CAS GENERAL: récursivité
        // printf("\nCas recursif . h: %d w: %d",h,w);
@@ -288,11 +270,6 @@ bool isUni(Arbre arbre)
 {
 	assert(arbre != NULL);
 
-    if(is_feuille(arbre))
-    {
-        return false;
-    }
-
 	Couleur couleur_no = getCouleur(getFils(arbre,NO));
 	Couleur couleur_ne = getCouleur(getFils(arbre,NE));
 	Couleur couleur_so = getCouleur(getFils(arbre,SO));
@@ -300,8 +277,7 @@ bool isUni(Arbre arbre)
 
     if(couleur_no == couleur_ne
     && couleur_so == couleur_se
-    && couleur_no == couleur_so
-    && couleur_no != NON_UNI)
+    && couleur_no == couleur_so)
     { return true; }
 	else
 	{ return false; }
@@ -314,27 +290,13 @@ void unification(Arbre arbre)
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
-        arbre->couleur= temp;
-
-		freeArbre(arbre->fils[NO]);
+		freeArbre(getFils(arbre,NO));
 		freeArbre(getFils(arbre,NE));
 		freeArbre(getFils(arbre,SO));
 		freeArbre(getFils(arbre,SE));
+		arbre->couleur= temp;
 
-        //arbre->fils[NO]=NULL;
-	//	assert(arbre->fils[NO] == NULL);
 	}
-    else if(arbre != NULL)
-    {
-        unification(arbre->fils[NO]);
-        unification(arbre->fils[NE]);
-        unification(arbre->fils[SO]);
-        unification(arbre->fils[SE]);
-    }
-
-    else
-        return ;
-
 }
 
 int hauteur (Arbre arbre){
@@ -401,29 +363,16 @@ int rgb_to_nb(int r, int g, int b)
 }
 RGB** ArbreToMatrice(Arbre arbre)
 {
-//Cas d'erreur
-        assert(arbre != NULL);
+//Cas d'arret
+        if(arbre == NULL)
+        {
+            return NULL;
+        }
 
         int hsize = calcDimensionMatrice(arbre);
-        RGB ** Matrice = createMatrix(hsize,hsize);
-        assert(Matrice != NULL);
 
-//Cas d'arret
-        if(is_feuille(arbre))
-        {
-            int i,j;
-            for(i=0; i<hsize; i++)
-            {
-                for(j=0; j<hsize; j++)
-                {
-                    Matrice[i][j].RGB[0] = arbre->couleur;
-                    Matrice[i][j].RGB[1] = arbre->couleur;
-                    Matrice[i][j].RGB[2] = arbre->couleur;
-                }
-            }
-            return Matrice;
-        }
-//Cas recursif
+
+        RGB ** Matrice = createMatrix();
         RGB ** sousMatriceNO;
         RGB ** sousMatriceNE;
         RGB ** sousMatriceSO;
@@ -441,12 +390,7 @@ RGB** ArbreToMatrice(Arbre arbre)
         if(arbre->fils[SE] != NULL)
             sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
 
-        assert(sousMatriceNO != NULL);
-        assert(sousMatriceNE != NULL);
-        assert(sousMatriceSO != NULL);
-        assert(sousMatriceSE != NULL);
-
-        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
+        //Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 
         return Matrice;
 }
@@ -456,8 +400,8 @@ int calcDimensionMatrice(Arbre arbre)
         int h = hauteur(arbre);
         int hsize=1;
         int i;
-        //Pow : hauteur matrice = 2^(hauteur arbre - 1);
-        for(i=1; i<h; i++)
+        //Pow : hauteur matrice = 2^(hauteur arbre + 1);
+        for(i=1; i<=h+1; i++)
         {
             hsize *= 2;
         }

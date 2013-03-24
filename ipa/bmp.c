@@ -7,7 +7,7 @@ FILE* exist(char *name)
 	tmp = fopen(name,"r+b");
 	if (!tmp)
 	{
-		printf("\nERROR: Incorrect file or not exist!\n");
+		printf("\nERROR: Ce fichier n'existe pas!\n");
 		exit(0);
 	}
 	fseek(tmp,0,0);
@@ -26,7 +26,7 @@ void isBMP(FILE* arq, HEADER head, INFOHEADER info){
         fread(&bpp,1,2,arq);
 
         if (strcmp(type,"BM") || (bpp != 24)){
-                printf("\nThe file is not BMP format or is not 24 bits\n");
+                printf("\nCe fichier n'est pas un BMP 24 bits\n");
                 exit(0);
         }
 }
@@ -243,10 +243,10 @@ void printMatrix(RGB** Matrix, int h, int w)
 
 RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w)
 {
-        assert(sousMatriceNO != NULL);
-        assert(sousMatriceNE != NULL);
-        assert(sousMatriceSO != NULL);
-        assert(sousMatriceSE != NULL);
+        //assert(sousMatriceNO != NULL);
+        //assert(sousMatriceNE != NULL);
+        //assert(sousMatriceSO != NULL);
+       // assert(sousMatriceSE != NULL);
 
 
         RGB ** Matrice = createMatrix(h,w);
