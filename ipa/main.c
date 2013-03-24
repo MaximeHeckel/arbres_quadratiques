@@ -45,10 +45,11 @@ int main()
     loadImage(arq,Matrix);
     MatriceToArbre(Matrix,newArbre, info.height, info.width);
     printf("\n %d", hauteur(newArbre));
-    //print(newArbre);
-    RGB ** res = ArbreToMatrice(newArbre);
-    int h = calcDimensionMatrice(newArbre);
-    printMatrix(res,h,h);
+    print(newArbre);
+    //RGB ** res = ArbreToMatrice(newArbre,info.height,info.width);
+    
+    printf("\n %d", calcDimensionMatrice(newArbre));
+    //printMatrix(res,h,h);
 
     //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
     //writeBMP(Matrix,head,arq);

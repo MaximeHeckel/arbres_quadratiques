@@ -238,10 +238,10 @@ void printMatrix(RGB** Matrix, int h, int w)
 
 RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceSO,RGB **  sousMatriceSE, int h, int w)
 {
-        /*assert(sousMatriceNO != NULL);
+        assert(sousMatriceNO != NULL);
         assert(sousMatriceNE != NULL);
         assert(sousMatriceSO != NULL);
-        assert(sousMatriceSE != NULL);*/
+        assert(sousMatriceSE != NULL);
 
 
         RGB ** Matrice = createMatrix(h,w);

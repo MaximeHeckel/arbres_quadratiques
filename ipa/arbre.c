@@ -99,16 +99,26 @@ void printArbre(Arbre arbre,int nb)
     else
     { printf("Noeud");}
 
-
-    for(j=0; j<NB_FILS; j++)
-    {
-        if(arbre->fils[j] != NULL)
+        if(arbre->fils[NO] != NULL)
         {
             printf("\n");
-            printArbre(arbre->fils[j],nb+1);
+            printArbre(arbre->fils[NO],nb+1);
         }
-
-    }
+        if(arbre->fils[NE] != NULL)
+        {
+            printf("\n");
+            printArbre(arbre->fils[NE],nb+1);
+        }
+        if(arbre->fils[SO] != NULL)
+        {
+            printf("\n");
+            printArbre(arbre->fils[SO],nb+1);
+        }
+        if(arbre->fils[SE] != NULL)
+        {
+            printf("\n");
+            printArbre(arbre->fils[SE],nb+1);
+        }
 
 }
 Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
@@ -361,7 +371,7 @@ int rgb_to_nb(int r, int g, int b)
 // Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie blanc (0) sinon noir (1)
   return (moyenne(r,g,b) < 127) ? 0 : 1;
 }
-RGB** ArbreToMatrice(Arbre arbre)
+RGB** ArbreToMatrice(Arbre arbre,int h,int w)
 {
 //Cas d'arret
         if(arbre == NULL)
@@ -369,28 +379,28 @@ RGB** ArbreToMatrice(Arbre arbre)
             return NULL;
         }
 
-        int hsize = calcDimensionMatrice(arbre);
+        //int hsize = calcDimensionMatrice(arbre);
 
 
-        RGB ** Matrice = createMatrix(hsize,hsize);
+        RGB ** Matrice = createMatrix();
         RGB ** sousMatriceNO;
         RGB ** sousMatriceNE;
         RGB ** sousMatriceSO;
         RGB ** sousMatriceSE;
 
         if(arbre->fils[NO] != NULL)
-            sousMatriceNO = ArbreToMatrice(arbre->fils[NO]);
+            sousMatriceNO = ArbreToMatrice(arbre->fils[NO],h,w);
 
         if(arbre->fils[NE] != NULL)
-            sousMatriceNE = ArbreToMatrice(arbre->fils[NE]);
+            sousMatriceNE = ArbreToMatrice(arbre->fils[NE],h,w);
 
         if(arbre->fils[SO] != NULL)
-            sousMatriceSO = ArbreToMatrice(arbre->fils[SO]);
+            sousMatriceSO = ArbreToMatrice(arbre->fils[SO],h,w);
 
         if(arbre->fils[SE] != NULL)
-            sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
+            sousMatriceSE = ArbreToMatrice(arbre->fils[SE],h,w);
 
-        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
+        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,h,w);
 
         return Matrice;
 }
