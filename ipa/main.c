@@ -36,7 +36,7 @@ int main()
     scanf("%s",name);*/
 
 
-    arq = exist(name);
+   /* arq = exist(name);
     isBMP(arq);
     info = readInfo(arq);
     height = info.height;
@@ -44,7 +44,7 @@ int main()
     Matrix = createMatrix(info.height,info.width);
    // printf(" %d %d",info.height,info.width);
    // printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
-    loadImage(arq,Matrix);
+    loadImage(arq,Matrix);*/
 
 
   //printMatrix(Matrix,info.height,info.width);
@@ -54,7 +54,11 @@ int main()
     RGB ** Matrice = createMatrix(4,4);
     pere = MatriceToArbre(Matrice,pere,4,4);
     print(pere);
-    RGB ** Matrice2 = ArbreToMatrice(pere);
+    printf("\n\n\n");
+    unification(pere);
+    print(pere);
+  //  printf("\n\n %d",isUni(pere->fils[NO]));
+//    RGB ** Matrice2 = ArbreToMatrice(pere);
 
     //pere = MatriceToArbre(Matrix,pere,info.height,info.width);
     //print(pere);
@@ -63,9 +67,9 @@ int main()
    // Matrix = ArbreToMatrice(pere);
 
 
-    writeBMP(Matrix,arq);
+   /* writeBMP(Matrix,arq);
     freeMatrix(Matrix,info);
-    fclose(arq);
+    fclose(arq);*/
 
 
 	return 0;

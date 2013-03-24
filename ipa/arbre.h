@@ -46,7 +46,7 @@ int countLevelBranch(Arbre arbre,Direction dir);
 Couleur getCouleurBranches(Arbre arbre, Direction dir);
 Arbre goToLevel(Arbre arbre, Direction dir,int level);
 bool isUni(Arbre arbre);
-Arbre unification(Arbre arbre);
+void unification(Arbre arbre);
 int hauteur (Arbre arbre);
 int nb_feuille(Arbre arbre);
 bool is_equilibre(Arbre arbre);

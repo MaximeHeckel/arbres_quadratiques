@@ -162,17 +162,19 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	*/
 	assert(Matrice != NULL);
 
-	int h2= sizeh/2;
-	int w2=sizew/2;
-	RGB** resMatrice = createMatrix(h2,w2);
-    assert(resMatrice != NULL);
 
-	//Si on a atteint le "fond" de l'image, ie un pixel (qui est indivisible), on return NULL (signal d'arrret)
-	if( (h2 == 0) || (w2 && 0) )
+
+
+	//Si on a atteint le "fond" de l'image, ie un pixel (qui est indivisible), on return la matrice
+	if( (sizeh == 1) || (sizew && 1) )
 	{
-	    return NULL;
+	    return Matrice;
 	}
 
+    int h2= sizeh/2;
+	int w2=sizew/2;
+    RGB** resMatrice = createMatrix(h2,w2);
+    assert(resMatrice != NULL);
 	int i;
 	int j;
 	switch(zone)

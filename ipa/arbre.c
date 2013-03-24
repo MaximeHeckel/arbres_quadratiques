@@ -65,7 +65,13 @@ void print(Arbre arbre)
 void printArbre(Arbre arbre,int nb)
 {
     if( arbre == NULL)
-    { return; }
+    {
+       /* int j;
+        for(j=0; j<nb; j++)
+               {printf("\t");}
+        printf("|_");printf("NULL");*/
+        return;
+     }
 
     int j;
     for(j=0; j<nb; j++)
@@ -137,10 +143,12 @@ void freeArbre(Arbre arbre)
     {
        // printf("\n\t |_ ");
         freeArbre(arbre->fils[i]);
+        arbre->fils[i] = NULL;
     }
    // printf("\t*Free fils*");
 
     free(arbre);
+    arbre = NULL;
 
 }
 
@@ -267,6 +275,11 @@ bool isUni(Arbre arbre)
 {
 	assert(arbre != NULL);
 
+    if(is_feuille(arbre))
+    {
+        return false;
+    }
+
 	Couleur couleur_no = getCouleur(getFils(arbre,NO));
 	Couleur couleur_ne = getCouleur(getFils(arbre,NE));
 	Couleur couleur_so = getCouleur(getFils(arbre,SO));
@@ -274,27 +287,37 @@ bool isUni(Arbre arbre)
 
     if(couleur_no == couleur_ne
     && couleur_so == couleur_se
-    && couleur_no == couleur_so)
+    && couleur_no == couleur_so
+    && couleur_no != NON_UNI)
     { return true; }
 	else
 	{ return false; }
 }
 
-Arbre unification(Arbre arbre)
+void unification(Arbre arbre)
 {
 
 	assert(arbre != NULL);
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
-		freeArbre(getFils(arbre,NO));
+        arbre->couleur= temp;
+
+		freeArbre(arbre->fils[NO]);
 		freeArbre(getFils(arbre,NE));
 		freeArbre(getFils(arbre,SO));
 		freeArbre(getFils(arbre,SE));
-		arbre->couleur= temp;
 
+		assert(arbre->fils[NO] == NULL);
 	}
-	return arbre;
+    else
+    {
+        unification(arbre->fils[NO]);
+        unification(arbre->fils[NE]);
+        unification(arbre->fils[SO]);
+        unification(arbre->fils[SE]);
+    }
+
 }
 
 int hauteur (Arbre arbre){
@@ -400,6 +423,11 @@ RGB** ArbreToMatrice(Arbre arbre)
 
         if(arbre->fils[SE] != NULL)
             sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
+
+        assert(sousMatriceNO != NULL);
+        assert(sousMatriceNE != NULL);
+        assert(sousMatriceSO != NULL);
+        assert(sousMatriceSE != NULL);
 
         Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 
