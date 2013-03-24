@@ -289,19 +289,10 @@ bool isUni(Arbre arbre)
 void unification(Arbre arbre)
 {
 
-<<<<<<< HEAD
 	assert(arbre != NULL);
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
-
-=======
-    assert(arbre != NULL);
-    if(isUni(arbre))
-    {
-        Couleur temp = getCouleur(getFils(arbre,NO));
-<<<<<<< HEAD
->>>>>>> 4377ebe6165e34187b2a607524bca13fa7d05e5b
         arbre->couleur= temp;
 
         freeArbre(&arbre->fils[NO]);

@@ -92,7 +92,7 @@ void loadImage(FILE* arq, RGB** Matrix){
 RGB** createMatrix()
 {
 
-        int i;
+        int i,j,k;
         RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * height);
         if (Matrix == NULL)
         {
@@ -107,6 +107,11 @@ RGB** createMatrix()
                     exit(0);
                 }
         }
+        for(i=0; i<height; i++)
+            for(j=0; j<width; j++)
+                for(k=0; k<3; k++)
+                    Matrix[i][j].RGB[k] = 0;
+
         return(Matrix);
 }
 
@@ -252,7 +257,7 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
 
 
         RGB ** Matrice = createMatrix();
-        
+
         int i,j;
         int hsize=1;
         int h2 = h/2;
