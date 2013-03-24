@@ -67,8 +67,8 @@ void print(Arbre arbre)
 void printArbre(Arbre arbre,int nb)
 {
     if( arbre == NULL)
-    { 
-        return; 
+    {
+        return;
     }
 
     int j;
@@ -130,21 +130,23 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
     return pere;
 }
 
-void freeArbre(Arbre arbre)
+void freeArbre(Arbre * arbre)
 {
-   printf("\n***Free***");
-    if(arbre == NULL)
+
+    //printf("\n***Free***");
+    if(*arbre == NULL)
     { return; }
 
-    int i;
-    for(i=0; i<NB_FILS; i++)
-    {
-       // printf("\n\t |_ ");
-        freeArbre(arbre->fils[i]);
-    }
    // printf("\t*Free fils*");
-
-    free(arbre);
+     int i;
+     for(i=0; i<NB_FILS; i++)
+     {
+       // printf("\n\t |_ ");
+        freeArbre(&(*arbre)->fils[i]);
+        //(*arbre)->fils[i] = NULL;
+     }
+    free(*arbre);
+    *arbre = NULL;
 
 }
 
@@ -242,114 +244,116 @@ int countLevelBranch(Arbre arbre,Direction dir)
 
 Couleur getCouleurBranches(Arbre arbre, Direction dir)
 {
-	assert(arbre != NULL);
-	int i;
-	int count = countLevelBranch(arbre,dir);
-	Arbre temp = arbre;
-	for(i=0;i<count;i++)
-	{
-		temp=getFils(temp,dir);
-	}
-	return getCouleur(temp);
+    assert(arbre != NULL);
+    int i;
+    int count = countLevelBranch(arbre,dir);
+    Arbre temp = arbre;
+    for(i=0;i<count;i++)
+    {
+        temp=getFils(temp,dir);
+    }
+    return getCouleur(temp);
 
 }
 
 Arbre goToLevel(Arbre arbre, Direction dir,int level)
 {
-	assert(arbre != NULL);
-	int i;
-	Arbre temp = arbre;
-	for(i=0; i<level; i++)
-	{
-		temp=getFils(temp,dir);
-	}
-	return temp;
+    assert(arbre != NULL);
+    int i;
+    Arbre temp = arbre;
+    for(i=0; i<level; i++)
+    {
+        temp=getFils(temp,dir);
+    }
+    return temp;
 }
 
 bool isUni(Arbre arbre)
 {
-	assert(arbre != NULL);
+    assert(arbre != NULL);
 
-	Couleur couleur_no = getCouleur(getFils(arbre,NO));
-	Couleur couleur_ne = getCouleur(getFils(arbre,NE));
-	Couleur couleur_so = getCouleur(getFils(arbre,SO));
-	Couleur couleur_se = getCouleur(getFils(arbre,SE));
+    Couleur couleur_no = getCouleur(getFils(arbre,NO));
+    Couleur couleur_ne = getCouleur(getFils(arbre,NE));
+    Couleur couleur_so = getCouleur(getFils(arbre,SO));
+    Couleur couleur_se = getCouleur(getFils(arbre,SE));
 
     if(couleur_no == couleur_ne
     && couleur_so == couleur_se
     && couleur_no == couleur_so)
     { return true; }
-	else
-	{ return false; }
+    else
+    { return false; }
 }
 
 void unification(Arbre arbre)
 {
 
-	assert(arbre != NULL);
-	if(isUni(arbre))
-	{
-		Couleur temp = getCouleur(getFils(arbre,NO));
-		freeArbre(getFils(arbre,NO));
-		freeArbre(getFils(arbre,NE));
-		freeArbre(getFils(arbre,SO));
-		freeArbre(getFils(arbre,SE));
-		arbre->couleur= temp;
+    assert(arbre != NULL);
+    if(isUni(arbre))
+    {
+        Couleur temp = getCouleur(getFils(arbre,NO));
+<<<<<<< HEAD
+        arbre->couleur= temp;
 
-	}
+        freeArbre(&arbre->fils[NO]);
+        freeArbre(&arbre->fils[NE]);
+        freeArbre(&arbre->fils[SO]);
+        freeArbre(&arbre->fils[SE]);
+
+    }
 }
 
 int hauteur (Arbre arbre){
 
-	int res=0;
-	if(arbre == NULL || is_feuille(arbre) )
-	{
-		res=0;
-	}
-	else
-	{
+    int res=0;
+    if(arbre == NULL || is_feuille(arbre) )
+    {
+        res=0;
+    }
+    else
+    {
         int hauteur1 = max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,SE)));
         int hauteur2 = max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,NE)));
-		res=1+max(hauteur1,hauteur2);
-	}
-	return res;
+        res=1+max(hauteur1,hauteur2);
+    }
+    return res;
 }
 
 int nb_feuille(Arbre arbre){
-	int res=0;
-	if(arbre == NULL || is_feuille(arbre))
-	{
-		res=1;
-	}
-	else
-	{
-		res += nb_feuille(getFils(arbre,SO)) + nb_feuille(getFils(arbre,SE)) + nb_feuille(getFils(arbre,NO)) + nb_feuille(getFils(arbre,NE));
-	}
-	return res;
+    int res=0;
+    if(arbre == NULL || is_feuille(arbre))
+    {
+        res=1;
+    }
+    else
+    {
+        res += nb_feuille(getFils(arbre,SO)) + nb_feuille(getFils(arbre,SE)) + nb_feuille(getFils(arbre,NO)) + nb_feuille(getFils(arbre,NE));
+    }
+    return res;
 }
 
 bool is_equilibre(Arbre arbre){
-	int res=false;
+    int res=false;
 
-	if(is_feuille(arbre))
-	{
-		res=true;
-	}
-	else
-	{
-	    int hNO = hauteur(getFils(arbre,NO));
-	    int hNE = hauteur(getFils(arbre,NE));
-	    int hSO = hauteur(getFils(arbre,SO));
-	    int hSE = hauteur(getFils(arbre,SE));
+    if(is_feuille(arbre))
+    {
+        res=true;
+    }
+    else
+    {
+        int hNO = hauteur(getFils(arbre,NO));
+        int hNE = hauteur(getFils(arbre,NE));
+        int hSO = hauteur(getFils(arbre,SO));
+        int hSE = hauteur(getFils(arbre,SE));
 
-		if(abs(hNO - hNE) <=1
+        if(abs(hNO - hNE) <=1
         && abs(hSO - hSE) <=1
         && abs(hNO - hNE)<=1)
-		{
-				res=true;
+        {
+                res=true;
         }
-	}
-	return res;
+    }
+    return res;
 }
 float moyenne(int a,int b, int c)
 {
@@ -390,7 +394,7 @@ RGB** ArbreToMatrice(Arbre arbre)
         if(arbre->fils[SE] != NULL)
             sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
 
-        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
+        //Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 
         return Matrice;
 }
