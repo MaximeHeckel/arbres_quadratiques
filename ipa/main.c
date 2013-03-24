@@ -26,25 +26,22 @@ int main()
 {
 
 
+
     FILE *arq; // the bitmap file 24 bits
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
-    char name[]="orca.bmp";
+    char name[15];
 
-   /* printf("Veuillez entrer le nom du fichier à traiter : ");
-    scanf("%s",name);*/
+    printf("Type the image's name : ");
+    scanf("%s",name);
 
-
-   /* arq = exist(name);
-    isBMP(arq);
+    arq = exist(name);
+    isBMP(arq,head,info);
     info = readInfo(arq);
     height = info.height;
     width = info.width;
-    Matrix = createMatrix(info.height,info.width);
-   // printf(" %d %d",info.height,info.width);
-   // printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
-    loadImage(arq,Matrix);*/
+
 
 
   //printMatrix(Matrix,info.height,info.width);
@@ -74,5 +71,7 @@ int main()
 
 
 	return 0;
+
+
 }
 
