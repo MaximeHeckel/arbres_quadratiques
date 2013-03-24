@@ -64,17 +64,18 @@ int main()
   //printMatrix(Matrix,info.height,info.width);
     //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
     Arbre pere = creerArbre();
+    height = 4;
+    width = 4;
 
-    RGB ** Matrice = createMatrix(4,4);
-    printf("%d",Matrice[0][0].RGB[0]);
+    RGB ** Matrice = createMatrix();
 
-    //printMatrix(Matrice,4,4);
-    /*pere = MatriceToArbre(Matrice,pere,4,4);
+    printMatrix(Matrice,4,4);
+    pere = MatriceToArbre(Matrice,pere,4,4);
     print(pere);
     printf("\n\n**************\n");
     //unification(pere);
     freeArbre(&pere);
-    print(pere);*/
+    freeMatrix(Matrice,4);
   //  printf("\n\n %d",isUni(pere->fils[NO]));
 //    RGB ** Matrice2 = ArbreToMatrice(pere);
 

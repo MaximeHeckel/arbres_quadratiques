@@ -89,18 +89,18 @@ void loadImage(FILE* arq, RGB** Matrix){
 }
 
 // ********** Create Matrix **********
-RGB** createMatrix(int h, int w)
+RGB** createMatrix()
 {
 
         int i;
-        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * h);
+        RGB ** Matrix = (RGB **) malloc (sizeof (RGB*) * height);
         if (Matrix == NULL)
         {
                 perror("***** No memory available 1*****");
                 exit(0);
         }
-        for (i=0;i<h;i++){
-                Matrix[i] = (RGB *) malloc (sizeof(RGB) * w);
+        for (i=0;i<height;i++){
+                Matrix[i] = (RGB *) malloc (sizeof(RGB) * width);
                 if (Matrix[i] == NULL)
                 {
                     perror("***** No memory available 2*****");
@@ -139,10 +139,10 @@ void writeBMP(RGB **Matrix, HEADER head, FILE* arq){
 }
 
 // ********** Free memory allocated for Matrix **********
-void freeMatrix(RGB** Matrix,INFOHEADER info)
+void freeMatrix(RGB** Matrix,int h)
 {
 	int i;
-	int lines = info.height;
+	int lines = h;
 
 	for (i=0;i<lines;i++){
 		free(Matrix[i]);
