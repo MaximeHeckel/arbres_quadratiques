@@ -83,9 +83,16 @@ int main()
     pere = MatriceToArbre(Matrice,pere,4,4);
    // print(pere);
     printf("\n\n**************\n");
-    //unification(pere);
+    unification(pere);
+    print(pere);
+    printf(" %d ",isUni(pere));
+    printf("\n\n**************\n");
+    RGB ** Matrice2 = ArbreToMatrice(pere);
+    printMatrix(Matrice2,4,4);
+
     freeArbre(&pere);
     freeMatrix(Matrice,4);
+    freeMatrix(Matrice2,4);
   //  printf("\n\n %d",isUni(pere->fils[NO]));
 //    RGB ** Matrice2 = ArbreToMatrice(pere);
 

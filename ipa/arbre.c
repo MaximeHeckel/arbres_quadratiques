@@ -288,8 +288,8 @@ bool isUni(Arbre arbre)
 
 void unification(Arbre arbre)
 {
-
 	assert(arbre != NULL);
+
 	if(isUni(arbre))
 	{
 		Couleur temp = getCouleur(getFils(arbre,NO));
@@ -299,7 +299,6 @@ void unification(Arbre arbre)
         freeArbre(&arbre->fils[NE]);
         freeArbre(&arbre->fils[SO]);
         freeArbre(&arbre->fils[SE]);
-
     }
 }
 
@@ -367,10 +366,18 @@ int rgb_to_nb(int r, int g, int b)
 }
 RGB** ArbreToMatrice(Arbre arbre)
 {
+//Cas d'erreur
+        assert(arbre != NULL);
+
 //Cas d'arret
-        if(arbre == NULL)
+        if(is_feuille(arbre))
         {
-            return NULL;
+            Couleur col = arbre->couleur;
+            RGB ** Matrice = createMatrix(1,1);
+            Matrice[0][0].RGB[0] = col;
+            Matrice[0][0].RGB[1] = col;
+            Matrice[0][0].RGB[2] = col;
+            return Matrice;
         }
 
         int hsize = calcDimensionMatrice(arbre);
