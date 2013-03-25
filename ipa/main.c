@@ -27,7 +27,7 @@ int main()
 
 
 
-   /* FILE *arq; // the bitmap file 24 bits
+    FILE *arq; // the bitmap file 24 bits
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
@@ -44,13 +44,13 @@ int main()
     width = info.width;
     Matrix = createMatrix(info);
 
-    width = info.width;*/
+    width = info.width;
 
 
 
 
     //writeBMP(Matrice,head,arq);
-  //  loadImage(arq,Matrix);
+     loadImage(arq,Matrix);
    // printMatrix(Matrix, height, width);
     //MatriceToArbre(Matrix,newArbre, info.height, info.width);
     //free(newArbre);
@@ -64,28 +64,27 @@ int main()
   //printMatrix(Matrix,info.height,info.width);
 
     Arbre pere = creerArbre();
-    height = 4;
-    width = 4;
+    Matrix = createMatrix();
 
-    RGB ** Matrice = createMatrix();
-
-    printMatrix(Matrice,4,4);
-    pere = MatriceToArbre(Matrice,pere,4,4);
-   // print(pere);
+    printMatrix(Matrix,height,width);
+    pere = MatriceToArbre(Matrix,pere,height,width);
+    //print(pere);
     printf("\n\n**************\n");
     unification(pere);
-    print(pere);
+    //print(pere);
 
-    //printf(" %d ",isUni(pere));
+
     printf("\n\n**************\n");
     RGB ** Matrice2 = ArbreToMatrice(pere);
 
-    printMatrix(Matrice2,4,4);
+    //printMatrix(Matrice2,height,width);
+    writeBMP(Matrice2,head,arq);
+
 
     freeArbre(&pere);
-    freeMatrix(Matrice,4);
-    freeMatrix(Matrice2,4);
-
+    freeMatrix(Matrix,height);
+    freeMatrix(Matrice2,height);
+    fclose(arq);
 
 
    /* writeBMP(Matrix,arq);
