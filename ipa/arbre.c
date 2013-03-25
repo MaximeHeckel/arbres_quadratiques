@@ -3,14 +3,11 @@
 bool is_feuille(Arbre arbre)
 {
     assert(arbre != NULL);
-    int i,j=0;
-    for(i=0; i<NB_FILS; i++)
-    {
-        if(arbre->fils[i] == NULL)
-            j++;
-    }
 
-    return (j == 4) ? true:false;
+    return (arbre->fils[NO] == NULL)
+    && (arbre->fils[NE] == NULL)
+    && (arbre->fils[SO] == NULL)
+    && (arbre->fils[SE] == NULL);
 }
 bool is_noeud(Arbre arbre)
 {
@@ -156,7 +153,7 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 
         return pere;
 }
-
+*/
 
 int max(int a, int b)
 {
@@ -167,8 +164,8 @@ bool isUni(Arbre arbre)
 {
     assert(arbre != NULL);
 
-    if(is_feuille(arbre))
-        return true;
+  //  if(is_feuille(arbre))
+    //    return true;
 
 
     Couleur couleur_no = arbre->fils[NO]->couleur;
@@ -185,11 +182,12 @@ bool isUni(Arbre arbre)
     { return false; }
 }
 
-void unification(Arbre arbre)
+Arbre unification(Arbre arbre)
 {
-	if(arbre == NULL)
-        return;
+    assert(arbre != NULL);
     //printf("\n %d %d",isUni(arbre),arbre->couleur);
+    if(is_feuille(arbre))
+        return arbre;
 
 	if(isUni(arbre))
 	{
@@ -199,6 +197,7 @@ void unification(Arbre arbre)
         freeArbre(&arbre->fils[NE]);
         freeArbre(&arbre->fils[SO]);
         freeArbre(&arbre->fils[SE]);
+        return arbre;
     }
     else
     {
@@ -206,7 +205,7 @@ void unification(Arbre arbre)
         unification(arbre->fils[NE]);
         unification(arbre->fils[SO]);
         unification(arbre->fils[SE]);
-        unification(arbre);
+        return arbre;
     }
 
 
@@ -240,7 +239,7 @@ int nb_feuille(Arbre arbre){
     }
     return res;
 }
-*/
+
 float moyenne(int a,int b, int c)
 {
  return (float) (a+b+c)/3.;
@@ -345,29 +344,33 @@ Arbre loadImage(FILE* arq,int h, int w)
     return pere;
 }
 
-void writeBMP2(Arbre arbre,char* name,int pos,int h)
+void writeBMP2(Arbre arbre,char* name,int x,int y,int h)
 {
-    assert(arbre != NULL);
-    if(is_feuille(arbre))
+    if(arbre == NULL)
+        return;
+    if(is_feuille(arbre) || arbre->couleur != NON_UNI || h == 1)
     {
-        writeCouleur(name,arbre->couleur,pos,pos,pos);
+       // printf(" ***Bottom***");
+        int i,j;
+        for(i=x;i<h;i++)
+            for(j=y;j<h;j++)
+                writeCouleur(name,arbre->couleur,x+i,y+j,h);
     }
-
-    writeCouleur(name,arbre->fils[NO]->couleur,pos+1*h/4,pos,pos);
-    writeCouleur(name,arbre->fils[NE]->couleur,pos + 2*h/4,pos,pos);
-    writeCouleur(name,arbre->fils[SO]->couleur,pos + 3*h/4,pos,pos);
-    writeCouleur(name,arbre->fils[SE]->couleur,pos + 4*h/4,pos,pos);
-
+  //  printf("\n %d %d %d",x,y,h);
+    writeBMP2(arbre->fils[NO],name,x,y+h/2,h/2);
+    writeBMP2(arbre->fils[NE],name,x+h/2,y+h/2,h/2);
+    writeBMP2(arbre->fils[SO],name,x,y,h/2);
+    writeBMP2(arbre->fils[SE],name,x+h/2,y,h/2);
 }
 void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
 {
     prepareBMP("out.bmp",info,arq);
-    writeBMP2(arbre,name,0,info.height);
+    writeBMP2(arbre,name,0,0,info.height);
 }
 void writeCouleur(char* name,Couleur col, int i,int j,int h)
 {
     int pos = i * h + j;
-    printf("\n %d %d %d    %d", i,j,h,pos);
+    //printf("\n %d %d %d    %d", i,j,h,pos);
     FILE * file = fopen(name,"r+");
     assert(file != NULL);
 

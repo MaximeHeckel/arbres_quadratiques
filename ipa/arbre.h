@@ -33,7 +33,7 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w);
 
 int max(int a, int b);
 bool isUni(Arbre arbre);
-void unification(Arbre arbre);
+Arbre unification(Arbre arbre);
 int hauteur (Arbre arbre);
 int nb_feuille(Arbre arbre);
 
@@ -45,7 +45,7 @@ int calcDimensionMatrice(Arbre arbre);
 Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere);
 Arbre loadImage(FILE* arq,int h, int w);
 void writeCouleur(char* name, Couleur col, int i,int j,int pos);
-void writeBMP2(Arbre arbre,char* name,int pos,int h);
+void writeBMP2(Arbre arbre,char* name,int x,int y,int h);
 void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq);
 void prepareBMP(char * name,INFOHEADER info, FILE* arq);
 #endif // ARBRE_H_INCLUDED

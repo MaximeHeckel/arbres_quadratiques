@@ -38,14 +38,15 @@ int main()
 
     Arbre pere = loadImage(arq,info.height,info.width);
     print(pere);
+    pere=unification(pere);
+    print(pere);
 
-
-   // writeBMP(pere,"out.bmp",info,arq);
-    prepareBMP("out.bmp",info,arq);
+    //writeBMP(pere,"out.bmp",info,arq);
+    /*prepareBMP("out.bmp",info,arq);
     int i,j;
     for(i=10;i<50;i++)
         for(j=20;j<30;j++)
-            writeCouleur("out.bmp",NOIR,i,j,info.height);
+            writeCouleur("out.bmp",NOIR,i,j,info.height);*/
     freeArbre(&pere);
     fclose(arq);
 
