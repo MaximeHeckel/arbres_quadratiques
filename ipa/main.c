@@ -31,20 +31,19 @@ int main()
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
-    char name[15];
+    char name[]="test.bmp";
 
-    printf("Entrez le nom du fichier à traiter : ");
-    scanf("%s",name);
+   /* printf("Entrez le nom du fichier à traiter : ");
+    scanf("%s",name);*/
 
     arq = exist(name);
     isBMP(arq,head,info);
     info = readInfo(arq);
     height = info.height;
-
     width = info.width;
+
     Matrix = createMatrix(info);
 
-    width = info.width;
 
 
 
@@ -61,29 +60,45 @@ int main()
 
 
 
-  //printMatrix(Matrix,info.height,info.width);
+   // printMatrix(Matrix,info.height,info.width);
+   /*int i,j,k;
+    for(i=0;i<height; i++)
+    {
+          for(j=0; j<width; j++)
+        {
 
+                    int col = rgb_to_nb( Matrix[i][j].RGB[0], Matrix[i][j].RGB[1], Matrix[i][j].RGB[2]);
+                    //printf(" %d ",col);
+                    Matrix[i][j].RGB[0] = col;
+                    Matrix[i][j].RGB[1] = col;
+                    Matrix[i][j].RGB[2] = col;
+
+        }
+    }*/
+  //  printf("\n\n**************\n");
+
+    //printMatrix(Matrix,height,width);
     Arbre pere = creerArbre();
-    Matrix = createMatrix();
 
-    printMatrix(Matrix,height,width);
-    pere = MatriceToArbre(Matrix,pere,height,width);
-    //print(pere);
-    printf("\n\n**************\n");
+   // printMatrix(Matrix,height,width);
+    pere = MatriceToArbre(Matrix,pere,info.height,info.width);
+    print(pere);
+   // printf("\n\n**************\n");
     unification(pere);
-    //print(pere);
+   print(pere);
 
 
-    printf("\n\n**************\n");
+  //  printf("\n\n**************\n");
     RGB ** Matrice2 = ArbreToMatrice(pere);
-
+    Matrice2 = nb_to_rgb(Matrice2);
     //printMatrix(Matrice2,height,width);
+    //Matrix = nb_to_rgb(Matrix);
     writeBMP(Matrice2,head,arq);
 
 
-    freeArbre(&pere);
+//    freeArbre(&pere);
     freeMatrix(Matrix,height);
-    freeMatrix(Matrice2,height);
+//    freeMatrix(Matrice2,height);
     fclose(arq);
 
 

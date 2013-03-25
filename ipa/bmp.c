@@ -257,7 +257,7 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
 
 
         RGB ** Matrice = createMatrix();
-
+        assert(Matrice != NULL);
         int i,j;
         int hsize=1;
         int h2 = h/2;
@@ -299,4 +299,16 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
             h=h*2;
         }
             return Matrice;
+}
+RGB ** nb_to_rgb(RGB ** Matrice)
+{
+    int i,j;
+    for(i=0;i<height; i++)
+    {
+        for(j=0; j<width; j++)
+        {
+            Matrice[i][j].RGB[0] *= 255;
+        }
+    }
+    return Matrice;
 }

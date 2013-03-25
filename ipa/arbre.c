@@ -186,6 +186,7 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
         {
           //  printf("\nCas d'arret h: %d w: %d",h,w);
             pere->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
+           //pere->couleur = Matrice[0][0].RGB[0];
             pere->genre = Feuille;
 
             return pere;
@@ -380,7 +381,8 @@ float moyenne(int a,int b, int c)
 
 int rgb_to_nb(int r, int g, int b)
 {
-// Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie blanc (0) sinon noir (1)
+// Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie noir (0) sinon blanc (1)
+    //printf("\n%d %d %d",r,g,b);
   return (moyenne(r,g,b) > 127) ? 0 : 1;
 }
 RGB** ArbreToMatrice(Arbre arbre)
