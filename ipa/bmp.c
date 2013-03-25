@@ -70,7 +70,7 @@ INFOHEADER readInfo(FILE* arq){
 
         return(info);
 }
-
+/*
 void loadImage(FILE* arq, RGB** Matrix){
         int i,j;
         RGB tmp;
@@ -158,7 +158,7 @@ void freeMatrix(RGB** Matrix,int h)
 
 RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 {
-
+*/
 	/*
 
 	|	1	|	2	|
@@ -166,7 +166,7 @@ RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone)
 	|		|		|
 	|	3	|	4	|
 
-	*/
+
 	assert(Matrice != NULL);
 
 
@@ -257,7 +257,7 @@ RGB ** fusionner(RGB ** sousMatriceNO,RGB **  sousMatriceNE,RGB **  sousMatriceS
 
 
         RGB ** Matrice = createMatrix();
-        assert(Matrice != NULL);
+
         int i,j;
         int hsize=1;
         int h2 = h/2;
@@ -312,3 +312,4 @@ RGB ** nb_to_rgb(RGB ** Matrice)
     }
     return Matrice;
 }
+*/

@@ -104,7 +104,7 @@ Arbre creerArbre()
 
     return nouveau;
 }
-
+/*
 Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 {
         assert(pere != NULL);
@@ -240,7 +240,7 @@ int nb_feuille(Arbre arbre){
     }
     return res;
 }
-
+*/
 float moyenne(int a,int b, int c)
 {
  return (float) (a+b+c)/3.;
@@ -252,6 +252,7 @@ int rgb_to_nb(int r, int g, int b)
     //printf("\n%d %d %d",r,g,b);
   return (moyenne(r,g,b) > 127) ? 0 : 1;
 }
+/*
 RGB** ArbreToMatrice(Arbre arbre)
 {
 //Cas d'erreur
@@ -299,6 +300,7 @@ int calcDimensionMatrice(Arbre arbre)
         int h = hauteur(arbre);
         int hsize=1;
         int i;
+
         //Pow : hauteur matrice = 2^(hauteur arbre + 1);
         for(i=1; i<=h+1; i++)
         {
@@ -306,3 +308,33 @@ int calcDimensionMatrice(Arbre arbre)
         }
         return hsize;
 }
+*/
+Arbre loadImage(FILE* arq,int h, int w, int i,Arbre pere){
+        assert(pere != NULL);
+
+        long pos = 51;
+        fseek(arq,SEEK_SET,i);
+        unsigned char tmp[3];
+
+
+        if(h == 1 || w == 1)
+        {
+             fread(&tmp,(sizeof(unsigned char)*3),1,arq);
+             Couleur col = rgb_to_nb(tmp[0],tmp[1],tmp[2]);
+             Arbre res = creerArbre();
+             res->couleur = col;
+             return res;
+        }
+        pere->fils[NO] = creerArbre();
+        pere->fils[NE] = creerArbre();
+        pere->fils[SO] = creerArbre();
+        pere->fils[SE] = creerArbre();
+
+        pere->fils[NO] = loadImage(arq,h/2,w/2,1*h/4, pere->fils[NO]);
+        pere->fils[NE] = loadImage(arq,h/2,w/2,2*h/4, pere->fils[NE]);
+        pere->fils[SO] = loadImage(arq,h/2,w/2,3*h/4, pere->fils[SO]);
+        pere->fils[SE] = loadImage(arq,h/2,w/2,4*h/4, pere->fils[SE]);
+
+        return pere;
+}
+

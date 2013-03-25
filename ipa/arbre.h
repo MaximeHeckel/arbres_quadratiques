@@ -42,7 +42,7 @@ int rgb_to_nb(int r, int g, int b);
 
 RGB** ArbreToMatrice(Arbre arbre);
 int calcDimensionMatrice(Arbre arbre);
-
+Arbre loadImage(FILE* arq,int h, int w, int i,Arbre pere);
 #endif // ARBRE_H_INCLUDED
 
 
