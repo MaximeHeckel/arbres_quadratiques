@@ -319,7 +319,7 @@ Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere){
         if(h == 1 || w == 1)
         {
              fread(&tmp,sizeof(unsigned char)*3,1,arq);
-             Couleur col = rgb_to_nb(tmp[0],tmp[1],tmp[2]);
+             Couleur col = NOIR;//rgb_to_nb(tmp[0],tmp[1],tmp[2]);
              Arbre res = creerArbre();
              res->couleur = col;
              return res;
@@ -344,19 +344,20 @@ Arbre loadImage(FILE* arq,int h, int w)
     return pere;
 }
 
+
 void writeBMP2(Arbre arbre,char* name,int x,int y,int h)
 {
     if(arbre == NULL)
         return;
     if(is_feuille(arbre) || arbre->couleur != NON_UNI || h == 1)
     {
-       // printf(" ***Bottom***");
+        //printf("\n ***Bottom***");
         int i,j;
         for(i=x;i<h;i++)
             for(j=y;j<h;j++)
                 writeCouleur(name,arbre->couleur,x+i,y+j,h);
     }
-  //  printf("\n %d %d %d",x,y,h);
+    //printf("\n %d %d %d",x,y,h);
     writeBMP2(arbre->fils[NO],name,x,y+h/2,h/2);
     writeBMP2(arbre->fils[NE],name,x+h/2,y+h/2,h/2);
     writeBMP2(arbre->fils[SO],name,x,y,h/2);
@@ -369,6 +370,16 @@ void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
 }
 void writeCouleur(char* name,Couleur col, int i,int j,int h)
 {
+    if(i < 0 || i> h)
+    {
+        printf("\nWrong i");
+        return;
+    }
+    if(j < 0 || j> h)
+    {
+        printf("\nWrong j");
+        return;
+    }
     int pos = i * h + j;
     //printf("\n %d %d %d    %d", i,j,h,pos);
     FILE * file = fopen(name,"r+");
