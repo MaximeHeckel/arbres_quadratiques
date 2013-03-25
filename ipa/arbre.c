@@ -287,7 +287,8 @@ bool isUni(Arbre arbre)
 
     if(couleur_no == couleur_ne
     && couleur_so == couleur_se
-    && couleur_no == couleur_so)
+    && couleur_no == couleur_so
+    && couleur_no != NON_UNI)
     { return true; }
     else
     { return false; }
@@ -295,18 +296,29 @@ bool isUni(Arbre arbre)
 
 void unification(Arbre arbre)
 {
-	assert(arbre != NULL);
+	if(arbre == NULL)
+        return;
+    //printf("\n %d %d",isUni(arbre),arbre->couleur);
 
 	if(isUni(arbre))
 	{
-		Couleur temp = getCouleur(getFils(arbre,NO));
-        arbre->couleur= temp;
-
+		arbre->couleur = arbre->fils[NO]->couleur;
+       // printf(" %d  ",arbre->couleur);
         freeArbre(&arbre->fils[NO]);
         freeArbre(&arbre->fils[NE]);
         freeArbre(&arbre->fils[SO]);
         freeArbre(&arbre->fils[SE]);
     }
+    else
+    {
+        unification(arbre->fils[NO]);
+        unification(arbre->fils[NE]);
+        unification(arbre->fils[SO]);
+        unification(arbre->fils[SE]);
+        unification(arbre);
+    }
+
+
 }
 
 int hauteur (Arbre arbre){
@@ -408,7 +420,7 @@ RGB** ArbreToMatrice(Arbre arbre)
         if(arbre->fils[SE] != NULL)
             sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
 
-        //Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
+        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
 
         return Matrice;
 }

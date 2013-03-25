@@ -40,20 +40,15 @@ int main()
     isBMP(arq,head,info);
     info = readInfo(arq);
     height = info.height;
-<<<<<<< HEAD
+
     width = info.width;
     Matrix = createMatrix(info);
-=======
+
     width = info.width;*/
 
 
-    //RGB** Matrice = createMatrix(info);
-    //Matrice[2][2].RGB[0] = 111;
-    //Matrice[0][1].RGB[2] = 222;
-    //Matrice[1][3].RGB[1]=44;
-    //Matrice[3][1].RGB[1]=33;
-    //printMatrix(Matrice,4,4);
-   // Arbre newArbre = creerArbre();
+
+
     //writeBMP(Matrice,head,arq);
   //  loadImage(arq,Matrix);
    // printMatrix(Matrix, height, width);
@@ -64,15 +59,10 @@ int main()
 
    // RGB ** res = ArbreToMatrice(newArbre);
 
-    //RGB ** res = ArbreToMatrice(newArbre);
-
-
-    //printf("\n %d", calcDimensionMatrice(newArbre));
-
 
 
   //printMatrix(Matrix,info.height,info.width);
-    //printf("\nMatrix = %c\n",Matrix[0][0].RGB[0]);
+
     Arbre pere = creerArbre();
     height = 4;
     width = 4;
@@ -89,19 +79,13 @@ int main()
     //printf(" %d ",isUni(pere));
     printf("\n\n**************\n");
     RGB ** Matrice2 = ArbreToMatrice(pere);
-    printMatrix(Matrice2,calcDimensionMatrice(pere),calcDimensionMatrice(pere));
+
+    printMatrix(Matrice2,4,4);
 
     freeArbre(&pere);
     freeMatrix(Matrice,4);
     freeMatrix(Matrice2,4);
-  //  printf("\n\n %d",isUni(pere->fils[NO]));
-//    RGB ** Matrice2 = ArbreToMatrice(pere);
 
-    //pere = MatriceToArbre(Matrix,pere,info.height,info.width);
-    //print(pere);
-    //unification(pere);
-
-   // Matrix = ArbreToMatrice(pere);
 
 
    /* writeBMP(Matrix,arq);
