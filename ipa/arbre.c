@@ -16,51 +16,9 @@ bool is_noeud(Arbre arbre)
 {
     assert(arbre != NULL);
 
-    return (arbre->genre == Noeud);
+    return (!is_feuille(arbre));
 }
 
-
-Direction getDirection(Arbre arbre)
-{
-    assert(arbre != NULL);
-    return arbre->direction;
-}
-Couleur getCouleur(Arbre arbre)
-{
-    if(arbre!=NULL);
-
-    return arbre->couleur;
-}
-Arbre getFils(Arbre arbre, Direction dir)
-{
-    assert(arbre != NULL);
-
-    return arbre->fils[dir];
-
-}
-
-void setDirection(Arbre arbre, Direction direction)
-{
-    assert(arbre != NULL);
-    arbre->direction = direction;
-}
-void setCouleur(Arbre arbre, Couleur couleur)
-{
-    assert(arbre != NULL);
-
-    arbre->couleur = couleur;
-}
-void setFils(Arbre pere,Arbre fils, Direction dir)  // <=== int numero -> dir Direction
-{
-    assert(pere != NULL);
-    pere->fils[dir] = fils;
-}
-
-/*bool isUni(Arbre arbre)
-{
-    assert(arbre != NULL);
-    return (getCouleur(arbre) != NON_UNI);
-}*/
 void print(Arbre arbre)
 {
     printf("\n\n");
@@ -79,31 +37,12 @@ void printArbre(Arbre arbre,int nb)
                {printf("\t");}
      printf("|_");
 
-    if(getCouleur(arbre) == NOIR)
+    if(arbre->couleur == NOIR)
     { printf("NOIR"); }
-    else if(getCouleur(arbre) == BLANC)
+    else if(arbre->couleur == BLANC)
     { printf("BLANC"); }
     else
     { printf("NON UNI"); }
-
-    printf(" - ");
-
-    if(getDirection(arbre) == NE)
-    { printf("NE"); }
-    else if(getDirection(arbre) == NO)
-    { printf("NO"); }
-    else if(getDirection(arbre) == SO)
-    { printf("SO"); }
-    else
-    { printf("SE"); }
-
-    printf(" - ");
-
-    if(is_feuille(arbre))
-    { printf("Feuille");}
-    else
-    { printf("Noeud");}
-
 
     for(j=0; j<NB_FILS; j++)
     {
@@ -120,15 +59,12 @@ Arbre inserer(Arbre pere, Direction direction, Couleur couleur)
 {
     Arbre nouveau = creerArbre();
 
-    nouveau->direction = direction;
     nouveau->couleur = couleur;
-    nouveau->genre = Feuille;
 
     if(pere == NULL)
     { return nouveau; }
 
     pere->fils[direction] = nouveau;
-    pere->genre = Noeud;
 
     return pere;
 }
@@ -160,9 +96,7 @@ Arbre creerArbre()
     nouveau = malloc(sizeof(struct arbre));
     assert(nouveau != NULL);
 
-    nouveau->direction = 0;
     nouveau->couleur = NON_UNI;
-    nouveau->genre=Feuille;
 
     int i;
     for(i=0; i<NB_FILS; i++)
@@ -187,7 +121,6 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
           //  printf("\nCas d'arret h: %d w: %d",h,w);
             pere->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
            //pere->couleur = Matrice[0][0].RGB[0];
-            pere->genre = Feuille;
 
             return pere;
         }
@@ -202,25 +135,21 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
         if(subMatrice1 != NULL)
         {
             pere->fils[NO] = creerArbre();
-            pere->fils[NO]->genre = Noeud;
             pere->fils[NO] = MatriceToArbre(subMatrice1,pere->fils[NO],h/2,w/2);
         }
         if(subMatrice2 != NULL)
         {
             pere->fils[NE] = creerArbre();
-            pere->fils[NE]->genre = Noeud;
             pere->fils[NE] = MatriceToArbre(subMatrice2,pere->fils[NE],h/2,w/2);
         }
         if(subMatrice3 != NULL)
         {
             pere->fils[SO] = creerArbre();
-            pere->fils[SO]->genre = Noeud;
             pere->fils[SO] = MatriceToArbre(subMatrice3,pere->fils[SO],h/2,w/2);
         }
         if(subMatrice4 != NULL)
         {
             pere->fils[SE] = creerArbre();
-            pere->fils[SE]->genre = Noeud;
             pere->fils[SE] = MatriceToArbre(subMatrice4,pere->fils[SE],h/2,w/2);
         }
 
@@ -232,45 +161,6 @@ Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
 int max(int a, int b)
 {
     return (a>b) ? a:b;
-}
-
-
-int countLevelBranch(Arbre arbre,Direction dir)
-{
-    assert(arbre != NULL);
-    int i;
-    while(getFils(arbre,dir)->genre !=Feuille)
-    {
-        i++;
-        arbre=getFils(arbre,dir);
-    }
-    return i;
-}
-
-Couleur getCouleurBranches(Arbre arbre, Direction dir)
-{
-    assert(arbre != NULL);
-    int i;
-    int count = countLevelBranch(arbre,dir);
-    Arbre temp = arbre;
-    for(i=0;i<count;i++)
-    {
-        temp=getFils(temp,dir);
-    }
-    return getCouleur(temp);
-
-}
-
-Arbre goToLevel(Arbre arbre, Direction dir,int level)
-{
-    assert(arbre != NULL);
-    int i;
-    Arbre temp = arbre;
-    for(i=0; i<level; i++)
-    {
-        temp=getFils(temp,dir);
-    }
-    return temp;
 }
 
 bool isUni(Arbre arbre)
@@ -331,8 +221,8 @@ int hauteur (Arbre arbre){
     }
     else
     {
-        int hauteur1 = max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,SE)));
-        int hauteur2 = max(hauteur(getFils(arbre,NO)),hauteur(getFils(arbre,NE)));
+        int hauteur1 = max(hauteur(arbre->fils[NO]),hauteur(arbre->fils[SE]));
+        int hauteur2 = max(hauteur(arbre->fils[NO]),hauteur(arbre->fils[NE]));
         res=1+max(hauteur1,hauteur2);
     }
     return res;
@@ -346,34 +236,11 @@ int nb_feuille(Arbre arbre){
     }
     else
     {
-        res += nb_feuille(getFils(arbre,SO)) + nb_feuille(getFils(arbre,SE)) + nb_feuille(getFils(arbre,NO)) + nb_feuille(getFils(arbre,NE));
+        res += nb_feuille(arbre->fils[SO]) + nb_feuille(arbre->fils[SE]) + nb_feuille(arbre->fils[NO]) + nb_feuille(arbre->fils[NE]);
     }
     return res;
 }
 
-bool is_equilibre(Arbre arbre){
-    int res=false;
-
-    if(is_feuille(arbre))
-    {
-        res=true;
-    }
-    else
-    {
-        int hNO = hauteur(getFils(arbre,NO));
-        int hNE = hauteur(getFils(arbre,NE));
-        int hSO = hauteur(getFils(arbre,SO));
-        int hSE = hauteur(getFils(arbre,SE));
-
-        if(abs(hNO - hNE) <=1
-        && abs(hSO - hSE) <=1
-        && abs(hNO - hNE)<=1)
-        {
-                res=true;
-        }
-    }
-    return res;
-}
 float moyenne(int a,int b, int c)
 {
  return (float) (a+b+c)/3.;
