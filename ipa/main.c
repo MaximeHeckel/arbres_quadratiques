@@ -85,10 +85,11 @@ int main()
     printf("\n\n**************\n");
     unification(pere);
     print(pere);
-    printf(" %d ",isUni(pere));
+
+    //printf(" %d ",isUni(pere));
     printf("\n\n**************\n");
     RGB ** Matrice2 = ArbreToMatrice(pere);
-    printMatrix(Matrice2,4,4);
+    printMatrix(Matrice2,calcDimensionMatrice(pere),calcDimensionMatrice(pere));
 
     freeArbre(&pere);
     freeMatrix(Matrice,4);

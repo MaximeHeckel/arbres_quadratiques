@@ -3,11 +3,14 @@
 bool is_feuille(Arbre arbre)
 {
     assert(arbre != NULL);
-    int i=0;
-    while(arbre->fils[i] != NULL)
-        i++;
+    int i,j=0;
+    for(i=0; i<NB_FILS; i++)
+    {
+        if(arbre->fils[i] == NULL)
+            j++;
+    }
 
-    return (i == 3) ? true:false;
+    return (j == 4) ? true:false;
 }
 bool is_noeud(Arbre arbre)
 {
@@ -273,10 +276,14 @@ bool isUni(Arbre arbre)
 {
     assert(arbre != NULL);
 
-    Couleur couleur_no = getCouleur(getFils(arbre,NO));
-    Couleur couleur_ne = getCouleur(getFils(arbre,NE));
-    Couleur couleur_so = getCouleur(getFils(arbre,SO));
-    Couleur couleur_se = getCouleur(getFils(arbre,SE));
+    if(is_feuille(arbre))
+        return true;
+
+
+    Couleur couleur_no = arbre->fils[NO]->couleur;
+    Couleur couleur_ne = arbre->fils[NE]->couleur;
+    Couleur couleur_so = arbre->fils[SO]->couleur;
+    Couleur couleur_se = arbre->fils[SE]->couleur;
 
     if(couleur_no == couleur_ne
     && couleur_so == couleur_se
