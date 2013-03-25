@@ -42,7 +42,10 @@ int rgb_to_nb(int r, int g, int b);
 
 RGB** ArbreToMatrice(Arbre arbre);
 int calcDimensionMatrice(Arbre arbre);
-Arbre loadImage(FILE* arq,int h, int w, int i,Arbre pere);
+Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere);
+Arbre loadImage(FILE* arq,int h, int w);
+void writeCouleur(char* name, Couleur col, int pos);
+void prepareBMP(char * name, HEADER head,INFOHEADER info, FILE* arq);
 #endif // ARBRE_H_INCLUDED
 
 

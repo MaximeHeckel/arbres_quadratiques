@@ -309,7 +309,7 @@ int calcDimensionMatrice(Arbre arbre)
         return hsize;
 }
 */
-Arbre loadImage(FILE* arq,int h, int w, int i,Arbre pere){
+Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere){
         assert(pere != NULL);
 
         long pos = 51;
@@ -330,11 +330,98 @@ Arbre loadImage(FILE* arq,int h, int w, int i,Arbre pere){
         pere->fils[SO] = creerArbre();
         pere->fils[SE] = creerArbre();
 
-        pere->fils[NO] = loadImage(arq,h/2,w/2,1*h/4, pere->fils[NO]);
-        pere->fils[NE] = loadImage(arq,h/2,w/2,2*h/4, pere->fils[NE]);
-        pere->fils[SO] = loadImage(arq,h/2,w/2,3*h/4, pere->fils[SO]);
-        pere->fils[SE] = loadImage(arq,h/2,w/2,4*h/4, pere->fils[SE]);
+        pere->fils[NO] = loadImage2(arq,h/2,w/2,1*h/4, pere->fils[NO]);
+        pere->fils[NE] = loadImage2(arq,h/2,w/2,2*h/4, pere->fils[NE]);
+        pere->fils[SO] = loadImage2(arq,h/2,w/2,3*h/4, pere->fils[SO]);
+        pere->fils[SE] = loadImage2(arq,h/2,w/2,4*h/4, pere->fils[SE]);
 
         return pere;
 }
 
+Arbre loadImage(FILE* arq,int h, int w)
+{
+    Arbre pere = creerArbre();
+    pere = loadImage2(arq,h,w,0,pere);
+    return pere;
+}
+/*
+void writeBMP(Arbre arbre, HEADER head, FILE* arq, int h,int w,int i){
+	FILE* out;
+
+	long pos = 51;
+    unsigned char tmp[3];
+	char header[54];
+	fseek(arq,0,0);
+	fread(header,54,1,arq);
+	out = fopen("out.bmp","a");
+    assert(out != NULL);
+
+	fseek(out,SEEK_SET,0);
+	fwrite(header,54,1,out);
+    fseek(out,SEEK_SET + pos,i);
+
+    assert(arbre != NULL);
+    if(is_feuille(arbre))
+    {
+        tmp[0] = arbre->couleur;
+        tmp[1] = arbre->couleur;
+        tmp[2] = arbre->couleur;
+        fwrite(&tmp,(sizeof(unsigned char)* 3),1,out);
+
+    }
+
+	fflush(out);
+	fclose(out);
+}*/
+void writeCouleur(char* name, Couleur col, int pos)
+{
+    FILE * file = fopen(name,"a");
+    assert(file != NULL);
+
+    long offset = 54;
+    fseek(file, SEEK_SET + offset + pos, 0);
+
+    unsigned char tmp[3];
+
+    if(col == NOIR)
+    {
+        tmp[0] = 0;
+        tmp[1] = 0;
+        tmp[2] = 0;
+    }
+    else
+    {
+        tmp[0] = 255;
+        tmp[1] = 255;
+        tmp[2] = 255;
+    }
+    fwrite(&tmp,(sizeof(unsigned char)* 3),1,file);
+
+    fclose(file);
+}
+void prepareBMP(char * name, HEADER head,INFOHEADER info, FILE* arq)
+{
+    FILE* out;
+	long pos = 51;
+
+	char header[54];
+	fseek(arq,0,0);
+	fread(header,54,1,arq);
+	out = fopen(name,"w");
+
+	fseek(out,0,0);
+	fwrite(header,54,1,out);
+
+
+    unsigned char tmp[3]={255,255,255};
+    int i,j;
+    for(i=0;i<info.height;i++){
+		for(j=0;j<info.width;j++){
+			pos+= 3;
+			fseek(out,pos,0);
+			fwrite(&tmp,(sizeof(unsigned char) * 3),1,out);
+		}
+	}
+	fflush(out);
+	fclose(out);
+}

@@ -31,7 +31,7 @@ int main()
     RGB  **Matrix;
     INFOHEADER info;
     HEADER head;
-    char name[]="orca.bmp";
+    char name[]="test.bmp";
 
    /* printf("Entrez le nom du fichier à traiter : ");
     scanf("%s",name);*/
@@ -41,11 +41,20 @@ int main()
     info = readInfo(arq);
 
 
-    Arbre pere=creerArbre();
-    pere = loadImage(arq,info.height,info.width,0,pere);
+
+    Arbre pere = loadImage(arq,info.height,info.width);
     print(pere);
 
+
+
     freeArbre(&pere);
+
+    printf("\n %d %d ",info.width,info.height);
+    prepareBMP("out.bmp",head,info,arq);
+    int i;
+    for(i=0; i<50;i++)
+        writeCouleur("out.bmp",NOIR,i);
+
 
     fclose(arq);
 
