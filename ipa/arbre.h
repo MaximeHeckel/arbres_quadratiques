@@ -44,7 +44,7 @@ RGB** ArbreToMatrice(Arbre arbre);
 int calcDimensionMatrice(Arbre arbre);
 Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere);
 Arbre loadImage(FILE* arq,int h, int w);
-void writeCouleur(char* name, Couleur col, int pos);
+void writeCouleur(char* name, Couleur col, int i,int j,int pos);
 void writeBMP2(Arbre arbre,char* name,int pos,int h);
 void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq);
 void prepareBMP(char * name,INFOHEADER info, FILE* arq);

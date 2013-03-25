@@ -350,13 +350,13 @@ void writeBMP2(Arbre arbre,char* name,int pos,int h)
     assert(arbre != NULL);
     if(is_feuille(arbre))
     {
-        writeCouleur(name,arbre->couleur,pos);
+        writeCouleur(name,arbre->couleur,pos,pos,pos);
     }
 
-    writeCouleur(name,arbre->fils[NO]->couleur,pos+1*h/4);
-    writeCouleur(name,arbre->fils[NE]->couleur,pos + 2*h/4);
-    writeCouleur(name,arbre->fils[SO]->couleur,pos + 3*h/4);
-    writeCouleur(name,arbre->fils[SE]->couleur,pos + 4*h/4);
+    writeCouleur(name,arbre->fils[NO]->couleur,pos+1*h/4,pos,pos);
+    writeCouleur(name,arbre->fils[NE]->couleur,pos + 2*h/4,pos,pos);
+    writeCouleur(name,arbre->fils[SO]->couleur,pos + 3*h/4,pos,pos);
+    writeCouleur(name,arbre->fils[SE]->couleur,pos + 4*h/4,pos,pos);
 
 }
 void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
@@ -364,9 +364,10 @@ void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
     prepareBMP("out.bmp",info,arq);
     writeBMP2(arbre,name,0,info.height);
 }
-void writeCouleur(char* name,Couleur col, int pos)
+void writeCouleur(char* name,Couleur col, int i,int j,int h)
 {
-
+    int pos = i * h + j;
+    printf("\n %d %d %d    %d", i,j,h,pos);
     FILE * file = fopen(name,"r+");
     assert(file != NULL);
 
