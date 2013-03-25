@@ -37,11 +37,11 @@ typedef struct INFOHEADER infoheader;
 int height, width;
 
 FILE* exist(char *name);
-void isBMP(FILE* arq, HEADER head, INFOHEADER info);
+void isBMP(FILE* arq);
 INFOHEADER readInfo(FILE* arq);
 RGB** createMatrix();
 //void loadImage(FILE* arq, RGB** Matrix);
-void writeBMP(RGB **Matrix, HEADER head, FILE* arq);
+//void writeBMP(RGB **Matrix, HEADER head, FILE* arq);
 void freeMatrix(RGB **Matrix,int h);
 RGB** MatriceToCell(RGB**Matrice ,int sizew, int sizeh, int zone);
 void printMatrix(RGB** Matrix, int h, int w);

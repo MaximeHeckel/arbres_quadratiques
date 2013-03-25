@@ -312,14 +312,14 @@ int calcDimensionMatrice(Arbre arbre)
 Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere){
         assert(pere != NULL);
 
-        long pos = 51;
-        fseek(arq,SEEK_SET,i);
+        long offset = 54;
+        fseek(arq,SEEK_SET+offset,i);
         unsigned char tmp[3];
 
 
         if(h == 1 || w == 1)
         {
-             fread(&tmp,(sizeof(unsigned char)*3),1,arq);
+             fread(&tmp,sizeof(unsigned char)*3,1,arq);
              Couleur col = rgb_to_nb(tmp[0],tmp[1],tmp[2]);
              Arbre res = creerArbre();
              res->couleur = col;
@@ -344,42 +344,34 @@ Arbre loadImage(FILE* arq,int h, int w)
     pere = loadImage2(arq,h,w,0,pere);
     return pere;
 }
-/*
-void writeBMP(Arbre arbre, HEADER head, FILE* arq, int h,int w,int i){
-	FILE* out;
 
-	long pos = 51;
-    unsigned char tmp[3];
-	char header[54];
-	fseek(arq,0,0);
-	fread(header,54,1,arq);
-	out = fopen("out.bmp","a");
-    assert(out != NULL);
-
-	fseek(out,SEEK_SET,0);
-	fwrite(header,54,1,out);
-    fseek(out,SEEK_SET + pos,i);
-
+void writeBMP2(Arbre arbre,char* name,int pos,int h)
+{
     assert(arbre != NULL);
     if(is_feuille(arbre))
     {
-        tmp[0] = arbre->couleur;
-        tmp[1] = arbre->couleur;
-        tmp[2] = arbre->couleur;
-        fwrite(&tmp,(sizeof(unsigned char)* 3),1,out);
-
+        writeCouleur(name,arbre->couleur,pos);
     }
 
-	fflush(out);
-	fclose(out);
-}*/
-void writeCouleur(char* name, Couleur col, int pos)
+    writeCouleur(name,arbre->fils[NO]->couleur,pos+1*h/4);
+    writeCouleur(name,arbre->fils[NE]->couleur,pos + 2*h/4);
+    writeCouleur(name,arbre->fils[SO]->couleur,pos + 3*h/4);
+    writeCouleur(name,arbre->fils[SE]->couleur,pos + 4*h/4);
+
+}
+void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
 {
-    FILE * file = fopen(name,"a");
+    prepareBMP("out.bmp",info,arq);
+    writeBMP2(arbre,name,0,info.height);
+}
+void writeCouleur(char* name,Couleur col, int pos)
+{
+
+    FILE * file = fopen(name,"r+");
     assert(file != NULL);
 
     long offset = 54;
-    fseek(file, SEEK_SET + offset + pos, 0);
+    fseek(file, SEEK_SET + offset + 3*pos, 0);
 
     unsigned char tmp[3];
 
@@ -395,20 +387,20 @@ void writeCouleur(char* name, Couleur col, int pos)
         tmp[1] = 255;
         tmp[2] = 255;
     }
-    fwrite(&tmp,(sizeof(unsigned char)* 3),1,file);
-
+    fwrite(&tmp,sizeof(unsigned char)* 3,1,file);
+   // printf("\n %d",res);
     fclose(file);
 }
-void prepareBMP(char * name, HEADER head,INFOHEADER info, FILE* arq)
+void prepareBMP(char * name, INFOHEADER info, FILE* arq)
 {
-    FILE* out;
+    FILE* out=NULL;
 	long pos = 51;
 
 	char header[54];
 	fseek(arq,0,0);
 	fread(header,54,1,arq);
 	out = fopen(name,"w");
-
+    assert(out != NULL);
 	fseek(out,0,0);
 	fwrite(header,54,1,out);
 

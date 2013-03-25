@@ -15,7 +15,7 @@ FILE* exist(char *name)
 }
 
 // ********** Verify if the file is BMP *********
-void isBMP(FILE* arq, HEADER head, INFOHEADER info){
+void isBMP(FILE* arq){
         char type[3];
         unsigned short int bpp;
         fseek(arq,0,0);

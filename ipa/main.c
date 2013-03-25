@@ -28,16 +28,15 @@ int main()
 
 
     FILE *arq; // the bitmap file 24 bits
-    RGB  **Matrix;
     INFOHEADER info;
-    HEADER head;
+   // HEADER head;
     char name[]="test.bmp";
 
    /* printf("Entrez le nom du fichier à traiter : ");
     scanf("%s",name);*/
 
     arq = exist(name);
-    isBMP(arq,head,info);
+    isBMP(arq);
     info = readInfo(arq);
 
 
@@ -46,17 +45,10 @@ int main()
     print(pere);
 
 
-
+    writeBMP(pere,"out.bmp",info,arq);
     freeArbre(&pere);
-
-    printf("\n %d %d ",info.width,info.height);
-    prepareBMP("out.bmp",head,info,arq);
-    int i;
-    for(i=0; i<50;i++)
-        writeCouleur("out.bmp",NOIR,i);
-
-
     fclose(arq);
+
 
 
 
