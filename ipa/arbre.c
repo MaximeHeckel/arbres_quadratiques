@@ -249,79 +249,18 @@ int rgb_to_nb(int r, int g, int b)
 {
 // Si la moyenne des 3 couleurs est < 127 (moitié de 255) alors on renvoie noir (0) sinon blanc (1)
     //printf("\n%d %d %d",r,g,b);
-  return (moyenne(r,g,b) > 127) ? 0 : 1;
+  return (moyenne(r,g,b) < 127) ? 0 : 1;
 }
-/*
-RGB** ArbreToMatrice(Arbre arbre)
+
+Arbre loadImage2(char * name,int h_img, int x,int y,int h,Arbre pere)
 {
-//Cas d'erreur
-        assert(arbre != NULL);
-
-//Cas d'arret
-        if(is_feuille(arbre))
-        {
-            Couleur col = arbre->couleur;
-            RGB ** Matrice = createMatrix(1,1);
-            Matrice[0][0].RGB[0] = col;
-            Matrice[0][0].RGB[1] = col;
-            Matrice[0][0].RGB[2] = col;
-            return Matrice;
-        }
-
-        int hsize = calcDimensionMatrice(arbre);
-
-
-        RGB ** Matrice = createMatrix(hsize,hsize);
-        RGB ** sousMatriceNO;
-        RGB ** sousMatriceNE;
-        RGB ** sousMatriceSO;
-        RGB ** sousMatriceSE;
-
-        if(arbre->fils[NO] != NULL)
-            sousMatriceNO = ArbreToMatrice(arbre->fils[NO]);
-
-        if(arbre->fils[NE] != NULL)
-            sousMatriceNE = ArbreToMatrice(arbre->fils[NE]);
-
-        if(arbre->fils[SO] != NULL)
-            sousMatriceSO = ArbreToMatrice(arbre->fils[SO]);
-
-        if(arbre->fils[SE] != NULL)
-            sousMatriceSE = ArbreToMatrice(arbre->fils[SE]);
-
-        Matrice = fusionner(sousMatriceNO,sousMatriceNE,sousMatriceSO,sousMatriceSE,hsize,hsize);
-
-        return Matrice;
-}
-
-int calcDimensionMatrice(Arbre arbre)
-{
-        int h = hauteur(arbre);
-        int hsize=1;
-        int i;
-
-        //Pow : hauteur matrice = 2^(hauteur arbre + 1);
-        for(i=1; i<=h+1; i++)
-        {
-            hsize *= 2;
-        }
-        return hsize;
-}
-*/
-Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere){
         assert(pere != NULL);
 
-        long offset = 54;
-        fseek(arq,SEEK_SET+offset,i);
-        unsigned char tmp[3];
-
-
-        if(h == 1 || w == 1)
+        if(h == 1)
         {
-             fread(&tmp,sizeof(unsigned char)*3,1,arq);
-             Couleur col = NOIR;//rgb_to_nb(tmp[0],tmp[1],tmp[2]);
              Arbre res = creerArbre();
-             res->couleur = col;
+             res->couleur = readCouleur(name,x,y,h_img);
+
              return res;
         }
         pere->fils[NO] = creerArbre();
@@ -329,18 +268,18 @@ Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere){
         pere->fils[SO] = creerArbre();
         pere->fils[SE] = creerArbre();
 
-        pere->fils[NO] = loadImage2(arq,h/2,w/2,1*h/4, pere->fils[NO]);
-        pere->fils[NE] = loadImage2(arq,h/2,w/2,2*h/4, pere->fils[NE]);
-        pere->fils[SO] = loadImage2(arq,h/2,w/2,3*h/4, pere->fils[SO]);
-        pere->fils[SE] = loadImage2(arq,h/2,w/2,4*h/4, pere->fils[SE]);
+        pere->fils[NO] = loadImage2(name,h_img,x,y+h/2, h/2,pere->fils[NO]);
+        pere->fils[NE] = loadImage2(name,h_img,x+h/2,y+h/2, h/2,pere->fils[NE]);
+        pere->fils[SO] = loadImage2(name,h_img,x,y,h/2, pere->fils[SO]);
+        pere->fils[SE] = loadImage2(name,h_img,x+h/2,y, h/2,pere->fils[SE]);
 
         return pere;
 }
 
-Arbre loadImage(FILE* arq,int h, int w)
+Arbre loadImage(char * name,int h_img)
 {
     Arbre pere = creerArbre();
-    pere = loadImage2(arq,h,w,0,pere);
+    pere = loadImage2(name,h_img,0,0,h_img,pere);
     return pere;
 }
 
@@ -364,23 +303,14 @@ void writeBMP2(Arbre arbre,char* name,int x,int y,int h,int h_img)
     writeBMP2(arbre->fils[SO],name,x,y,h/2,h_img);
     writeBMP2(arbre->fils[SE],name,x+h/2,y,h/2,h_img);
 }
-void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
+void writeBMP(Arbre arbre,char * name,INFOHEADER info)
 {
-    prepareBMP("out.bmp",info,arq);
+    //prepareBMP("out.bmp",info,arq);
     writeBMP2(arbre,name,0,0,info.height,info.height);
 }
 void writeCouleur(char* name,Couleur col, int i,int j,int h)
 {
-    /*if(i < 0 || i> h)
-    {
-        printf("\nWrong i: %d",i);
-        return;
-    }
-    if(j < 0 || j> h)
-    {
-        printf("\nWrong j : %d",j);
-        return;
-    }*/
+
     int pos = i * h + j;
     //printf("\n %d %d %d    %d", i,j,h,pos);
     FILE * file = fopen(name,"r+");
@@ -432,4 +362,23 @@ void prepareBMP(char * name, INFOHEADER info, FILE* arq)
 	}
 	fflush(out);
 	fclose(out);
+}
+Couleur readCouleur(char* name, int x,int y,int h)
+{
+    int pos = y * h + x;
+    //printf("\n %d %d %d    %d", i,j,h,pos);
+    FILE * file = fopen(name,"r");
+    assert(file != NULL);
+
+    long offset = 54;
+    fseek(file, SEEK_SET + offset + 3*pos, 0);
+
+    unsigned char tmp[3];
+
+    fread(&tmp,sizeof(unsigned char)* 3,1,file);
+   // printf("\n %d",res);
+    fclose(file);
+
+    Couleur col=rgb_to_nb(tmp[0],tmp[1],tmp[2]);
+    return col;
 }

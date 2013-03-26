@@ -35,12 +35,14 @@ int main()
     arq = exist(name);
     isBMP(arq);
     info = readInfo(arq);
+    prepareBMP("out.bmp",info,arq);
+    fclose(arq);
 
-    //Arbre pere = loadImage(arq,info.height,info.width);
-    //print(pere);
+    Arbre pere = loadImage("test.bmp",info.height);
+    print(pere);
    // pere=unification(pere);
     //print(pere);
-    Arbre pere = creerArbre();
+  /*  Arbre pere = creerArbre();
     pere->couleur = NON_UNI;
 
     Arbre filsNO = creerArbre();
@@ -58,9 +60,9 @@ int main()
     pere->fils[NO]=filsNO;
     pere->fils[NE]=filsNE;
     pere->fils[SO]=filsSO;
-    pere->fils[SE]=filsSE;
+    pere->fils[SE]=filsSE;*/
 
-   writeBMP(pere,"out.bmp",info,arq);
+   writeBMP(pere,"out.bmp",info);
   //printf(" \n %d",is_feuille(pere->fils[NO]));
  // writeBMP2(pere->fils[NO],"out.bmp",info.height/2,info.height/2,info.height/2);
    // writeBMP( pere->fils[SE],"out.bmp",info,arq);
@@ -72,7 +74,7 @@ int main()
         for(j=0;j<32;j++)
             writeCouleur("out.bmp",NOIR,i,j,64);*/
     freeArbre(&pere);
-    fclose(arq);
+     //fclose(arq);
 
 	return 0;
 }
