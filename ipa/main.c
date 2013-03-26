@@ -1,11 +1,11 @@
 /*
- * @File : test.c
+ * @File : main.c
  *
- * @Author :
+ * @Author :Philippe Gaultier, Maxime Heckel
  *
- * @Summary :
+ * @Summary : compress 24 bits .bmp files, whose size is 2^n.
  *
- * @Version : 2013/03/14
+ * @Version : 2013/03/26
  *
  * ----------------------------------------------------------------------------
  * "THE BEER-WARE LICENSE" (Revision 42):
@@ -43,8 +43,8 @@ int main(int argc, char * argv[])
     Arbre pere = loadImage(name,info.height);
 
 
-    pere=unification(pere);
-    writeBMP(pere,out,info);
+    //pere=unification(pere);
+    //writeBMP(pere,out,info);
     freeArbre(&pere);
 
 	return 0;
