@@ -33,8 +33,7 @@ typedef struct
                 unsigned int impcolours;
         }INFOHEADER;
 typedef struct INFOHEADER infoheader;
-/* Global */
-int height, width;
+
 
 FILE* exist(char *name);
 void isBMP(FILE* arq);

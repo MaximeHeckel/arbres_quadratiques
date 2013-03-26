@@ -101,59 +101,7 @@ Arbre creerArbre()
 
     return nouveau;
 }
-/*
-Arbre MatriceToArbre(RGB** Matrice,Arbre pere, int h, int w)
-{
-        assert(pere != NULL);
-//Cas d'erreur
-        if(Matrice == NULL)
-        {
-           fprintf(stderr,"\nCas d'erreur");
-            return NULL;
-        }
-//CAS D'ARRET: Si on est arrivé au niveau du pixel on affecte la couleur
-        //Matrice est en fait un tableau 2D de hauteur 1 et largeur 1 -> 1 case
-        if(h == 1 || w == 1)
-        {
-          //  printf("\nCas d'arret h: %d w: %d",h,w);
-            pere->couleur = rgb_to_nb(Matrice[0][0].RGB[0],Matrice[0][0].RGB[1],Matrice[0][0].RGB[2]);
-           //pere->couleur = Matrice[0][0].RGB[0];
 
-            return pere;
-        }
-//CAS GENERAL: récursivité
-       // printf("\nCas recursif . h: %d w: %d",h,w);
-        RGB** subMatrice1 =MatriceToCell(Matrice ,h,w, 1);
-        RGB** subMatrice2 =MatriceToCell(Matrice ,h,w, 2);
-        RGB** subMatrice3 =MatriceToCell(Matrice ,h,w,3);
-        RGB** subMatrice4 =MatriceToCell(Matrice ,h,w,4);
-
-        //Affectation des fils (recursif)
-        if(subMatrice1 != NULL)
-        {
-            pere->fils[NO] = creerArbre();
-            pere->fils[NO] = MatriceToArbre(subMatrice1,pere->fils[NO],h/2,w/2);
-        }
-        if(subMatrice2 != NULL)
-        {
-            pere->fils[NE] = creerArbre();
-            pere->fils[NE] = MatriceToArbre(subMatrice2,pere->fils[NE],h/2,w/2);
-        }
-        if(subMatrice3 != NULL)
-        {
-            pere->fils[SO] = creerArbre();
-            pere->fils[SO] = MatriceToArbre(subMatrice3,pere->fils[SO],h/2,w/2);
-        }
-        if(subMatrice4 != NULL)
-        {
-            pere->fils[SE] = creerArbre();
-            pere->fils[SE] = MatriceToArbre(subMatrice4,pere->fils[SE],h/2,w/2);
-        }
-
-
-        return pere;
-}
-*/
 
 int max(int a, int b)
 {

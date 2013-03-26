@@ -26,7 +26,7 @@ int main()
 {
     FILE *arq; // the bitmap file 24 bits
     INFOHEADER info;
-   // HEADER head;
+
     char name[15];
 
     printf("Entrez le nom du fichier à traiter : ");
@@ -36,47 +36,15 @@ int main()
     isBMP(arq);
     info = readInfo(arq);
     prepareBMP("out.bmp",info,arq);
+    prepareBMP("out1.bmp",info,arq);
     fclose(arq);
     printf("\n %d %d",info.height,info.width);
     Arbre pere = loadImage(name,info.height);
-   // print(pere);
 
-   //printf("\n%d",readCouleur("test.bmp",60,60,64));
-   // pere=unification(pere);
-    //print(pere);
-  /*  Arbre pere = creerArbre();
-    pere->couleur = NON_UNI;
-
-    Arbre filsNO = creerArbre();
-    filsNO->couleur = BLANC;
-
-    Arbre filsNE = creerArbre();
-    filsNE->couleur = BLANC;
-
-    Arbre filsSO = creerArbre();
-    filsSO->couleur = BLANC;
-
-    Arbre filsSE = creerArbre();
-    filsSE->couleur = NOIR;
-
-    pere->fils[NO]=filsNO;
-    pere->fils[NE]=filsNE;
-    pere->fils[SO]=filsSO;
-    pere->fils[SE]=filsSE;*/
-
-   writeBMP(pere,"out.bmp",info);
-  //printf(" \n %d",is_feuille(pere->fils[NO]));
- // writeBMP2(pere->fils[NO],"out.bmp",info.height/2,info.height/2,info.height/2);
-   // writeBMP( pere->fils[SE],"out.bmp",info,arq);
-   //  writeBMP( pere->fils[SO],"out.bmp",info,arq);
-   /* //  writeBMP( pere->fils[SE],"out.bmp",info,arq);
-    prepareBMP("out.bmp",info,arq);
-    int i,j;
-    for(i=0;i<32;i++)
-        for(j=0;j<32;j++)
-            writeCouleur("out.bmp",NOIR,i,j,64);*/
+    writeBMP(pere,"out.bmp",info);
+    pere=unification(pere);
+    writeBMP(pere,"out1.bmp",info);
     freeArbre(&pere);
-     //fclose(arq);
 
 	return 0;
 }
