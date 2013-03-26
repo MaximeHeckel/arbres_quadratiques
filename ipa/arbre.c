@@ -308,10 +308,10 @@ void writeBMP(Arbre arbre,char * name,INFOHEADER info)
     //prepareBMP("out.bmp",info,arq);
     writeBMP2(arbre,name,0,0,info.height,info.height);
 }
-void writeCouleur(char* name,Couleur col, int i,int j,int h)
+void writeCouleur(char* name,Couleur col, int x,int y,int h)
 {
 
-    int pos = i * h + j;
+    int pos = y * h + x;
     //printf("\n %d %d %d    %d", i,j,h,pos);
     FILE * file = fopen(name,"r+");
     assert(file != NULL);

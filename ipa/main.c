@@ -39,7 +39,9 @@ int main()
     fclose(arq);
 
     Arbre pere = loadImage("test.bmp",info.height);
-    print(pere);
+   // print(pere);
+
+   printf("\n%d",readCouleur("test.bmp",60,60,64));
    // pere=unification(pere);
     //print(pere);
   /*  Arbre pere = creerArbre();
