@@ -27,21 +27,21 @@ int main()
     FILE *arq; // the bitmap file 24 bits
     INFOHEADER info;
    // HEADER head;
-    char name[]="test.bmp";
+    char name[15];
 
-   /* printf("Entrez le nom du fichier à traiter : ");
-    scanf("%s",name);*/
+    printf("Entrez le nom du fichier à traiter : ");
+    scanf("%s",name);
 
     arq = exist(name);
     isBMP(arq);
     info = readInfo(arq);
     prepareBMP("out.bmp",info,arq);
     fclose(arq);
-
-    Arbre pere = loadImage("test.bmp",info.height);
+    printf("\n %d %d",info.height,info.width);
+    Arbre pere = loadImage(name,info.height);
    // print(pere);
 
-   printf("\n%d",readCouleur("test.bmp",60,60,64));
+   //printf("\n%d",readCouleur("test.bmp",60,60,64));
    // pere=unification(pere);
     //print(pere);
   /*  Arbre pere = creerArbre();
