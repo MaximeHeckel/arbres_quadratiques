@@ -1,92 +1,36 @@
-TODO:
+##Quadtree BMP compression
+---
 
-- Corriger la fonction print() pour afficher correctement l'arbre (à la manière de "ps aux --forest"), peut-être faire une sous-fonction print(int niveau) pour savoir à quel niveau on est
-- Faire plein de fonctions utiles aux arbres
-- Faire la fonction estEquilibre()
-- Modifier structure ( pas de couleur au NOEUD seulement au FEUILLE)
-Struct proposée :
-
-enum cas_arbre { Feuille, Noeud};
-
-union union_arbre {
-    
-	int feuille;
-	arbre_binaire_strict *filsNO, *filsNE *filsSO *filsSE;
-};
+This program is a quadtree implementation un C for .bmp files compression. 
 
 
-struct donnee_arbre
-{
-	enum cas_arbre genre;
-	union union_arbre valeur;
-};
 
-typedef struct donnee_arbre arbre_binaire_strict;
+###How to make it work ?
 
-- Fonction est_régulier + conv
+First clone the repository using : 
+	
+	git clone git@github.com:MaximeHeckel/arbres_quadratiques.git
 
-- Structure image ?
+Then go to the "arbres_quadratiques" folder and type: 
 
-- Fonction colorer
+	make
 
-- Fonction read_image 
+in order to execute the makefile.
 
-- Faire une image noir et blanc sur paint!
+Finally run the program with the folowing command : 
 
-- Fonction niveau de gris
+	./arbres_quadratiques input_bmp output_bmp
+	
 
-###### Update : 14-03-13 :
+And see the result
 
-- Nouvelle structure : fait
 
-- Correction sur les fonctions déjà implémentées : fait
+###How does it look like at the end ?
 
-- Fonction is_Equilibré : fait
+Let's see some examples. 
 
-- Ajout de getFilsNO getFilsSO getFils NE et getFils NE : fait
+![ScreenShot](/img/orca.bmp)
+![ScreenShot](/img/out.bmp)  
 
-- Reflexion sur la fonction profondeur( ou niveau ) : en cours
-
-###### Update : 16-03-13 : 
-
-- Ajout nouvelle structure 
-
-- Correction de certains algos ( La majorité des tiens, Phillipe ne fonctionnent plus il faut les modifier)
-
-- Ajout getToLevel getColorBranches getDepthBranches
- 
-###### Update : 18-03-13 : 
-
-- Ajout des fonctions isUni et Unification 
-
-- Code trouvé sur StackOverFlow pour la conversion d'une image en quadtree : 
-
-				void divideAndConquer(Mat im, QuadTree &tree, int parent){
-  				if(parent<0) 
-    				return;
-  				double min,max;
-  				minMaxLoc(im,&min,&max);
-  				if(max-min<0.01)
-    				tree.addNode(parent,closed);
-  				else{
-    				tree.addNode(parent,open);
-    				Mat im0=Mat(im,Range(0,image.rows/				2-1),Range(0,image.cols/2-1));
-    				Mat im1=Mat(im,Range(image.rows/				2,image.rows),Range(0,image.cols/2-1));
-    				Mat im2=Mat(im,Range(0,image.rows/				2-1),Range(image.cols/2,image.cols));
-    				Mat im3=Mat(im,Range(image.rows/				2,image.rows),Range(image.cols/2-1,image.cols));
-    				divideAndConquer(im0, tree, parent/4);
-    				divideAndConquer(im1, tree, parent/4+1);
-    				divideAndConquer(im2, tree, parent/4+2);
-    				divideAndConquer(im3, tree, parent/4+3);
-  				}
-
-//Update 23/03
-TODO:
--ArbreToMatrix : l'inverse de MatrixToArbre.
-
-Je crois que c'est le dernier truc à faire.
-Pour résumer :  on charge le bmp, on le stocke dans une Matrice, on la transforme en arbre, on unifie l'arbre, on transforme l'arbre en Matrice, puis la Matrice en .bmp.
-
-bmp -> Matrice -> Arbre -> Arbre unifié -> Matrice -> bmp
-
-MatrixToArbre fait l'avant derniere operation, c'est celle qui nous manque.
+![ScreenShot](/img/image_fond.bmp)
+![ScreenShot](/img/out2.bmp)
