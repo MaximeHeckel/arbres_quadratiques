@@ -22,15 +22,15 @@
 #include "image.h"
 #include "bmp.h"
 
-int main()
+int main(int argc, char * argv[])
 {
     FILE *arq; // the bitmap file 24 bits
     INFOHEADER info;
 
-    char name[15];
+    char * name = argv[1];
 
-    printf("Entrez le nom du fichier à traiter : ");
-    scanf("%s",name);
+    /*printf("Entrez le nom du fichier à traiter : ");
+    scanf("%s",name);*/
 
     arq = exist(name);
     isBMP(arq);
@@ -38,10 +38,11 @@ int main()
     prepareBMP("out.bmp",info,arq);
     prepareBMP("out1.bmp",info,arq);
     fclose(arq);
+
     printf("\n %d %d",info.height,info.width);
     Arbre pere = loadImage(name,info.height);
 
-    writeBMP(pere,"out.bmp",info);
+   // writeBMP(pere,"out.bmp",info);
     pere=unification(pere);
     writeBMP(pere,"out1.bmp",info);
     freeArbre(&pere);
