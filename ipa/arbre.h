@@ -45,7 +45,7 @@ int calcDimensionMatrice(Arbre arbre);
 Arbre loadImage2(FILE* arq,int h, int w, int i,Arbre pere);
 Arbre loadImage(FILE* arq,int h, int w);
 void writeCouleur(char* name, Couleur col, int i,int j,int pos);
-void writeBMP2(Arbre arbre,char* name,int x,int y,int h);
+void writeBMP2(Arbre arbre,char* name,int x,int y,int h,int h_img);
 void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq);
 void prepareBMP(char * name,INFOHEADER info, FILE* arq);
 #endif // ARBRE_H_INCLUDED

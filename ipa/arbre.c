@@ -345,7 +345,7 @@ Arbre loadImage(FILE* arq,int h, int w)
 }
 
 
-void writeBMP2(Arbre arbre,char* name,int x,int y,int h)
+void writeBMP2(Arbre arbre,char* name,int x,int y,int h,int h_img)
 {
     if(arbre == NULL)
         return;
@@ -353,33 +353,34 @@ void writeBMP2(Arbre arbre,char* name,int x,int y,int h)
     {
         //printf("\n ***Bottom***");
         int i,j;
-        for(i=x;i<h;i++)
-            for(j=y;j<h;j++)
-                writeCouleur(name,arbre->couleur,x+i,y+j,h);
+        for(i=0;i<h;i++)
+            for(j=0;j<h;j++)
+                writeCouleur(name,arbre->couleur,x+j,y+i,h_img);
+        return;
     }
     //printf("\n %d %d %d",x,y,h);
-    writeBMP2(arbre->fils[NO],name,x,y+h/2,h/2);
-    writeBMP2(arbre->fils[NE],name,x+h/2,y+h/2,h/2);
-    writeBMP2(arbre->fils[SO],name,x,y,h/2);
-    writeBMP2(arbre->fils[SE],name,x+h/2,y,h/2);
+    writeBMP2(arbre->fils[NO],name,x,y+h/2,h/2,h_img);
+    writeBMP2(arbre->fils[NE],name,x+h/2,y+h/2,h/2,h_img);
+    writeBMP2(arbre->fils[SO],name,x,y,h/2,h_img);
+    writeBMP2(arbre->fils[SE],name,x+h/2,y,h/2,h_img);
 }
 void writeBMP(Arbre arbre,char * name,INFOHEADER info,FILE* arq)
 {
     prepareBMP("out.bmp",info,arq);
-    writeBMP2(arbre,name,0,0,info.height);
+    writeBMP2(arbre,name,0,0,info.height,info.height);
 }
 void writeCouleur(char* name,Couleur col, int i,int j,int h)
 {
-    if(i < 0 || i> h)
+    /*if(i < 0 || i> h)
     {
-        printf("\nWrong i");
+        printf("\nWrong i: %d",i);
         return;
     }
     if(j < 0 || j> h)
     {
-        printf("\nWrong j");
+        printf("\nWrong j : %d",j);
         return;
-    }
+    }*/
     int pos = i * h + j;
     //printf("\n %d %d %d    %d", i,j,h,pos);
     FILE * file = fopen(name,"r+");
