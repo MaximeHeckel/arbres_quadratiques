@@ -47,30 +47,30 @@ int main()
     filsNO->couleur = BLANC;
 
     Arbre filsNE = creerArbre();
-    filsNO->couleur = NOIR;
+    filsNE->couleur = BLANC;
 
     Arbre filsSO = creerArbre();
-    filsNO->couleur = BLANC;
+    filsSO->couleur = BLANC;
 
     Arbre filsSE = creerArbre();
-    filsNO->couleur = NOIR;
+    filsSE->couleur = NOIR;
 
     pere->fils[NO]=filsNO;
     pere->fils[NE]=filsNE;
     pere->fils[SO]=filsSO;
     pere->fils[SE]=filsSE;
 
-  // writeBMP(pere,"out.bmp",info,arq);
+   writeBMP(pere,"out.bmp",info,arq);
   //printf(" \n %d",is_feuille(pere->fils[NO]));
  // writeBMP2(pere->fils[NO],"out.bmp",info.height/2,info.height/2,info.height/2);
-    //writeBMP( pere->fils[NE],"out.bmp",info,arq);
+   // writeBMP( pere->fils[SE],"out.bmp",info,arq);
    //  writeBMP( pere->fils[SO],"out.bmp",info,arq);
-    //  writeBMP( pere->fils[SE],"out.bmp",info,arq);
+   /* //  writeBMP( pere->fils[SE],"out.bmp",info,arq);
     prepareBMP("out.bmp",info,arq);
     int i,j;
     for(i=0;i<32;i++)
         for(j=0;j<32;j++)
-            writeCouleur("out.bmp",NOIR,i,j,64);
+            writeCouleur("out.bmp",NOIR,i,j,64);*/
     freeArbre(&pere);
     fclose(arq);
 
