@@ -43,15 +43,13 @@ int main(int argc, char * argv[])
     Arbre pere = loadImage(name,info.height);
 
 
-<<<<<<< HEAD:main.c
 
     pere=unification(pere);
     print(pere);
     writeBMP(pere,out,info);
-=======
-    //pere=unification(pere);
-    //writeBMP(pere,out,info);
->>>>>>> 847d351485c4529b4bdb25d7537eb265c785cf77:ipa/main.c
+
+    pere=unification(pere);
+    writeBMP(pere,out,info);
     freeArbre(&pere);
 
 	return 0;
